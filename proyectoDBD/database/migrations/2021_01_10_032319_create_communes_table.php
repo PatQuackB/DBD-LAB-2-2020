@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStreetAddressesTable extends Migration
+class CreateCommunesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateStreetAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('street_addresses', function (Blueprint $table) {
+        Schema::create('communes', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nombreCalle');
+            $table->string('nombreComuna');
+
+            #Foranea de Region
+            $table->unsignedBigInteger('idRegion');
+            $table->foreign('idRegion')->references('id')->on('regions');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateStreetAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('street_addresses');
+        Schema::dropIfExists('communes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStreetAddressesTable extends Migration
+class CreateDeliveryOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateStreetAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('street_addresses', function (Blueprint $table) {
+        Schema::create('delivery_orders', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nombreCalle');
+            $table->integer('estadoDespacho');
+            $table->integer('tipoDespacho');
+
+            #Foranea de Calle
+            $table->unsignedBigInteger('idCalle');
+            $table->foreign('idCalle')->references('id')->on('street_addresses');
+
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ class CreateStreetAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('street_addresses');
+        Schema::dropIfExists('delivery_orders');
     }
 }

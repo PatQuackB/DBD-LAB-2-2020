@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStreetAddressesTable extends Migration
+class CreateSubCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class CreateStreetAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('street_addresses', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nombreCalle');
+            $table->string('nombreSubCategoria');
+
+            #Foranea de Categoria
+            $table->unsignedBigInteger('idCategoria');
+            $table->foreign('idCategoria')->references('id')->on('categories');
+
+
             $table->timestamps();
         });
     }
@@ -27,6 +33,6 @@ class CreateStreetAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('street_addresses');
+        Schema::dropIfExists('sub_categories');
     }
 }
