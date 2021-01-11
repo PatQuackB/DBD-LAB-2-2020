@@ -15,7 +15,7 @@ class CreateStallsTable extends Migration
     {
         Schema::create('stalls', function (Blueprint $table) {
             $table->id('id');
-            $table->string('direccionPuesto');
+            $table->string('nombrePuesto');
 
             #Foranea de Feria
             $table->unsignedBigInteger('idFeria');

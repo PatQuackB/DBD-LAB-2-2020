@@ -23,11 +23,17 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'rutUsuario'=>$this->faker->unique()->localIpv4,
+            'nombreUsuario'=>$this->faker->firstName($gender = null),
+            'apellidoUsuario'=>$this->faker->lastName($gender = null),
+            'oculto'=>$this->faker->boolean,
+            'correoUsuario'=>$this->faker->unique()->safeEmail,
+            'correoUsuarioVerificado'=>$this->faker->dateTime($max = 'now', $timezone = null),
+            'contraseniaUsuario'=>$this->faker->password,
+            
+            //Foranea
+            'idCalle'=>StreetAddress::Factory,
+            'idRol'=>Role::Factory
         ];
     }
 }
