@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     use HasFactory;
+
+    public function Commune(){
+        return $this->hasMany(Commune::class);
+    }
 }

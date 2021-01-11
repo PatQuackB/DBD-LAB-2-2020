@@ -13,7 +13,7 @@ class CreateProductUnitOfMeasuresTable extends Migration
      */
     public function up()
     {
-        Schema::create('product__unit_of_measures', function (Blueprint $table) {
+        Schema::create('product_unit_of_measures', function (Blueprint $table) {
             $table->id('id');
 
             #Foranea de Producto
@@ -35,6 +35,6 @@ class CreateProductUnitOfMeasuresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product__unit_of_measures');
+        Schema::dropIfExists('product_unit_of_measures');
     }
 }

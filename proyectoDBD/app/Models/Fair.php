@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Fair extends Model
 {
     use HasFactory;
+
+    public function Stall(){
+        return $this->hasMany(Stall::class);
+    } 
+
 }

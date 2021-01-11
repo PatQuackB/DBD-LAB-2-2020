@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UnitOfMeasure extends Model
 {
     use HasFactory;
+    
+    public function ProductUnitOfMeasure(){
+        return $this->hasMany(ProductUnitOfMeasure::class);
+    }
 }
