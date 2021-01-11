@@ -9,16 +9,16 @@ class PurchaseOrder extends Model
 {
     use HasFactory;
 
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    public function User(){
+        return $this->belongsTo(User::class);
     }
 
-    public function purchaseOrderProducts(){
-        return $this->hasMany('App\Models\PurchaseOrderProduct');
+    public function PurchaseOrderProducts(){
+        return $this->hasMany(PurchaseOrderProducts::class);
     }
 
-    public function deliveryOrderPurchaseOrders(){
-        return $this->hasMany('App\Models\DeliveryOrderPurchaseOrder');
+    public function DeliveryOrderPurchaseOrders(){
+        return $this->hasMany(DeliveryOrderPurchaseOrders::class);
     }   
     
 }

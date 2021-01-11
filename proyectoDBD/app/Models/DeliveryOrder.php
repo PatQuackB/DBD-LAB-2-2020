@@ -21,5 +21,4 @@ class DeliveryOrder extends Model
         return $this->hasMany(DeliveryOrderPurchaseOrder::class);
     } 
     
-    
 }
