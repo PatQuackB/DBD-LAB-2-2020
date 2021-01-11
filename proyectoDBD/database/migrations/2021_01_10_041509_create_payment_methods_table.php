@@ -26,10 +26,6 @@ class CreatePaymentMethodsTable extends Migration
             $table->unsignedBigInteger('idDespacho');
             $table->foreign('idDespacho')->references('id')->on('delivery_orders');
 
-            #Foranea de Usuario
-            $table->unsignedBigInteger('idUsuario');
-            $table->foreign('idUsuario')->references('id')->on('users');
-
             $table->timestamps();
         });
     }
