@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\PaymentMethodUser;
+use App\Models\PaymentMethod;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentMethodUserFactory extends Factory
@@ -23,8 +25,8 @@ class PaymentMethodUserFactory extends Factory
     {
         return [
             //Foranea
-            'idPago'=>PaymentMethod::Factory,
-            'idUsuario'=>User::Factory
+            'idPago'=>PaymentMethod::factory(),
+            'idUsuario'=>User::factory()
         ];
     }
 }

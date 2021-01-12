@@ -23,6 +23,7 @@ class PermissionFactory extends Factory
     {
         return [
             'nombrePermiso'=>$this->faker->name
+            
         ];
     }
 }

@@ -16,7 +16,7 @@ class CreatePurchaseOrdersTable extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id('id');
 
-            $table->integer('numeroCompra');
+            $table->text('numeroCompra');
             $table->dateTime('fechaCompra');
             $table->integer('montoTotal');
 

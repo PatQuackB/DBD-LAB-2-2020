@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\DeliveryOrder;
+use App\Models\StreetAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DeliveryOrderFactory extends Factory
@@ -26,7 +27,7 @@ class DeliveryOrderFactory extends Factory
             'tipoDespacho'=>$this->faker->numberBetween($min=0,$max=1),
 
             //Foranea
-            'idCalle'=>StreetAddress::Factory
+            'idCalle'=>StreetAddress::factory()
         ];
     }
 }

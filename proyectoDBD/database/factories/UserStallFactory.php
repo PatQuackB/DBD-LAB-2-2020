@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\UserStall;
+use App\Models\User;
+use App\Models\Stall;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserStallFactory extends Factory
@@ -23,8 +25,8 @@ class UserStallFactory extends Factory
     {
         return [
             //Foranea 
-            'idUsuario'=>User::Factory,
-            'idPuesto'=>Stall::Factory
+            'idUsuario'=>User::factory(),
+            'idPuesto'=>Stall::factory()
         ];
     }
 }

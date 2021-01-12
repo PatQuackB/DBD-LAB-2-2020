@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\PaymentMethod;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\DeliveryOrder;
 
 class PaymentMethodFactory extends Factory
 {
@@ -30,7 +31,7 @@ class PaymentMethodFactory extends Factory
             'anioVencimiento'=>$this->faker->numberBetween($min=0,$max=99),
 
             //Foranea
-            'idDespacho'=>DeliveryOrder::Factory
+            'idDespacho'=>DeliveryOrder::factory()
         ];
     }
 }

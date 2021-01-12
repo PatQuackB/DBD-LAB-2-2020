@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Region;
 use App\Models\Commune;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,7 +26,7 @@ class CommuneFactory extends Factory
             'nombreComuna'=>$this->faker->city,
 
             //Foranea
-            'idRegion'=>Region::Factory
+            'idRegion'=>Region::factory()
         ];
     }
 }

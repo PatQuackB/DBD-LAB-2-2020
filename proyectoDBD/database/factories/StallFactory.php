@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Stall;
+use App\Models\StreetAddress;
+use App\Models\Fair;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StallFactory extends Factory
@@ -25,8 +27,8 @@ class StallFactory extends Factory
             'nombrePuesto'=>$this->faker->company,
 
             //Foranea
-            'idFeria'=>Fair::Factory,
-            'idCalle'=>StreetAddress::Factory
+            'idFeria'=>Fair::factory(),
+            'idCalle'=>StreetAddress::factory()
         ];
     }
 }

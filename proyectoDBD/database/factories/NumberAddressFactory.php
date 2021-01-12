@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\NumberAddress;
+use App\Models\Commune;
+use App\Models\StreetAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class NumberAddressFactory extends Factory
@@ -25,8 +27,8 @@ class NumberAddressFactory extends Factory
             'numeroCalle'=>$this->faker->buildingNumber,
 
             //Foraneas
-            'idComuna'=>Commune::Factory,
-            'idCalle'=>StreetAddress::Factory
+            'idComuna'=>Commune::factory(),
+            'idCalle'=>StreetAddress::factory()
         ];
     }
 }

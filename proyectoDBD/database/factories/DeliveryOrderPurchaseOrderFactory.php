@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\DeliveryOrderPurchaseOrder;
+use App\Models\DeliveryOrder;
+use App\Models\PurchaseOrder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DeliveryOrderPurchaseOrderFactory extends Factory
@@ -23,8 +25,8 @@ class DeliveryOrderPurchaseOrderFactory extends Factory
     {
         return [
             //Intermedia
-            'idDespacho'=>DeliveryOrder::Factory,
-            'idOrdenCompra'=>PurchaseOrder::Factory
+            'idDespacho'=>DeliveryOrder::factory(),
+            'idOrdenCompra'=>PurchaseOrder::factory()
         ];
     }
 }

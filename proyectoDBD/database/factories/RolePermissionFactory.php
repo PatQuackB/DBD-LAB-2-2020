@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\RolePermission;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RolePermissionFactory extends Factory
@@ -23,8 +25,9 @@ class RolePermissionFactory extends Factory
     {
         return [
             //Foranea
-            'idPermiso'=>Permission::Factory,
-            'idRol'=>Role::Factory
+            'idPermiso'=>Permission::factory(),
+            'idRol'=>Role::factory()
         ];
     }
 }
+ 

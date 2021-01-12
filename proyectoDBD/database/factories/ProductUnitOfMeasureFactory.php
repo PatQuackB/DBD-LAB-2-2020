@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\ProductUnitOfMeasure;
+use App\Models\Product;
+use App\Models\UnitOfMeasure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductUnitOfMeasureFactory extends Factory
@@ -23,8 +25,8 @@ class ProductUnitOfMeasureFactory extends Factory
     {
         return [
             //Foranea
-            'idProducto'=>Product::Factory,
-            'idUnidadMedida'=>UnitOfMeasure::Factory
+            'idProducto'=>Product::factory(),
+            'idUnidadMedida'=>UnitOfMeasure::factory()
         ];
     }
 }
