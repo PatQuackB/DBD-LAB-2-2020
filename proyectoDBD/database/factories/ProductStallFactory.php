@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\ProductStall;
+use App\Models\Product;
+use App\Models\Stall;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductStallFactory extends Factory
@@ -23,8 +25,8 @@ class ProductStallFactory extends Factory
     {
         return [
             //Foranea
-            'idProducto'=>Product::Factory,
-            'idPuesto'=>Stall::Factory
+            'idProducto'=>Product::factory(),
+            'idPuesto'=>Stall::factory()
         ];
     }
 }

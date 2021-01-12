@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\SubCategory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubCategoryFactory extends Factory
@@ -25,7 +26,7 @@ class SubCategoryFactory extends Factory
             'nombreSubCategoria'=>$this->faker->name,
 
             //Foranea
-            'idCategoria'=>Category::Factory
+            'idCategoria'=>Category::factory()
         ];
     }
 }

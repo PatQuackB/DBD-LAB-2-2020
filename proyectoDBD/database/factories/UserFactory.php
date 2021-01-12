@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\StreetAddress;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -32,8 +34,8 @@ class UserFactory extends Factory
             'contraseniaUsuario'=>$this->faker->password,
             
             //Foranea
-            'idCalle'=>StreetAddress::Factory,
-            'idRol'=>Role::Factory
+            'idCalle'=>StreetAddress::factory(),
+            'idRol'=>Role::factory()
         ];
     }
 }

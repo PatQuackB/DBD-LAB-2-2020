@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PurchaseOrder;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PurchaseOrderFactory extends Factory
@@ -27,7 +28,7 @@ class PurchaseOrderFactory extends Factory
             'montoTotal'=>$this->faker->numberBetween($min=1000,$max=40000),
 
             //Foranea
-            'idUsuario'=>User::Factory
+            'idUsuario'=>User::factory()
         ];
     }
 }

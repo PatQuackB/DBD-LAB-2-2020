@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\PurchaseOrderProduct;
+use App\Models\PurchaseOrder;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PurchaseOrderProductFactory extends Factory
@@ -23,8 +25,8 @@ class PurchaseOrderProductFactory extends Factory
     {
         return [
             //Foranea
-            'idOrdenCompra'=>PurchaseOrder::Factory,
-            'idProducto'=>Product::Factory
+            'idOrdenCompra'=>PurchaseOrder::factory(),
+            'idProducto'=>Product::factory()
         ];
     }
 }
