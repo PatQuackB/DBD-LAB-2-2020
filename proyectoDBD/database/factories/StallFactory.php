@@ -27,8 +27,10 @@ class StallFactory extends Factory
             'nombrePuesto'=>$this->faker->company,
 
             //Foranea
-            'idFeria'=>Fair::factory(),
-            'idCalle'=>StreetAddress::factory()
+            //'idFeria'=>Fair::factory(),
+            'idFeria' => Fair::all()->random()->id,
+            //'idCalle'=>StreetAddress::factory()
+            'idCalle' => StreetAddress::all()->random()->id
         ];
     }
 }

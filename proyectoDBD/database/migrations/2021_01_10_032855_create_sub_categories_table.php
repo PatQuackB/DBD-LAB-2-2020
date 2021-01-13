@@ -15,9 +15,10 @@ class CreateSubCategoriesTable extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('nombreSubCategoria');
 
-            #Foranea de Categoria
+            //Foranea de Categoria
             $table->unsignedBigInteger('idCategoria');
             $table->foreign('idCategoria')->references('id')->on('categories');
 

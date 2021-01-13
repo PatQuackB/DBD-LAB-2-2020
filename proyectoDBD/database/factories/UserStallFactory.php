@@ -25,8 +25,10 @@ class UserStallFactory extends Factory
     {
         return [
             //Foranea 
-            'idUsuario'=>User::factory(),
-            'idPuesto'=>Stall::factory()
+            //'idUsuario'=>User::factory(),
+            'idUsuario' => User::all()->random()->id,
+            //'idPuesto'=>Stall::factory()
+            'idPuesto' => Stall::all()->random()->id
         ];
     }
 }

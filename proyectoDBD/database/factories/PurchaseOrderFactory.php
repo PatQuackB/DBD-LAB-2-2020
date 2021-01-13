@@ -28,7 +28,8 @@ class PurchaseOrderFactory extends Factory
             'montoTotal'=>$this->faker->numberBetween($min=1000,$max=40000),
 
             //Foranea
-            'idUsuario'=>User::factory()
+            //'idUsuario'=>User::factory()
+            'idUsuario' => User::all()->random()->id
         ];
     }
 }

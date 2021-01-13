@@ -34,8 +34,10 @@ class UserFactory extends Factory
             'contraseniaUsuario'=>$this->faker->password,
             
             //Foranea
-            'idCalle'=>StreetAddress::factory(),
-            'idRol'=>Role::factory()
+            //'idCalle'=>StreetAddress::factory(),
+            'idCalle' => StreetAddress::all()->random()->id,
+            //'idRol'=>Role::factory()
+            'idRol' => Role::all()->random()->id
         ];
     }
 }

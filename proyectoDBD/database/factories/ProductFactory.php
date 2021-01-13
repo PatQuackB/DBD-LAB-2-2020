@@ -28,7 +28,8 @@ class ProductFactory extends Factory
             'stockProducto'=>$this->faker->randomNumber($nbDigits = 4, $strict = false),
 
             //Foranea
-            'idCategoria'=>Category::factory()
+            //'idCategoria'=>Category::factory()
+            'idCategoria' => Category::all()->random()->id
         ];
     }
 }

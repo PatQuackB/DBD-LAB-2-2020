@@ -15,7 +15,9 @@ class CreateStreetAddressesTable extends Migration
     {
         Schema::create('street_addresses', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('nombreCalle');
+
             $table->timestamps();
         });
     }

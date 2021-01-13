@@ -16,13 +16,14 @@ class CreatePaymentMethodUsersTable extends Migration
         Schema::create('payment_method_users', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de OrdenDespacho
+            //Foranea de OrdenDespacho
             $table->unsignedBigInteger('idPago');
             $table->foreign('idPago')->references('id')->on('payment_methods');
 
-            #Foranea de Usuario
+            //Foranea de Usuario
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

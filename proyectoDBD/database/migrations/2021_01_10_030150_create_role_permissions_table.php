@@ -16,11 +16,11 @@ class CreateRolePermissionsTable extends Migration
         Schema::create('role_permissions', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de Rol
+            //Foranea de Rol
             $table->unsignedBigInteger('idRol');
             $table->foreign('idRol')->references('id')->on('roles');
 
-            #Foranea de Permiso
+            //Foranea de Permiso
             $table->unsignedBigInteger('idPermiso');
             $table->foreign('idPermiso')->references('id')->on('permissions');
 

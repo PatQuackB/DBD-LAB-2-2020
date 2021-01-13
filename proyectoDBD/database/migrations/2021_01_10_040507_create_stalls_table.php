@@ -15,13 +15,14 @@ class CreateStallsTable extends Migration
     {
         Schema::create('stalls', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('nombrePuesto');
 
-            #Foranea de Feria
+            //Foranea de Feria
             $table->unsignedBigInteger('idFeria');
             $table->foreign('idFeria')->references('id')->on('fairs');
 
-            #Foranea de CalleDireccion
+            //Foranea de CalleDireccion
             $table->unsignedBigInteger('idCalle');
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 

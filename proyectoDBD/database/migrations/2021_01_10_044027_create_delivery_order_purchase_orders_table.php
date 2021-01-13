@@ -16,11 +16,11 @@ class CreateDeliveryOrderPurchaseOrdersTable extends Migration
         Schema::create('delivery_order_purchase_orders', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de Orden De Compra
+            //Foranea de Orden De Compra
             $table->unsignedBigInteger('idOrdenCompra');
             $table->foreign('idOrdenCompra')->references('id')->on('purchase_orders');
 
-            #Foranea de Orden De Despacho
+            //Foranea de Orden De Despacho
             $table->unsignedBigInteger('idDespacho');
             $table->foreign('idDespacho')->references('id')->on('delivery_orders');
 

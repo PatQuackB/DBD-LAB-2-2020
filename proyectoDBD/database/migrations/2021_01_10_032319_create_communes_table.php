@@ -15,9 +15,10 @@ class CreateCommunesTable extends Migration
     {
         Schema::create('communes', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('nombreComuna');
 
-            #Foranea de Region
+            //Foranea de Region
             $table->unsignedBigInteger('idRegion');
             $table->foreign('idRegion')->references('id')->on('regions');
             $table->timestamps();

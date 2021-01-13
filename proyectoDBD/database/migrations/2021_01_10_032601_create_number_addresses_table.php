@@ -15,13 +15,14 @@ class CreateNumberAddressesTable extends Migration
     {
         Schema::create('number_addresses', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('numeroCalle');
 
-            #Foranea de Comuna
+            //Foranea de Comuna
             $table->unsignedBigInteger('idComuna');
             $table->foreign('idComuna')->references('id')->on('communes');
 
-            #Foranea de CalleDireccion
+            //Foranea de CalleDireccion
             $table->unsignedBigInteger('idCalle');
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 

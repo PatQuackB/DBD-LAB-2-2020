@@ -16,11 +16,11 @@ class CreateProductUnitOfMeasuresTable extends Migration
         Schema::create('product_unit_of_measures', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de Producto
+            //Foranea de Producto
             $table->unsignedBigInteger('idProducto');
             $table->foreign('idProducto')->references('id')->on('products');
 
-            #Foranea de Unidad de medida
+            //Foranea de Unidad de medida
             $table->unsignedBigInteger('idUnidadMedida');
             $table->foreign('idUnidadMedida')->references('id')->on('unit_of_measures');
             

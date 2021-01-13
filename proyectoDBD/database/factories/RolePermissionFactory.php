@@ -25,9 +25,10 @@ class RolePermissionFactory extends Factory
     {
         return [
             //Foranea
-            'idPermiso'=>Permission::factory(),
-            'idRol'=>Role::factory()
+            //'idPermiso'=>Permission::factory(),
+            'idPermiso' => Permission::all()->random()->id,
+            //'idRol'=>Role::factory()
+            'idRol' => Role::all()->random()->id
         ];
     }
 }
- 

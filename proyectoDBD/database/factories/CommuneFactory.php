@@ -26,7 +26,8 @@ class CommuneFactory extends Factory
             'nombreComuna'=>$this->faker->city,
 
             //Foranea
-            'idRegion'=>Region::factory()
+            //'idRegion'=>Region::factory()
+            'idRegion' => Region::all()->random()->id
         ];
     }
 }

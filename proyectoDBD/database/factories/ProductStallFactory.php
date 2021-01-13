@@ -25,8 +25,10 @@ class ProductStallFactory extends Factory
     {
         return [
             //Foranea
-            'idProducto'=>Product::factory(),
-            'idPuesto'=>Stall::factory()
+            //'idProducto'=>Product::factory(),
+            'idProducto' => Product::all()->random()->id,
+            //'idPuesto'=>Stall::factory()
+            'idPuesto' => Stall::all()->random()->id
         ];
     }
 }

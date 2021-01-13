@@ -37,29 +37,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Fair::factory(5)->create();
-        Region::factory(5)->create();
-        StreetAddress::factory(5)->create();
-        Role::factory(5)->create();
-        UnitOfMeasure::factory(5)->create();
-        Category::factory(5)->create();
-        Permission::factory(5)->create();
-        RolePermission::factory(5)->create();
-        Commune::factory(5)->create();
-        NumberAddress::factory(5)->create();
-        SubCategory::factory(5)->create();
-        Product::factory(5)->create();
-        ProductUnitOfMeasure::factory(5)->create();
-        Stall::factory(5)->create();
-        ProductStall::factory(5)->create();
-        DeliveryOrder::factory(5)->create();
-        User::factory(5)->create();
-        PaymentMethod::factory(5)->create();
-        UserStall::factory(5)->create();
-        PurchaseOrder::factory(5)->create();
-        PurchaseOrderProduct::factory(5)->create();
-        DeliveryOrderPurchaseOrder::factory(5)->create();
-        PaymentMethodUser::factory(5)->create();
+        $cantidadSeeders=5;
+
+        Fair::factory($cantidadSeeders)->create();
+        Region::factory($cantidadSeeders)->create();
+        StreetAddress::factory($cantidadSeeders)->create();
+        Role::factory($cantidadSeeders)->create();
+        UnitOfMeasure::factory($cantidadSeeders)->create();
+        Category::factory($cantidadSeeders)->create();
+        Permission::factory($cantidadSeeders)->create();
+        RolePermission::factory($cantidadSeeders)->create();
+        Commune::factory($cantidadSeeders)->create();
+        NumberAddress::factory($cantidadSeeders)->create();
+        SubCategory::factory($cantidadSeeders)->create();
+        Product::factory($cantidadSeeders)->create();
+        ProductUnitOfMeasure::factory($cantidadSeeders)->create();
+        Stall::factory($cantidadSeeders)->create();
+        ProductStall::factory($cantidadSeeders)->create();
+        DeliveryOrder::factory($cantidadSeeders)->create();
+        User::factory($cantidadSeeders)->create();
+        PaymentMethod::factory($cantidadSeeders)->create();
+        UserStall::factory($cantidadSeeders)->create();
+        PurchaseOrder::factory($cantidadSeeders)->create();
+        PurchaseOrderProduct::factory($cantidadSeeders)->create();
+        DeliveryOrderPurchaseOrder::factory($cantidadSeeders)->create();
+        PaymentMethodUser::factory($cantidadSeeders)->create();
 
     }
 }

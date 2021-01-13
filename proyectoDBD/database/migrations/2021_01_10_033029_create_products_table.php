@@ -15,11 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('nombreProducto');
             $table->integer('precioProducto');
             $table->unsignedBigInteger('stockProducto');
 
-            #Foranea de Categoria
+            //Foranea de Categoria
             $table->unsignedBigInteger('idCategoria');
             $table->foreign('idCategoria')->references('id')->on('categories');
 

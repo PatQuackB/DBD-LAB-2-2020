@@ -25,8 +25,10 @@ class PurchaseOrderProductFactory extends Factory
     {
         return [
             //Foranea
-            'idOrdenCompra'=>PurchaseOrder::factory(),
-            'idProducto'=>Product::factory()
+            //'idProducto'=>Product::factory()
+            'idProducto' => Product::all()->random()->id,
+            //'idOrdenCompra'=>PurchaseOrder::factory(),
+            'idOrdenCompra' => PurchaseOrder::all()->random()->id
         ];
     }
 }

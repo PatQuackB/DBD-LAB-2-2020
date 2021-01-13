@@ -25,8 +25,10 @@ class PaymentMethodUserFactory extends Factory
     {
         return [
             //Foranea
-            'idPago'=>PaymentMethod::factory(),
-            'idUsuario'=>User::factory()
+            //'idPago'=>PaymentMethod::factory(),
+            'idPago' => PaymentMethod::all()->random()->id,
+            //'idUsuario'=>User::factory()
+            'idUsuario' => User::all()->random()->id
         ];
     }
 }

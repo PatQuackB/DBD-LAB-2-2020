@@ -16,11 +16,11 @@ class CreateProductStallsTable extends Migration
         Schema::create('product_stalls', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de Producto
+            //Foranea de Producto
             $table->unsignedBigInteger('idProducto');
             $table->foreign('idProducto')->references('id')->on('products');
 
-            #Foranea de Puesto
+            //Foranea de Puesto
             $table->unsignedBigInteger('idPuesto');
             $table->foreign('idPuesto')->references('id')->on('stalls');
 

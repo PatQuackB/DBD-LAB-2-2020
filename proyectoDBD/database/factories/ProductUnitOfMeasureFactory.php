@@ -25,8 +25,10 @@ class ProductUnitOfMeasureFactory extends Factory
     {
         return [
             //Foranea
-            'idProducto'=>Product::factory(),
-            'idUnidadMedida'=>UnitOfMeasure::factory()
+            //'idProducto'=>Product::factory(),
+            'idProducto' => Product::all()->random()->id,
+            //'idUnidadMedida'=>UnitOfMeasure::factory()
+            'idUnidadMedida' => UnitOfMeasure::all()->random()->id
         ];
     }
 }

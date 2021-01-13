@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id');
+
             $table->string('rutUsuario');
             $table->string('nombreUsuario');
             $table->string('apellidoUsuario');
@@ -25,11 +26,11 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
 
 
-            #Foranea de Calle
+            //Foranea de Calle
             $table->unsignedBigInteger('idCalle');
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 
-            #Foranea de Rol
+            //Foranea de Rol
             $table->unsignedBigInteger('idRol');
             $table->foreign('idRol')->references('id')->on('roles');
 

@@ -15,6 +15,7 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id('id');
+
             $table->integer('estadoPago');
             $table->integer('tipoTarjeta');
             $table->string('nombreBanco');
@@ -22,7 +23,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->integer('mesVencimiento');
             $table->integer('anioVencimiento');
 
-            #Foranea de OrdenDespacho
+            //Foranea de OrdenDespacho
             $table->unsignedBigInteger('idDespacho');
             $table->foreign('idDespacho')->references('id')->on('delivery_orders');
 

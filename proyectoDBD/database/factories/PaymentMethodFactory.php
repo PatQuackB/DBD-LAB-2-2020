@@ -31,7 +31,8 @@ class PaymentMethodFactory extends Factory
             'anioVencimiento'=>$this->faker->numberBetween($min=0,$max=99),
 
             //Foranea
-            'idDespacho'=>DeliveryOrder::factory()
+            //'idDespacho'=>DeliveryOrder::factory()
+            'idDespacho' => DeliveryOrder::all()->random()->id
         ];
     }
 }

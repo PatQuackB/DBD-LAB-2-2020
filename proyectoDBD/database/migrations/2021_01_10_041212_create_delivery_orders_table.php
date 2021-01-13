@@ -15,10 +15,11 @@ class CreateDeliveryOrdersTable extends Migration
     {
         Schema::create('delivery_orders', function (Blueprint $table) {
             $table->id('id');
+
             $table->integer('estadoDespacho');
             $table->integer('tipoDespacho');
 
-            #Foranea de Calle
+            //Foranea de Calle
             $table->unsignedBigInteger('idCalle');
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 

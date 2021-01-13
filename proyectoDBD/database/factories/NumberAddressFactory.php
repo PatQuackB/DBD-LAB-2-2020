@@ -27,8 +27,10 @@ class NumberAddressFactory extends Factory
             'numeroCalle'=>$this->faker->buildingNumber,
 
             //Foraneas
-            'idComuna'=>Commune::factory(),
-            'idCalle'=>StreetAddress::factory()
+            //'idComuna'=>Commune::factory(),
+            'idComuna' => Commune::all()->random()->id,
+            //'idCalle'=>StreetAddress::factory()
+            'idCalle' => StreetAddress::all()->random()->id
         ];
     }
 }

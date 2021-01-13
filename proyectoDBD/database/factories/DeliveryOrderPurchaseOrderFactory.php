@@ -25,8 +25,10 @@ class DeliveryOrderPurchaseOrderFactory extends Factory
     {
         return [
             //Intermedia
-            'idDespacho'=>DeliveryOrder::factory(),
-            'idOrdenCompra'=>PurchaseOrder::factory()
+            //'idDespacho'=>DeliveryOrder::factory(),
+            'idDespacho' => DeliveryOrder::all()->random()->id,
+            //'idOrdenCompra'=>PurchaseOrder::factory()
+            'idOrdenCompra' => PurchaseOrder::all()->random()->id
         ];
     }
 }

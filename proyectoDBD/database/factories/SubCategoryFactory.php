@@ -26,7 +26,8 @@ class SubCategoryFactory extends Factory
             'nombreSubCategoria'=>$this->faker->name,
 
             //Foranea
-            'idCategoria'=>Category::factory()
+            //'idCategoria'=>Category::factory()
+            'idCategoria' => Category::all()->random()->id
         ];
     }
 }

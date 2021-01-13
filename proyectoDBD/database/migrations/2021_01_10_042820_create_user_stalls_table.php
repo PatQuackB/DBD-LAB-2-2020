@@ -16,11 +16,11 @@ class CreateUserStallsTable extends Migration
         Schema::create('user_stalls', function (Blueprint $table) {
             $table->id('id');
 
-            #Foranea de Usuario
+            //Foranea de Usuario
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('users');
 
-            #Foranea de Puesto
+            //Foranea de Puesto
             $table->unsignedBigInteger('idPuesto');
             $table->foreign('idPuesto')->references('id')->on('stalls');
 
