@@ -17,13 +17,23 @@ class CategoryController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $category = new Category();
+        $category->nombreCategoria= $request->nombreCategoria;
+        $category->save();
+        return response()->json([
+            "message"=> "Se ha creado una categoria",
+            "id"=> $category->id
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $category = Category::find($id);
+        if($category != null){
+            return response()->json($category);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)
