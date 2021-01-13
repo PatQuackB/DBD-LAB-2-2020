@@ -10,7 +10,8 @@ class FairController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $fair = Fair::all();
+        return response()->json($fair);
     }
 
     //Crear una nueva tupla (post)

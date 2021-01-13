@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
+
 class SubCategoryController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $subCategory = SubCategory::all();
+        return response()->json($subCategory);
     }
 
     //Crear una nueva tupla (post)

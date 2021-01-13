@@ -10,7 +10,8 @@ class DeliveryOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $deliveryOrder = DeliveryOrder::all();
+        return response()->json($deliveryOrder);
     }
 
     //Crear una nueva tupla (post)

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StreetAddress;
+
 class StreetAddressController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $streetAddress = StreetAddress::all();
+        return response()->json($streetAddress);
     }
 
     //Crear una nueva tupla (post)

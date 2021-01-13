@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UnitOfMeasure;
+
 class UnitOfMeasureController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $unitOfMeasure = UnitOfMeasure::all();
+        return response()->json($unitOfMeasure);
     }
 
     //Crear una nueva tupla (post)

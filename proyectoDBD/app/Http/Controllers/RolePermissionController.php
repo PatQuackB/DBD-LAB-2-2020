@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RolePermission;
+
 class RolePermissionController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $rolePermission = RolePermission::all();
+        return response()->json($rolePermission);
     }
 
     //Crear una nueva tupla (post)

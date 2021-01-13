@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+
 class UserController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $user = User::all()->where($user->oculto,false);
+        return response()->json($user);
     }
 
     //Crear una nueva tupla (post)

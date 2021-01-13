@@ -10,7 +10,8 @@ class CommuneController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $commune = Commune::all();
+        return response()->json($commune);
     }
 
     //Crear una nueva tupla (post)

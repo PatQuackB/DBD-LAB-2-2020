@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Permission;
+
 class PermissionController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $permission = Permission::all();
+        return response()->json($permission);
     }
 
     //Crear una nueva tupla (post)

@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+
 class PaymentMethodController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $paymentMethod = PaymentMethod::all();
+        return response()->json($paymentMethod);
     }
 
     //Crear una nueva tupla (post)

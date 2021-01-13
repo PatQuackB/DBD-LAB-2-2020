@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PurchaseOrder;
+
 class PurchaseOrderController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $purchaseOrder = PurchaseOrder::all();
+        return response()->json($purchaseOrder);
     }
 
     //Crear una nueva tupla (post)

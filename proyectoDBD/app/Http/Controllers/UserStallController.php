@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserStall;
+
 class UserStallController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $userStall = UserStall::all();
+        return response()->json($userStall);
     }
 
     //Crear una nueva tupla (post)

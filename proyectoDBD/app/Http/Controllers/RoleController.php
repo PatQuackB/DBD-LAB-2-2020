@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+
 class RoleController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        
+        $role = Role::all();
+        return response()->json($role);
     }
 
     //Crear una nueva tupla (post)
