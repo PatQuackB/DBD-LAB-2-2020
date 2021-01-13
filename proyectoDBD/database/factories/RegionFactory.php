@@ -22,7 +22,25 @@ class RegionFactory extends Factory
     public function definition()
     {
         return [
-             'nombreRegion'=>$this->faker->state
+             //'nombreRegion'=>$this->faker->state
+             'nombreRegion' => $this->faker->randomElement($array = array (
+                'I Region de Tarapaca',
+                'II Region de Antofagasta',
+                'III Region de Atacama',
+                'IV Region de Coquimbo',
+                'V Region de Valparaiso',
+                'VI Region del Libertador General Bernardo OHiggins',
+                'VII Region del Maule',
+                'VIII Region del Biobio',
+                'IX Region de La Araucania',
+                'X Region de Los Lagos',
+                'XI Region Aysen del General Carlos Ibañez del Campo',
+                'XII Region de Magallanes y Antartica Chilena',
+                'XIII Region Metropolitana de Santiago',
+                'XIV Region de Los Rios',
+                'XV Region de Arica y Parinacota',
+                'XVI Region de Ñuble',
+                ))
         ];
     }
 }
