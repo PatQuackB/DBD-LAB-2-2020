@@ -22,7 +22,8 @@ class PermissionFactory extends Factory
     public function definition()
     {
         return [
-            'nombrePermiso'=>$this->faker->name
+            'nombrePermiso'=>$this->faker->name,
+            'softDelete'=>$this->faker->boolean
             
         ];
     }

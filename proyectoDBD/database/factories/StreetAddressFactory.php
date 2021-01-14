@@ -22,7 +22,8 @@ class StreetAddressFactory extends Factory
     public function definition()
     {
         return [
-            'nombreCalle'=>$this->faker->streetName
+            'nombreCalle'=>$this->faker->streetName,
+            'softDelete'=>$this->faker->boolean
         ];
     }
 }

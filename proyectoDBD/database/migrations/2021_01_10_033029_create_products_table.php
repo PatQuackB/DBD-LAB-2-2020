@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('nombreProducto');
             $table->integer('precioProducto');
             $table->unsignedBigInteger('stockProducto');
-
+            $table->boolean('softDelete');
             //Foranea de Categoria
             $table->unsignedBigInteger('idCategoria');
             $table->foreign('idCategoria')->references('id')->on('categories');

@@ -10,7 +10,8 @@ class PurchaseOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $purchaseOrder = PurchaseOrder::all();
+        //$purchaseOrder = PurchaseOrder::all();
+        $purchaseOrder = PurchaseOrder::all()->where($purchaseOrder->softDelete,false);
         return response()->json($purchaseOrder);
     }
 
@@ -39,6 +40,33 @@ class PurchaseOrderController extends Controller
     //Borrar una tupla específica (delete)
     public function destroy($id)
     {
-        
+        $purchaseOrder = PurchaseOrder::find($id);
+        if($purchaseOrder != null){
+            if($purchaseOrder->softDelete){
+                return response()->json(["message"=>"La orden de compra ya está eliminada."]);         
+            }
+            $purchaseOrder->softDelete = True;
+            $purchaseOrder->save();
+            return response()->json(["message"=>"La orden de compra ha sido eliminada."]);
+        }
+        return response()->json(["message"=>"El id no existe."]);
+    }
+
+    //Vuelve a false el atributo softDelete en una tupla específica 
+    public function restore($id)
+    {
+        $purchaseOrder = PurchaseOrder::find($id);
+        if($purchaseOrder != null){
+            if($purchaseOrder->softDelete){
+                $purchaseOrder->softDelete = False;
+                $purchaseOrder->save();
+                return response()->json([
+                    "message"=> "Se ha recuperado la orden de compra.",
+                    "id"=> $purchaseOrder->id
+                ], 202);
+            }
+            return response()->json(["message"=>"No es posible realizar la operación debido a que la orden de compra no está eliminada."]);
+        }
+        return response()->json(["message"=>"El id no existe."]);
     }
 }

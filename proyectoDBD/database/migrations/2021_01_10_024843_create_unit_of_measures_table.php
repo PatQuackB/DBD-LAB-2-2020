@@ -17,7 +17,8 @@ class CreateUnitOfMeasuresTable extends Migration
             $table->id('id');
 
             $table->string('nombreUnidadMedida');
-
+            $table->boolean('softDelete');
+            
             $table->timestamps();
         });
     }

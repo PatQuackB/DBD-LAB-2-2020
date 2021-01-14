@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('rutUsuario');
             $table->string('nombreUsuario');
             $table->string('apellidoUsuario');
-            $table->boolean('oculto');
+            $table->boolean('softDelete');
             $table->string('correoUsuario')->unique();
             $table->timestamp('correoUsuarioVerificado')->nullable();
             $table->string('contraseniaUsuario');

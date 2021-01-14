@@ -22,7 +22,8 @@ class UnitOfMeasureFactory extends Factory
     public function definition()
     {
         return [
-            'nombreUnidadMedida'=>$this->faker->name
+            'nombreUnidadMedida'=>$this->faker->name,
+            'softDelete'=>$this->faker->boolean
         ];
     }
 }

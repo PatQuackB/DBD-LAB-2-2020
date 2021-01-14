@@ -17,9 +17,10 @@ class CreateCommunesTable extends Migration
             $table->id('id');
 
             $table->string('nombreComuna');
+            $table->boolean('softDelete'); 
 
             //Foranea de Region
-            $table->unsignedBigInteger('idRegion')->nullable();
+            $table->unsignedBigInteger('idRegion')->nullable();//AQUI SE AGREGO UN NULLABLE PARA REALIZAR PRUEBAS DE STORE EN POSTMAN
             $table->foreign('idRegion')->references('id')->on('regions');
             
             $table->timestamps();

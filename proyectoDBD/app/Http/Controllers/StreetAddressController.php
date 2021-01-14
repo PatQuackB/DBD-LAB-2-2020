@@ -10,7 +10,8 @@ class StreetAddressController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $streetAddress = StreetAddress::all();
+        //$streetAddress = StreetAddress::all();
+        $streetAddress = StreetAddress::all()->where($streetAddress->softDelete,false);
         return response()->json($streetAddress);
     }
 
@@ -33,12 +34,45 @@ class StreetAddressController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        
+        $streetAddress = StreetAddress::find($id);
+        if($streetAddress != null){
+            $streetAddress->nombreCalle= $request->nombreCalle;
+            $streetAddress->save();
+            return response()->json($streetAddress);
+        }
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)
     public function destroy($id)
     {
-        
+        $streetAddress = StreetAddress::find($id);
+        if($streetAddress != null){
+            if($streetAddress->softDelete){
+                return response()->json(["message"=>"La calle de dirección ya está eliminada."]);         
+            }
+            $streetAddress->softDelete = True;
+            $streetAddress->save();
+            return response()->json(["message"=>"La calle de dirección ha sido eliminada."]);
+        }
+        return response()->json(["message"=>"El id no existe."]);
+    }
+
+    //Vuelve a false el atributo softDelete en una tupla específica 
+    public function restore($id)
+    {
+        $streetAddress = StreetAddress::find($id);
+        if($streetAddress != null){
+            if($streetAddress->softDelete){
+                $streetAddress->softDelete = False;
+                $streetAddress->save();
+                return response()->json([
+                    "message"=> "Se ha recuperado la calle de dirección.",
+                    "id"=> $streetAddress->id
+                ], 202);
+            }
+            return response()->json(["message"=>"No es posible realizar la operación debido a que la calle de dirección no está eliminada."]);
+        }
+        return response()->json(["message"=>"El id no existe."]);
     }
 }

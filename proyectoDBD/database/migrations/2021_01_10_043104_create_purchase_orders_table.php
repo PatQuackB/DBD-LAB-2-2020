@@ -19,7 +19,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('numeroCompra');
             $table->dateTime('fechaCompra');
             $table->integer('montoTotal');
-
+            $table->boolean('softDelete');
             //Foranea de Usuario
             $table->unsignedBigInteger('idUsuario');
             $table->foreign('idUsuario')->references('id')->on('users');

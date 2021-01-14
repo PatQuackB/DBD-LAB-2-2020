@@ -17,7 +17,7 @@ class CreateStallsTable extends Migration
             $table->id('id');
 
             $table->string('nombrePuesto');
-
+            $table->boolean('softDelete');
             //Foranea de Feria
             $table->unsignedBigInteger('idFeria');
             $table->foreign('idFeria')->references('id')->on('fairs');

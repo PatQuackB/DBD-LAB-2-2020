@@ -17,7 +17,7 @@ class CreateSubCategoriesTable extends Migration
             $table->id('id');
 
             $table->string('nombreSubCategoria');
-
+            $table->boolean('softDelete');
             //Foranea de Categoria
             $table->unsignedBigInteger('idCategoria');
             $table->foreign('idCategoria')->references('id')->on('categories');

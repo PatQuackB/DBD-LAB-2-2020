@@ -22,6 +22,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('ultimosNumerosTarjeta');
             $table->integer('mesVencimiento');
             $table->integer('anioVencimiento');
+            $table->boolean('softDelete');
 
             //Foranea de OrdenDespacho
             $table->unsignedBigInteger('idDespacho');

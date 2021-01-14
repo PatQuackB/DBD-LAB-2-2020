@@ -24,6 +24,7 @@ class CommuneFactory extends Factory
     {
         return [
             'nombreComuna'=>$this->faker->city,
+            'softDelete'=>$this->faker->boolean,
 
             //Foranea
             //'idRegion'=>Region::factory()

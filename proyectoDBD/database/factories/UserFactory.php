@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'rutUsuario'=>$this->faker->unique()->localIpv4,
             'nombreUsuario'=>$this->faker->firstName($gender = null),
             'apellidoUsuario'=>$this->faker->lastName($gender = null),
-            'oculto'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->boolean,
             'correoUsuario'=>$this->faker->unique()->safeEmail,
             'correoUsuarioVerificado'=>$this->faker->dateTime($max = 'now', $timezone = null),
             'contraseniaUsuario'=>$this->faker->password,

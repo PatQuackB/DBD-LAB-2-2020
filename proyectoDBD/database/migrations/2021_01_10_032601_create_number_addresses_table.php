@@ -17,7 +17,8 @@ class CreateNumberAddressesTable extends Migration
             $table->id('id');
 
             $table->string('numeroCalle');
-
+            $table->boolean('softDelete');
+            
             //Foranea de Comuna
             $table->unsignedBigInteger('idComuna');
             $table->foreign('idComuna')->references('id')->on('communes');

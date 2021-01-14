@@ -25,6 +25,7 @@ class DeliveryOrderFactory extends Factory
         return [
             'estadoDespacho'=>$this->faker->numberBetween($min=0,$max=3),
             'tipoDespacho'=>$this->faker->numberBetween($min=0,$max=1),
+            'softDelete'=>$this->faker->boolean,
 
             //Foranea
             //'idCalle'=>StreetAddress::factory()

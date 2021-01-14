@@ -22,7 +22,8 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'nombreCategoria'=>$this->faker->name
+            'nombreCategoria'=>$this->faker->name,
+            'softDelete'=>$this->faker->boolean
         ];
     }
 }

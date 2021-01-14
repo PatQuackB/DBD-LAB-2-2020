@@ -22,7 +22,8 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'nombreRol'=>$this->faker->jobTitle
+            'nombreRol'=>$this->faker->jobTitle,
+            'softDelete'=>$this->faker->boolean
         ];
     }
 }

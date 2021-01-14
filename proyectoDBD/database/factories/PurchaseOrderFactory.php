@@ -26,6 +26,7 @@ class PurchaseOrderFactory extends Factory
             'numeroCompra'=>$this->faker->unique()->uuid,
             'fechaCompra'=>$this->faker->dateTime($max = 'now', $timezone = null),
             'montoTotal'=>$this->faker->numberBetween($min=1000,$max=40000),
+            'softDelete'=>$this->faker->boolean,
 
             //Foranea
             //'idUsuario'=>User::factory()

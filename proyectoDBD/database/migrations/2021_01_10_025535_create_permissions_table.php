@@ -17,7 +17,8 @@ class CreatePermissionsTable extends Migration
             $table->id('id');
 
             $table->string('nombrePermiso');
-
+            $table->boolean('softDelete');
+            
             $table->timestamps();
         });
     }

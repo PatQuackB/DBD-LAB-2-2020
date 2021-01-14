@@ -18,7 +18,7 @@ class CreateDeliveryOrdersTable extends Migration
 
             $table->integer('estadoDespacho');
             $table->integer('tipoDespacho');
-
+            $table->boolean('softDelete');
             //Foranea de Calle
             $table->unsignedBigInteger('idCalle');
             $table->foreign('idCalle')->references('id')->on('street_addresses');

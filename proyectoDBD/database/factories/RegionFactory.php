@@ -40,7 +40,8 @@ class RegionFactory extends Factory
                 'XIV Region de Los Rios',
                 'XV Region de Arica y Parinacota',
                 'XVI Region de Ñuble',
-                ))
+             )),
+             'softDelete'=>$this->faker->boolean
         ];
     }
 }

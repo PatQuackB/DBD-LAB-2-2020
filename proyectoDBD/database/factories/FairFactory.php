@@ -22,7 +22,8 @@ class FairFactory extends Factory
     public function definition()
     {
         return [
-            'nombreFeria'=>$this->faker->name
+            'nombreFeria'=>$this->faker->name,
+            'softDelete'=>$this->faker->boolean
         ];
     }
 }

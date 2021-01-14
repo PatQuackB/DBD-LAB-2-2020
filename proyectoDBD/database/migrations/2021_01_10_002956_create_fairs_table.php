@@ -17,6 +17,7 @@ class CreateFairsTable extends Migration
             $table->id('id');
 
             $table->string('nombreFeria');
+            $table->boolean('softDelete');
 
             $table->timestamps();
         });

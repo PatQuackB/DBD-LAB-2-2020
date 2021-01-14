@@ -17,7 +17,7 @@ class CreateStreetAddressesTable extends Migration
             $table->id('id');
 
             $table->string('nombreCalle');
-
+            $table->boolean('softDelete');
             $table->timestamps();
         });
     }
