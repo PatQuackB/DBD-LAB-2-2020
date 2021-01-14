@@ -11,8 +11,8 @@ class CategoryController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$category = Category::all();
-        $category = Category::all()->where($category->softDelete,false);
+        $category = Category::all();
+        //$category = Category::all()->where($category->softDelete,false);
         return response()->json($category);
     }
 

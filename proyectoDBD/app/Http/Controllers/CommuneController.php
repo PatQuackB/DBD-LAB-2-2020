@@ -11,8 +11,8 @@ class CommuneController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$commune = Commune::all();
-        $commune = Commune::all()->where($commune->softDelete,false);
+        $commune = Commune::all();
+        //$commune = Commune::all()->where($commune->softDelete,false);
         return response()->json($commune);
     }
     
@@ -63,11 +63,22 @@ class CommuneController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
+    /*
+    {
+        "nombreComuna": ""
+        "nombreRegion": ""
+        if($request->nombreComuna == "")
+    }
+    */
         $commune = Commune::find($id);
         if($commune != null){
-            $commune->nombreComuna= $request->nombreComuna;
-            $commune->save();
-            return response()->json($commune);
+            if($request->nombreComuna != null){
+                $commune->nombreComuna= $request->nombreComuna;
+                $commune->save();
+                return response()->json($commune);
+            }else{
+                return response()->json($commune);
+            }
         }
         return response()->json(["message"=>"El id no existe"]);
     }
