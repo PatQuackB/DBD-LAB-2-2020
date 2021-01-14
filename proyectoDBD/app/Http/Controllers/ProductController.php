@@ -18,7 +18,16 @@ class ProductController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $product = new Product();
+        $product->nombreProducto = $request->nombreProducto;
+        $product->precioProducto = $request->precioProducto;
+        $product->stockProducto = $request->stockProducto;
+        $product->softDelete = False;
+        $product->save();
+        return response()->json([
+            "message"=> "Se ha creado un producto.",
+            "id"=> $product->id
+        ], 202);   
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

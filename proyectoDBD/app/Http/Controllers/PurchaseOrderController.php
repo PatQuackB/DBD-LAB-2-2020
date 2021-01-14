@@ -18,7 +18,16 @@ class PurchaseOrderController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $purchaseorder = new PurchaseOrder();
+        $purchaseorder->numeroCompra = $request->numeroCompra;
+        $purchaseorder->fechaCompra = $request->fechaCompra;
+        $purchaseorder->montoTotal = $request->montoTotal;
+        $purchaseorder->softDelete = False;
+        $purchaseorder->save();
+        return response()->json([
+            "message"=> "Se ha creado una orden de compra.",
+            "id"=> $purchaseorder->id
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

@@ -18,7 +18,15 @@ class StreetAddressController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $streetAddress = new StreetAddress();
+        $streetAddress->nombreCalle = $request->nombreCalle;
+        $streetAddress->softDelete = False;
+        $streetAddress->save();
+        return response()->json([
+            "message"=> "Se ha creado una direccion de calle.",
+            "id"=> $streetAddress->id
+        ], 202);
+    }  
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

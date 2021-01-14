@@ -18,7 +18,14 @@ class UnitOfMeasureController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $unitOfMeasure = new UnitOfMeasure();
+        $unitOfMeasure->nombreUnidadMedida = $request->nombreUnidadMedida;
+        $unitOfMeasure->softDelete = False;
+        $unitOfMeasure->save();
+        return response()->json([
+            "message"=> "Se ha creado una orden de despacho.",
+            "id"=> $unitOfMeasure->id
+        ], 202);   
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

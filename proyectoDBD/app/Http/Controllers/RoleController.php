@@ -18,7 +18,14 @@ class RoleController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        /*$role = new Role();
+        $role->nombreRol = $request->nombreRol;
+        $role->softDelete = False;
+        $role->save();
+        return response()->json([
+            "message"=> "Se ha creado un rol.",
+            "id"=> $role->id
+        ], 202);   */
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

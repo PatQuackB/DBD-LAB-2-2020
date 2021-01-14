@@ -18,7 +18,15 @@ class StallController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $stall = new Stall();
+        $stall->nombrePuesto = $request->nombrePuesto;
+        $stall->softDelete = False;
+        $stall->save();
+        return response()->json([
+            "message"=> "Se ha creado un puesto.",
+            "id"=> $stall->id
+        ], 202);
+    }
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

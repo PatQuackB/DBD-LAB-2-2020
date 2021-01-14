@@ -18,8 +18,21 @@ class UserController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $user = new User();
+        $user->rutUsuario = $request->rutUsuario;
+        $user->nombreUsuario = $request->nombreUsuario;
+        $user->apellidoUsuario = $request->apellidoUsuario;
+        $user->correoUsuario = $request->correoUsuario;
+        $user->correoUsuarioVerificado = $request->correoUsuarioVerificado;
+        $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $user->softDelete = False;
+        $user->save();
+        return response()->json([
+            "message"=> "Se ha creado un usuario.",
+            "id"=> $user->id
+        ], 202);
     }
+    
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)

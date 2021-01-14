@@ -18,7 +18,14 @@ class SubCategoryController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $subCategory = new SubCategory();
+        $subCategory->sub_categories = $request->sub_categories;
+        $subCategory->softDelete = False;
+        $subCategory->save();
+        return response()->json([
+            "message"=> "Se ha creado una orden una subcategoria.",
+            "id"=> $subCategory->id
+        ], 202);    
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

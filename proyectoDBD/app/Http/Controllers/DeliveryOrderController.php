@@ -23,7 +23,10 @@ class DeliveryOrderController extends Controller
         $deliveryOrder->tipoDespacho = $request->tipoDespacho;
         $deliveryOrder->softDelete = False;
         $deliveryOrder->save();
-        return response()->json(["message"=> "Se ha creado una orden de despacho.", "id"=> $deliveryOrder->id], 202);
+        return response()->json([
+            "message"=> "Se ha creado una orden de despacho.",
+            "id"=> $deliveryOrder->id
+        ], 202);   
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
