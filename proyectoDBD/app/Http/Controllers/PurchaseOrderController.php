@@ -23,7 +23,11 @@ class PurchaseOrderController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $purchaseOrder = PurchaseOrder::find($id);
+        if($purchaseOrder != null){
+            return response()->json($purchaseOrder);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

@@ -23,7 +23,11 @@ class StallController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $stall = Stall::find($id);
+        if($stall != null){
+            return response()->json($stall);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

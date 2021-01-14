@@ -23,7 +23,11 @@ class SubCategoryController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $subCategory = SubCategory::find($id);
+        if($subCategory != null){
+            return response()->json($subCategory);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

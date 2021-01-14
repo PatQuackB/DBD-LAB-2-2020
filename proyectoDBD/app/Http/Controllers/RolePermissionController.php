@@ -23,7 +23,11 @@ class RolePermissionController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $rolePermission = RolePermission::find($id);
+        if($rolePermission != null){
+            return response()->json($rolePermission);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

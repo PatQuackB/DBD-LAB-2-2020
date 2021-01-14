@@ -23,7 +23,11 @@ class StreetAddressController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $streetAddress = StreetAddress::find($id);
+        if($streetAddress != null){
+            return response()->json($streetAddress);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

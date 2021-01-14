@@ -39,7 +39,13 @@ class CategoryController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        
+        $category = Category::find($id);
+        if($category != null){
+            $category->nombreCategoria= $request->nombreCategoria;
+            $category->save();
+            return response()->json($category);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Borrar una tupla específica (delete)

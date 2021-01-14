@@ -23,7 +23,11 @@ class RegionController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $region = Region::find($id);
+        if($region != null){
+            return response()->json($region);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

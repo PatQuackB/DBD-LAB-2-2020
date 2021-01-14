@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $cantidadSeeders=5;
+        $cantidadSeeders=15;
 
         Fair::factory($cantidadSeeders)->create();
         Region::factory($cantidadSeeders)->create();

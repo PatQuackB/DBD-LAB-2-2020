@@ -23,7 +23,11 @@ class ProductStallController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $productStall = ProductStall::find($id);
+        if($productStall != null){
+            return response()->json($productStall);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

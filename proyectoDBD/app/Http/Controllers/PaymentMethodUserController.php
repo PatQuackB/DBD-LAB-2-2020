@@ -23,7 +23,11 @@ class PaymentMethodUserController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $paymentMethodUser = PaymentMethodUser::find($id);
+        if($paymentMethodUser != null){
+            return response()->json($paymentMethodUser);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

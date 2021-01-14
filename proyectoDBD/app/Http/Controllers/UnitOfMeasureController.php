@@ -23,7 +23,11 @@ class UnitOfMeasureController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $unitOfMeasure = UnitOfMeasure::find($id);
+        if($unitOfMeasure != null){
+            return response()->json($unitOfMeasure);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

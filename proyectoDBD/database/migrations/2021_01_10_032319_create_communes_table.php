@@ -19,8 +19,9 @@ class CreateCommunesTable extends Migration
             $table->string('nombreComuna');
 
             //Foranea de Region
-            $table->unsignedBigInteger('idRegion');
+            $table->unsignedBigInteger('idRegion')->nullable();
             $table->foreign('idRegion')->references('id')->on('regions');
+            
             $table->timestamps();
         });
     }

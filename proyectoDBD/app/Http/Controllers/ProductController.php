@@ -23,7 +23,11 @@ class ProductController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $product = Product::find($id);
+        if($product != null){
+            return response()->json($product);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

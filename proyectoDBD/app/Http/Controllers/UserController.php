@@ -23,7 +23,11 @@ class UserController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $user = User::find($id);
+        if($user != null){
+            return response()->json($user);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

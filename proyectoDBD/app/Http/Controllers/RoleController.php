@@ -23,7 +23,11 @@ class RoleController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $role = Role::find($id);
+        if($role != null){
+            return response()->json($role);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

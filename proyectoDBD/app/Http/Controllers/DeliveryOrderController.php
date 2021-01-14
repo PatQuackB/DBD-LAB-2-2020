@@ -17,13 +17,24 @@ class DeliveryOrderController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $deliveryOrder = new DeliveryOrder();
+        $deliveryOrder->estadoDespacho= $request->estadoDespacho;
+        $deliveryOrder->tipoDespacho= $request->tipoDespacho;
+        $deliveryOrder->save();
+        return response()->json([
+            "message"=> "Se ha creado una categoria",
+            "id"=> $deliveryOrder->id
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $deliveryOrder = DeliveryOrder::find($id);
+        if($deliveryOrder != null){
+            return response()->json($deliveryOrder);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

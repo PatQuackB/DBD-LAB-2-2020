@@ -23,7 +23,11 @@ class UserStallController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $userStall = UserStall::find($id);
+        if($userStall != null){
+            return response()->json($userStall);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)

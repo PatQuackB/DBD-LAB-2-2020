@@ -23,7 +23,11 @@ class FairController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-        
+        $fair = Fair::find($id);
+        if($fair != null){
+            return response()->json($fair);
+        }
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Modificar una tupla especifica (put)
