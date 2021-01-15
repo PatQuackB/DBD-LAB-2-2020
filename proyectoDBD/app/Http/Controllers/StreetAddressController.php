@@ -27,7 +27,7 @@ class StreetAddressController extends Controller
             "id"=> $streetAddress->id
         ], 202);
     }  
-    }
+    
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)

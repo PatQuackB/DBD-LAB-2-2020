@@ -27,7 +27,7 @@ class StallController extends Controller
             "id"=> $stall->id
         ], 202);
     }
-    }
+    
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
