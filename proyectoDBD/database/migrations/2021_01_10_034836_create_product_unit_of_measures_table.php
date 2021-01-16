@@ -17,11 +17,11 @@ class CreateProductUnitOfMeasuresTable extends Migration
             $table->id('id');
 
             //Foranea de Producto
-            $table->unsignedBigInteger('idProducto');
+            $table->unsignedBigInteger('idProducto')->nullable();
             $table->foreign('idProducto')->references('id')->on('products');
 
             //Foranea de Unidad de medida
-            $table->unsignedBigInteger('idUnidadMedida');
+            $table->unsignedBigInteger('idUnidadMedida')->nullable();
             $table->foreign('idUnidadMedida')->references('id')->on('unit_of_measures');
             
             $table->timestamps();

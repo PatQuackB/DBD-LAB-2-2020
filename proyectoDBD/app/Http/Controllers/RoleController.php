@@ -10,22 +10,22 @@ class RoleController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$role = Role::all();
-        $role = Role::all()->where($role->softDelete,false);
+        $role = Role::all();
+        //$role = Role::all()->where($role->softDelete,false);
         return response()->json($role);
     }
 
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        /*$role = new Role();
+        $role = new Role();
         $role->nombreRol = $request->nombreRol;
         $role->softDelete = False;
         $role->save();
         return response()->json([
             "message"=> "Se ha creado un rol.",
             "id"=> $role->id
-        ], 202);   */
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)

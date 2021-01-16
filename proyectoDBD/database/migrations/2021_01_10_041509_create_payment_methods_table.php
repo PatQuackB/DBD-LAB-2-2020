@@ -25,7 +25,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->boolean('softDelete');
 
             //Foranea de OrdenDespacho
-            $table->unsignedBigInteger('idDespacho');
+            $table->unsignedBigInteger('idDespacho')->nullable();
             $table->foreign('idDespacho')->references('id')->on('delivery_orders');
 
             $table->timestamps();

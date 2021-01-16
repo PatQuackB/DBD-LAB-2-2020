@@ -17,11 +17,11 @@ class CreateDeliveryOrderPurchaseOrdersTable extends Migration
             $table->id('id');
 
             //Foranea de Orden De Compra
-            $table->unsignedBigInteger('idOrdenCompra');
+            $table->unsignedBigInteger('idOrdenCompra')->nullable();
             $table->foreign('idOrdenCompra')->references('id')->on('purchase_orders');
 
             //Foranea de Orden De Despacho
-            $table->unsignedBigInteger('idDespacho');
+            $table->unsignedBigInteger('idDespacho')->nullable();
             $table->foreign('idDespacho')->references('id')->on('delivery_orders');
 
             $table->timestamps();

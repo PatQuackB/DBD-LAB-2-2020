@@ -10,8 +10,8 @@ class UserController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$user = User::all();
-        $user = User::all()->where($user->softDelete,false);
+        $user = User::all();
+        //$user = User::all()->where($user->softDelete,false);
         return response()->json($user);
     }
 
@@ -23,7 +23,7 @@ class UserController extends Controller
         $user->nombreUsuario = $request->nombreUsuario;
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
-        $user->correoUsuarioVerificado = $request->correoUsuarioVerificado;
+        $user->correoUsuarioVerificado = now();//$request->correoUsuarioVerificado;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
         $user->softDelete = False;
         $user->save();

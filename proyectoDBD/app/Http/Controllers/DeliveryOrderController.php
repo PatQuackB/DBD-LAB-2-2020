@@ -10,8 +10,8 @@ class DeliveryOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$deliveryOrder = DeliveryOrder::all();
-        $deliveryOrder = DeliveryOrder::all()->where($deliveryOrder->softDelete,false);
+        $deliveryOrder = DeliveryOrder::all();
+        //$deliveryOrder = DeliveryOrder::all()->where($deliveryOrder->softDelete,false);
         return response()->json($deliveryOrder);
     }
 

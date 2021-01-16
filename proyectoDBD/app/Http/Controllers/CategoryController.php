@@ -49,6 +49,7 @@ class CategoryController extends Controller
             $category->save();
             return response()->json($category);
         }
+        if($category->nombreCategoria == null)return response()->json(["message"=>"No se ha ingresado un nombre de categoría."]);
         return response()->json(["message"=>"El id no existe."]);
     }
 

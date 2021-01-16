@@ -19,11 +19,11 @@ class CreateStallsTable extends Migration
             $table->string('nombrePuesto');
             $table->boolean('softDelete');
             //Foranea de Feria
-            $table->unsignedBigInteger('idFeria');
+            $table->unsignedBigInteger('idFeria')->nullable();
             $table->foreign('idFeria')->references('id')->on('fairs');
 
             //Foranea de CalleDireccion
-            $table->unsignedBigInteger('idCalle');
+            $table->unsignedBigInteger('idCalle')->nullable();
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 
             $table->timestamps();

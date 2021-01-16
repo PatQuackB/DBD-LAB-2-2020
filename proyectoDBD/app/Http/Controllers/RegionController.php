@@ -10,8 +10,8 @@ class RegionController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$region = Region::all();
-        $region = Region::all()->where($region->softDelete,false);
+        $region = Region::all();
+        //$region = Region::all()->where($region->softDelete,false);
         return response()->json($region);
     }
 

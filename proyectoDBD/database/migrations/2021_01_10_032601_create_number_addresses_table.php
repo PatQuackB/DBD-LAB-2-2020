@@ -20,11 +20,11 @@ class CreateNumberAddressesTable extends Migration
             $table->boolean('softDelete');
             
             //Foranea de Comuna
-            $table->unsignedBigInteger('idComuna');
+            $table->unsignedBigInteger('idComuna')->nullable();
             $table->foreign('idComuna')->references('id')->on('communes');
 
             //Foranea de CalleDireccion
-            $table->unsignedBigInteger('idCalle');
+            $table->unsignedBigInteger('idCalle')->nullable();
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 
             $table->timestamps();

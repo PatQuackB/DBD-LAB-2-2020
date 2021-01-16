@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Models\Permission;
 use App\Models\RolePermission;
 
 class RolePermissionController extends Controller
@@ -17,7 +19,22 @@ class RolePermissionController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $role = Role::find($request->idRol);
+        $permission = Permission::find($request->idPermiso);
+
+        if($role == null and $permission == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
+        if($role == null)return response()->json(["message"=> "El identificador de rol no existe."]);
+        if($permission == null)return response()->json(["message"=> "El identificador de permiso no existe."]);
+
+        $rolePermission = new RolePermission();
+        $rolePermission->idRol = $request->idRol;        
+        $rolePermission->idPermiso = $request->idPermiso;
+        $rolePermission->save();
+
+        return response()->json([
+            "message"=> "Se ha creado la relación.",
+            "id"=> $rolePermission->id
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -31,7 +48,7 @@ class RolePermissionController extends Controller
     }
 
     //Modificar una tupla especifica (put)
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         
     }
@@ -40,5 +57,5 @@ class RolePermissionController extends Controller
     public function destroy($id)
     {
         
-    }
+    }*/
 }

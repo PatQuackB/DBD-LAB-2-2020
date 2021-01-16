@@ -10,8 +10,8 @@ class UnitOfMeasureController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$unitOfMeasure = UnitOfMeasure::all();
-        $unitOfMeasure = UnitOfMeasure::all()->where($unitOfMeasure->softDelete,false);
+        $unitOfMeasure = UnitOfMeasure::all();
+        //$unitOfMeasure = UnitOfMeasure::all()->where($unitOfMeasure->softDelete,false);
         return response()->json($unitOfMeasure);
     }
 

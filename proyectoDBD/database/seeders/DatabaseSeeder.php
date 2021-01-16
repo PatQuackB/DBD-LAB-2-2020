@@ -38,9 +38,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $cantidadSeeders=15;
-
+        
         Fair::factory($cantidadSeeders)->create();
-        Region::factory($cantidadSeeders)->create();
+        //Region::factory($cantidadSeeders)->create();
+        Region::insert([
+            [ 'id' => 1, 'nombreRegion' => 'I Region de Tarapaca', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 2, 'nombreRegion' => 'II Region de Antofagasta', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 3, 'nombreRegion' => 'III Region de Atacama', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 4, 'nombreRegion' => 'IV Region de Coquimbo', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 5, 'nombreRegion' => 'V Region de Valparaiso', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 6, 'nombreRegion' => 'VI Region del Libertador General Bernardo OHiggins', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 7, 'nombreRegion' => 'VII Region del Maule', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 8, 'nombreRegion' => 'VIII Region del Biobio', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 9, 'nombreRegion' => 'IX Region de La Araucania', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 10, 'nombreRegion' => 'X Region de Los Lagos', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 11, 'nombreRegion' => 'XI Region Aysen del General Carlos Ibañez del Campo', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 12, 'nombreRegion' => 'XII Region de Magallanes y Antartica Chilena', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 13, 'nombreRegion' => 'XIII Region Metropolitana de Santiago', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 14, 'nombreRegion' => 'XIV Region de Los Rios', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 15, 'nombreRegion' => 'XV Region de Arica y Parinacota', 'softDelete' => false,'created_at' => now()],
+            [ 'id' => 16, 'nombreRegion' => 'XVI Region de Ñuble', 'softDelete' => false,'created_at' => now()]
+           ]);
         StreetAddress::factory($cantidadSeeders)->create();
         Role::factory($cantidadSeeders)->create();
         UnitOfMeasure::factory($cantidadSeeders)->create();

@@ -10,8 +10,8 @@ class PurchaseOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$purchaseOrder = PurchaseOrder::all();
-        $purchaseOrder = PurchaseOrder::all()->where($purchaseOrder->softDelete,false);
+        $purchaseOrder = PurchaseOrder::all();
+        //$purchaseOrder = PurchaseOrder::all()->where($purchaseOrder->softDelete,false);
         return response()->json($purchaseOrder);
     }
 
@@ -20,7 +20,7 @@ class PurchaseOrderController extends Controller
     {
         $purchaseorder = new PurchaseOrder();
         $purchaseorder->numeroCompra = $request->numeroCompra;
-        $purchaseorder->fechaCompra = $request->fechaCompra;
+        $purchaseorder->fechaCompra = now();//$request->fechaCompra;
         $purchaseorder->montoTotal = $request->montoTotal;
         $purchaseorder->softDelete = False;
         $purchaseorder->save();

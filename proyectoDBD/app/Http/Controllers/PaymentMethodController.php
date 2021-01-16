@@ -10,8 +10,8 @@ class PaymentMethodController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$paymentMethod = PaymentMethod::all();
-        $paymentMethod = PaymentMethod::all()->where($paymentMethod->softDelete,false);
+        $paymentMethod = PaymentMethod::all();
+        //$paymentMethod = PaymentMethod::all()->where($paymentMethod->softDelete,false);
         return response()->json($paymentMethod);
     }
 

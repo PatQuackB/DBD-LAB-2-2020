@@ -19,19 +19,19 @@ class CreateUsersTable extends Migration
             $table->string('rutUsuario');
             $table->string('nombreUsuario');
             $table->string('apellidoUsuario');
-            $table->boolean('softDelete');
             $table->string('correoUsuario')->unique();
             $table->timestamp('correoUsuarioVerificado')->nullable();
             $table->string('contraseniaUsuario');
             $table->rememberToken();
+            $table->boolean('softDelete');
 
 
             //Foranea de Calle
-            $table->unsignedBigInteger('idCalle');
+            $table->unsignedBigInteger('idCalle')->nullable();
             $table->foreign('idCalle')->references('id')->on('street_addresses');
 
             //Foranea de Rol
-            $table->unsignedBigInteger('idRol');
+            $table->unsignedBigInteger('idRol')->nullable();
             $table->foreign('idRol')->references('id')->on('roles');
 
             $table->timestamps();

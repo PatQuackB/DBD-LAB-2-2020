@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Stall;
 use App\Models\UserStall;
 
 class UserStallController extends Controller
@@ -17,7 +19,22 @@ class UserStallController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        
+        $user = User::find($request->idUsuario);
+        $stall = Stall::find($request->idPuesto);
+
+        if($user == null and $stall == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
+        if($user == null)return response()->json(["message"=> "El identificador de usuario no existe."]);
+        if($stall == null)return response()->json(["message"=> "El identificador de puesto no existe."]);
+
+        $userStall = new UserStall();
+        $userStall->idUsuario = $request->idUsuario;        
+        $userStall->idPuesto = $request->idPuesto;
+        $userStall->save();
+
+        return response()->json([
+            "message"=> "Se ha creado la relación.",
+            "id"=> $userStall->id
+        ], 202);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -31,7 +48,7 @@ class UserStallController extends Controller
     }
 
     //Modificar una tupla especifica (put)
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         
     }
@@ -40,5 +57,5 @@ class UserStallController extends Controller
     public function destroy($id)
     {
         
-    }
+    }*/
 }

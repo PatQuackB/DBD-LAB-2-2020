@@ -10,8 +10,8 @@ class StallController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$stall = Stall::all();
-        $stall = Stall::all()->where($stall->softDelete,false);
+        $stall = Stall::all();
+        //$stall = Stall::all()->where($stall->softDelete,false);
         return response()->json($stall);
     }
 

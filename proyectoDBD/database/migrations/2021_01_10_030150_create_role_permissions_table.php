@@ -17,11 +17,11 @@ class CreateRolePermissionsTable extends Migration
             $table->id('id');
 
             //Foranea de Rol
-            $table->unsignedBigInteger('idRol');
+            $table->unsignedBigInteger('idRol')->nullable();
             $table->foreign('idRol')->references('id')->on('roles');
 
             //Foranea de Permiso
-            $table->unsignedBigInteger('idPermiso');
+            $table->unsignedBigInteger('idPermiso')->nullable();
             $table->foreign('idPermiso')->references('id')->on('permissions');
 
             $table->timestamps();

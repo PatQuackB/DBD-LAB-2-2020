@@ -43,6 +43,7 @@ class ProductController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
+        
         $product = Product::find($id);
         if($product != null){
             $product->nombreProducto= $request->nombreProducto;

@@ -17,11 +17,11 @@ class CreateProductStallsTable extends Migration
             $table->id('id');
 
             //Foranea de Producto
-            $table->unsignedBigInteger('idProducto');
+            $table->unsignedBigInteger('idProducto')->nullable();
             $table->foreign('idProducto')->references('id')->on('products');
 
             //Foranea de Puesto
-            $table->unsignedBigInteger('idPuesto');
+            $table->unsignedBigInteger('idPuesto')->nullable();
             $table->foreign('idPuesto')->references('id')->on('stalls');
 
             $table->timestamps();

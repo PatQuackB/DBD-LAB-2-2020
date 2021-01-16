@@ -17,11 +17,11 @@ class CreateUserStallsTable extends Migration
             $table->id('id');
 
             //Foranea de Usuario
-            $table->unsignedBigInteger('idUsuario');
+            $table->unsignedBigInteger('idUsuario')->nullable();
             $table->foreign('idUsuario')->references('id')->on('users');
 
             //Foranea de Puesto
-            $table->unsignedBigInteger('idPuesto');
+            $table->unsignedBigInteger('idPuesto')->nullable();
             $table->foreign('idPuesto')->references('id')->on('stalls');
 
             $table->timestamps();
