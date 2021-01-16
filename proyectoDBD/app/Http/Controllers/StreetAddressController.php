@@ -18,14 +18,22 @@ class StreetAddressController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $streetAddress = new StreetAddress();
-        $streetAddress->nombreCalle = $request->nombreCalle;
-        $streetAddress->softDelete = False;
-        $streetAddress->save();
-        return response()->json([
-            "message"=> "Se ha creado una direccion de calle.",
-            "id"=> $streetAddress->id
-        ], 202);
+        if($request->nombreCalle != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreCalle)){ // añadir min y max
+                // si es string
+                $streetAddress = new StreetAddress();
+                $streetAddress->nombreCalle = $request->nombreCalle;
+                $streetAddress->softDelete = False;
+                $streetAddress->save();
+                return response()->json([
+                    "message"=> "Se ha creado una direccion de calle.",
+                    "id"=> $streetAddress->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre calle debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre calle es obligatorio."]);
     }  
     
 
@@ -44,7 +52,19 @@ class StreetAddressController extends Controller
     {
         $streetAddress = StreetAddress::find($id);
         if($streetAddress != null){
-            $streetAddress->nombreCalle= $request->nombreCalle;
+            // Si no es nulo
+            // atributo
+            if($request->nombreCalle != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreCalle)){
+                    // si es string
+                    $streetAddress->nombreCalle = $request->nombreCalle;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre calle debe ser string."]);
+                }
+            }
             $streetAddress->save();
             return response()->json($streetAddress);
         }

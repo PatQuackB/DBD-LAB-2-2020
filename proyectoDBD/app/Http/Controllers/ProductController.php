@@ -18,16 +18,37 @@ class ProductController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->nombreProducto = $request->nombreProducto;
-        $product->precioProducto = $request->precioProducto;
-        $product->stockProducto = $request->stockProducto;
-        $product->softDelete = False;
-        $product->save();
-        return response()->json([
-            "message"=> "Se ha creado un producto.",
-            "id"=> $product->id
-        ], 202);   
+        if($request->nombreProducto != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreProducto)){ 
+                // si es string
+                if($request->precioProducto != null){
+                    if(is_integer($request->precioProducto)){ 
+                        if($request->stockProducto != null){
+                            if(is_integer($request->stockProducto)){ 
+                                $product = new Product();
+                                $product->nombreProducto = $request->nombreProducto;
+                                $product->precioProducto = $request->precioProducto;
+                                $product->stockProducto = $request->stockProducto;
+                                $product->softDelete = False;
+                                $product->save();
+                                return response()->json([
+                                    "message"=> "Se ha creado un producto.",
+                                    "id"=> $product->id
+                                ], 202);
+                            }
+                            return response()->json(["message"=>"Stock producto debe ser número."]);
+                        }
+                        return response()->json(["message"=>"Stock producto es obligatorio."]);
+                    }
+                    return response()->json(["message"=>"Precio producto debe ser número."]);
+                }
+                return response()->json(["message"=>"Precio producto es obligatorio."]);
+            }
+            return response()->json(["message"=>"Nombre producto debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre producto es obligatorio."]);
+        
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -43,12 +64,37 @@ class ProductController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        
         $product = Product::find($id);
         if($product != null){
-            $product->nombreProducto= $request->nombreProducto;
-            $product->precioProducto= $request->precioProducto;
-            $product->stockProducto= $request->stockProducto;
+            // Si no es nulo
+            // atributo
+            if($request->nombreProducto != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreProducto)){ 
+                    // si es string
+                    $product->nombreProducto = $request->nombreProducto;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre producto debe ser string."]);
+                }
+            }
+            if($request->precioProducto != null){
+                if(is_integer($request->precioProducto)){ 
+                    $product->precioProducto = $request->precioProducto;
+                }
+                else{
+                    return response()->json(["message"=>"Precio producto debe ser número."]);
+                }
+            }
+            if($request->stockProducto != null){
+                if(is_integer($request->stockProducto)){ 
+                    $product->stockProducto = $request->stockProducto;
+                }
+                else{
+                    return response()->json(["message"=>"Stock producto debe ser número."]);
+                }
+            }
             $product->save();
             return response()->json($product);
         }

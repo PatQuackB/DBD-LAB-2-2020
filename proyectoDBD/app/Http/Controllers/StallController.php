@@ -18,14 +18,22 @@ class StallController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $stall = new Stall();
-        $stall->nombrePuesto = $request->nombrePuesto;
-        $stall->softDelete = False;
-        $stall->save();
-        return response()->json([
-            "message"=> "Se ha creado un puesto.",
-            "id"=> $stall->id
-        ], 202);
+        if($request->nombrePuesto != null){
+            // si atributo no es nulo
+            if(is_string($request->nombrePuesto)){
+                // si es string
+                $stall = new Stall();
+                $stall->nombrePuesto = $request->nombrePuesto;
+                $stall->softDelete = False;
+                $stall->save();
+                return response()->json([
+                    "message"=> "Se ha creado un puesto.",
+                    "id"=> $stall->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre puesto debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre puesto es obligatorio."]);
     }
     
 
@@ -44,7 +52,19 @@ class StallController extends Controller
     {
         $stall = Stall::find($id);
         if($stall != null){
-            $stall->nombrePuesto= $request->nombrePuesto;
+            // Si no es nulo
+            // atributo
+            if($request->nombrePuesto != null){
+                // si atributo no es nulo
+                if(is_string($request->nombrePuesto)){
+                    // si es string
+                    $stall->nombrePuesto = $request->nombrePuesto;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre puesto debe ser string."]);
+                }
+            }
             $stall->save();
             return response()->json($stall);
         }

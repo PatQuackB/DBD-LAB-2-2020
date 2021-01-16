@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\database",
-    "\\database\\factories",
     "\\database\\migrations",
     "\\database\\seeders",
     "\\routes"
   ],
-  "SelectedNode": "\\database\\factories\\PurchaseOrderProductFactory.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\CategoryController.php",
   "PreviewInSolutionExplorer": false
 }

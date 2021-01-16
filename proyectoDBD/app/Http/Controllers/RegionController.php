@@ -18,14 +18,22 @@ class RegionController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $region = new Region();
-        $region->nombreRegion = $request->nombreRegion;
-        $region->softDelete = False;
-        $region->save();
-        return response()->json([
-            "message"=> "Se ha creado una región",
-            "id"=> $region->id
-        ], 202);
+        if($request->nombreRegion != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreRegion)){ 
+                // si es string
+                $region = new Region();
+                $region->nombreRegion = $request->nombreRegion;
+                $region->softDelete = False;
+                $region->save();
+                return response()->json([
+                    "message"=> "Se ha creado una región",
+                    "id"=> $region->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre region debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre region es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -44,11 +52,23 @@ class RegionController extends Controller
     {
         $region = Region::find($id);
         if($region != null){
-            $region->nombreRegion= $request->nombreRegion;
+            // Si no es nulo
+            // atributo
+            if($request->nombreRegion != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreRegion)){ 
+                    // si es string
+                    $region->nombreRegion = $request->nombreRegion;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre region debe ser string."]);
+                }
+            }
             $region->save();
             return response()->json($region);
         }
-        return response()->json(["message"=>"El id no existe"]);
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)

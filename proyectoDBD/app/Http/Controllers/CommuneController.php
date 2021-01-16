@@ -62,7 +62,7 @@ class CommuneController extends Controller
                 // Si request no es nulo
                 if(is_string($request->nombreComuna)){
                     // Si request es string
-                    $commune->nombreComuna= $request->nombreComuna;
+                    $commune->nombreComuna = $request->nombreComuna;
                     $commune->save();
                     return response()->json($commune);
                 }else{

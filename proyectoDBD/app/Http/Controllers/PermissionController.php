@@ -18,11 +18,19 @@ class PermissionController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $permission = new Permission();
-        $permission->nombrePermiso = $request->nombrePermiso;
-        $permission->softDelete = False;
-        $permission->save();
-        return response()->json(["message"=> "Se ha creado un permiso.", "id"=> $permission->id], 202);
+        if($request->nombrePermiso != null){
+            // si atributo no es nulo
+            if(is_string($request->nombrePermiso)){
+                // si es string
+                $permission = new Permission();
+                $permission->nombrePermiso = $request->nombrePermiso;
+                $permission->softDelete = False;
+                $permission->save();
+                return response()->json(["message"=> "Se ha creado un permiso.", "id"=> $permission->id], 202);
+            }
+            return response()->json(["message"=>"Estado despacho debe ser string."]);
+        }
+        return response()->json(["message"=>"Estado despacho es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -32,13 +40,31 @@ class PermissionController extends Controller
         if($permission != null){
             return response()->json($permission);
         }
-        return response()->json(["message"=>"El id no existe"]);
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        
+        $permission = Permission::find($id);
+        if($permission != null){
+            // Si no es nulo
+            // atributo
+            if($request->nombrePermiso != null){
+                // si atributo no es nulo
+                if(is_string($request->nombrePermiso)){
+                    // si es string
+                    $permission->nombrePermiso = $request->nombrePermiso;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Estado despacho debe ser string."]);
+                }
+            }
+            $permission->save();
+            return response()->json($permission);
+        }
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)

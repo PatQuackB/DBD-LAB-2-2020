@@ -32,7 +32,7 @@ class DeliveryOrderController extends Controller
                     }
                     return response()->json(["message"=>"Tipo despacho debe ser número."]);
                 }
-                return response()->json(["message"=>"Tpo despacho debe es obligatorio."]);
+                return response()->json(["message"=>"Tipo despacho es obligatorio."]);
             }
             return response()->json(["message"=>"Estado despacho debe ser número."]);
         }
@@ -54,27 +54,31 @@ class DeliveryOrderController extends Controller
     {
         $deliveryOrder = DeliveryOrder::find($id);
         if($deliveryOrder != null){
+            // Si no es nulo
+            // atributo
             if($request->estadoDespacho != null){
+                // si atributo no es nulo
                 if(is_integer($request->estadoDespacho)){ // añadir min y max
-                    $deliveryOrder->estadoDespacho= $request->estadoDespacho;
+                    // si es entero
+                    $deliveryOrder->estadoDespacho = $request->estadoDespacho;
                 }
                 else{
+                    // si no es entero
                     return response()->json(["message"=>"Estado despacho debe ser número."]);
                 }
             }
-            if($request->tipo_despacho != null){
+            if($request->tipoDespacho != null){
                 if(is_integer($request->tipoDespacho)){ // añadir min y max
-                    $deliveryOrder->tipoDespacho= $request->tipoDespacho;
+                    $deliveryOrder->tipoDespacho = $request->tipoDespacho;
                 }
                 else{
                     return response()->json(["message"=>"Tipo despacho debe ser número."]);
                 }
-                
             }
             $deliveryOrder->save();
             return response()->json($deliveryOrder);
         }
-        return response()->json(["message"=>"El id no existe"]);
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)

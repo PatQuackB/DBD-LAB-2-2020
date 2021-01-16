@@ -18,11 +18,19 @@ class NumberAddressController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $numberAddress = new NumberAddress();
-        $numberAddress->numeroDireccion = $request->numeroDireccion;
-        $numberAddress->softDelete = False;
-        $numberAddress->save();
-        return response()->json(["message"=> "Se ha creado un número de dirección.", "id"=> $numberAddress->id], 202);
+        if($request->numeroDireccion != null){
+            // si atributo no es nulo
+            if(is_string($request->numeroDireccion)){ 
+                // si es string
+                $numberAddress = new NumberAddress();
+                $numberAddress->numeroDireccion = $request->numeroDireccion;
+                $numberAddress->softDelete = False;
+                $numberAddress->save();
+                return response()->json(["message"=> "Se ha creado un número de dirección.", "id"=> $numberAddress->id], 202);
+            }
+            return response()->json(["message"=>"Numero dirección debe ser string."]);
+        }
+        return response()->json(["message"=>"Numero dirección es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -40,7 +48,19 @@ class NumberAddressController extends Controller
     {
         $numberAddress = NumberAddress::find($id);
         if($numberAddress != null){
-            $numberAddress->numeroDireccion= $request->numeroDireccion;
+            // Si no es nulo
+            // atributo
+            if($request->numeroDireccion != null){
+                // si atributo no es nulo
+                if(is_string($request->numeroDireccion)){
+                    // si es string
+                    $numberAddress->numeroDireccion = $request->numeroDireccion;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Numero dirección debe ser string."]);
+                }
+            }
             $numberAddress->save();
             return response()->json($numberAddress);
         }

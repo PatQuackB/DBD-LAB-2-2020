@@ -18,14 +18,22 @@ class UnitOfMeasureController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $unitOfMeasure = new UnitOfMeasure();
-        $unitOfMeasure->nombreUnidadMedida = $request->nombreUnidadMedida;
-        $unitOfMeasure->softDelete = False;
-        $unitOfMeasure->save();
-        return response()->json([
-            "message"=> "Se ha creado una orden de despacho.",
-            "id"=> $unitOfMeasure->id
-        ], 202);   
+        if($request->nombreUnidadMedida != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreUnidadMedida)){
+                // si es string
+                $unitOfMeasure = new UnitOfMeasure();
+                $unitOfMeasure->nombreUnidadMedida = $request->nombreUnidadMedida;
+                $unitOfMeasure->softDelete = False;
+                $unitOfMeasure->save();
+                return response()->json([
+                    "message"=> "Se ha creado una orden de despacho.",
+                    "id"=> $unitOfMeasure->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre unidad de medida debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre unidad de medida es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -43,7 +51,19 @@ class UnitOfMeasureController extends Controller
     {
         $unitOfMeasure = UnitOfMeasure::find($id);
         if($unitOfMeasure != null){
-            $unitOfMeasure->nombreUnidadMedida= $request->nombreUnidadMedida;
+            // Si no es nulo
+            // atributo
+            if($request->nombreUnidadMedida != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreUnidadMedida)){
+                    // si es string
+                    $unitOfMeasure->nombreUnidadMedida = $request->nombreUnidadMedida;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre unidad de medida debe ser string."]);
+                }
+            }
             $unitOfMeasure->save();
             return response()->json($unitOfMeasure);
         }

@@ -18,14 +18,22 @@ class RoleController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $role = new Role();
-        $role->nombreRol = $request->nombreRol;
-        $role->softDelete = False;
-        $role->save();
-        return response()->json([
-            "message"=> "Se ha creado un rol.",
-            "id"=> $role->id
-        ], 202);
+        if($request->nombreRol != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreRol)){ 
+                // si es string
+                $role = new Role();
+                $role->nombreRol = $request->nombreRol;
+                $role->softDelete = False;
+                $role->save();
+                return response()->json([
+                    "message"=> "Se ha creado un rol.",
+                    "id"=> $role->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre rol debe ser string."]);
+        }
+        return response()->json(["message"=>"RUT usuario es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -43,25 +51,25 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if($role != null){
-            $role->nombreRol= $request->nombreRol;
-            $role->save();
-            return response()->json($role);
-        }
-        return response()->json(["message"=>"El id no existe"]);
-    }
-    /*
-    //Modificar una tupla especifica (put)
-    public function update(Request $request, $id)
-    {
-        $role = Role::find($id);
-        if($request->nombreRol != null){
-            $role->nombreRol = $request->nombreRol;
+            // Si no es nulo
+            // atributo
+            if($request->nombreRol != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreRol)){
+                    // si es string
+                    $role->nombreRol = $request->nombreRol;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre rol debe ser string."]);
+                }
+            }
             $role->save();
             return response()->json($role);
         }
         return response()->json(["message"=>"El id no existe."]);
     }
-    */
+    
     //Borrar una tupla específica (delete)
     public function destroy($id)
     {

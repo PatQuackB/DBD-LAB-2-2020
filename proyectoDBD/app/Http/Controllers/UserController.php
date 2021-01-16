@@ -18,19 +18,57 @@ class UserController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $user = new User();
-        $user->rutUsuario = $request->rutUsuario;
-        $user->nombreUsuario = $request->nombreUsuario;
-        $user->apellidoUsuario = $request->apellidoUsuario;
-        $user->correoUsuario = $request->correoUsuario;
-        $user->correoUsuarioVerificado = now();//$request->correoUsuarioVerificado;
-        $user->contraseniaUsuario = $request->contraseniaUsuario;
-        $user->softDelete = False;
-        $user->save();
-        return response()->json([
-            "message"=> "Se ha creado un usuario.",
-            "id"=> $user->id
-        ], 202);
+        if($request->rutUsuario != null){
+            // si atributo no es nulo
+            if(is_string($request->rutUsuario)){ 
+                // si es string
+                if($request->nombreUsuario != null){
+                    if(is_string($request->nombreUsuario)){ 
+                        if($request->apellidoUsuario != null){
+                            if(is_string($request->apellidoUsuario)){ /
+                                if($request->correoUsuario != null){
+                                    if(is_string($request->correoUsuario)){ 
+                                        if($request->correoUsuarioVerificado != null){
+                                            if($request->correoUsuarioVerificado instanceof DateTime){ 
+                                                if($request->contraseniaUsuario != null){
+                                                    if(is_string($request->contraseniaUsuario)){ 
+                                                        $user = new User();
+                                                        $user->rutUsuario = $request->rutUsuario;
+                                                        $user->nombreUsuario = $request->nombreUsuario;
+                                                        $user->apellidoUsuario = $request->apellidoUsuario;
+                                                        $user->correoUsuario = $request->correoUsuario;
+                                                        $user->correoUsuarioVerificado = now();//$request->correoUsuarioVerificado;
+                                                        $user->contraseniaUsuario = $request->contraseniaUsuario;
+                                                        $user->softDelete = False;
+                                                        $user->save();
+                                                        return response()->json([
+                                                            "message"=> "Se ha creado un usuario.",
+                                                            "id"=> $user->id
+                                                        ], 202);
+                                                    }
+                                                    return response()->json(["message"=>"Contraseña usuario debe ser string."]);
+                                                }
+                                                return response()->json(["message"=>"Contraseña usuario es obligatorio."]);
+                                            }
+                                            return response()->json(["message"=>"Correo usuario verificado debe ser una fecha."]);
+                                        }
+                                        return response()->json(["message"=>"Correo usuario verificado es obligatorio."]);
+                                    }
+                                    return response()->json(["message"=>"Correo usuario debe ser string."]);
+                                }
+                                return response()->json(["message"=>"Correo usuario es obligatorio."]);
+                            }
+                            return response()->json(["message"=>"Apellido usuario debe ser string."]);
+                        }
+                        return response()->json(["message"=>"Apellido usuario es obligatorio."]);
+                    }
+                    return response()->json(["message"=>"Nombre usuario debe ser string."]);
+                }
+                return response()->json(["message"=>"Nombre usuario es obligatorio."]);
+            }
+            return response()->json(["message"=>"RUT usuario debe ser string."]);
+        }
+        return response()->json(["message"=>"RUT usuario es obligatorio."]);
     }
     
 
@@ -49,11 +87,59 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if($user != null){
-            $user->rutUsuario= $request->rutUsuario;
-            $user->nombreUsuario= $request->nombreUsuario;
-            $user->apellidoUsuario= $request->apellidoUsuario;
-            $user->correoUsuario= $request->correoUsuario;
-            $user->contraseniaUsuario= $request->contraseniaUsuario;
+            // Si no es nulo
+            // atributo
+            if($request->rutUsuario != null){
+                // si atributo no es nulo
+                if(is_string($request->rutUsuario)){
+                    // si es string
+                    $user->rutUsuario = $request->rutUsuario;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"RUT usuario debe ser string."]);
+                }
+            }
+            if($request->nombreUsuario != null){
+                if(is_string($request->nombreUsuario)){
+                    $user->nombreUsuario = $request->nombreUsuario;
+                }
+                else{
+                    return response()->json(["message"=>"Nombre usuario debe ser string."]);
+                }
+            }
+            if($request->apellidoUsuario != null){
+                if(is_string($request->apellidoUsuario)){
+                    $user->apellidoUsuario = $request->apellidoUsuario;
+                }
+                else{
+                    return response()->json(["message"=>"Apellido usuario debe ser string."]);
+                }
+            }
+            if($request->correoUsuario != null){
+                if(is_string($request->correoUsuario)){
+                    $user->correoUsuario = $request->correoUsuario;
+                }
+                else{
+                    return response()->json(["message"=>"Correo usuario debe ser string."]);
+                }
+            }
+            if($request->correoUsuarioVerificado != null){
+                if($request->correoUsuarioVerificado instanceof DateTime){
+                    $user->correoUsuarioVerificado = $request->correoUsuarioVerificado;
+                }
+                else{
+                    return response()->json(["message"=>"Correo usuario verificado debe ser una fecha."]);
+                }
+            }
+            if($request->contraseniaUsuario != null){
+                if(is_string($request->contraseniaUsuario)){
+                    $user->contraseniaUsuario = $request->contraseniaUsuario;
+                }
+                else{
+                    return response()->json(["message"=>"Contraseña usuario debe ser string."]);
+                }
+            }
             $user->save();
             return response()->json($user);
         }

@@ -18,16 +18,36 @@ class PurchaseOrderController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $purchaseorder = new PurchaseOrder();
-        $purchaseorder->numeroCompra = $request->numeroCompra;
-        $purchaseorder->fechaCompra = now();//$request->fechaCompra;
-        $purchaseorder->montoTotal = $request->montoTotal;
-        $purchaseorder->softDelete = False;
-        $purchaseorder->save();
-        return response()->json([
-            "message"=> "Se ha creado una orden de compra.",
-            "id"=> $purchaseorder->id
-        ], 202);
+        if($request->numeroCompra != null){
+            // si atributo no es nulo
+            if(is_string($request->numeroCompra)){ 
+                // si es string
+                if($request->fechaCompra != null){
+                    if($request->fechaCompra instanceof DateTime)){ 
+                        if($request->montoTotal != null){
+                            if(is_integer($request->montoTotal)){ 
+                                $purchaseorder = new PurchaseOrder();
+                                $purchaseorder->numeroCompra = $request->numeroCompra;
+                                $purchaseorder->fechaCompra = now();//$request->fechaCompra;
+                                $purchaseorder->montoTotal = $request->montoTotal;
+                                $purchaseorder->softDelete = False;
+                                $purchaseorder->save();
+                                return response()->json([
+                                    "message"=> "Se ha creado una orden de compra.",
+                                    "id"=> $purchaseorder->id
+                                ], 202);
+                            }
+                            return response()->json(["message"=>"Monto total debe ser un número."]);
+                        }
+                        return response()->json(["message"=>"Monto total es obligatorio."]);
+                    }
+                    return response()->json(["message"=>"Fecha compra debe ser una fecha."]);
+                }
+                return response()->json(["message"=>"Fecha compra es obligatorio."]);
+            }
+            return response()->json(["message"=>"Numero compra debe ser string."]);
+        }
+        return response()->json(["message"=>"Numero compra es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -43,7 +63,41 @@ class PurchaseOrderController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        
+        $purchaseOrder = PurchaseOrder::find($id);
+        if($purchaseOrder != null){
+            // Si no es nulo
+            // atributo
+            if($request->numeroCompra != null){
+                // si atributo no es nulo
+                if(is_string($request->numeroCompra)){ 
+                    // si es string
+                    $purchaseOrder->numeroCompra = $request->numeroCompra;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Numero compra debe ser string."]);
+                }
+            }
+            if($request->fechaCompra != null){
+                if($request->fechaCompra instanceof DateTime)){ 
+                    $purchaseOrder->fechaCompra = $request->fechaCompra;
+                }
+                else{
+                    return response()->json(["message"=>"Fecha compra debe ser una fecha."]);
+                }
+            }
+            if($request->montoTotal != null){
+                if(is_integer($request->montoTotal)){ 
+                    $purchaseOrder->montoTotal = $request->montoTotal;
+                }
+                else{
+                    return response()->json(["message"=>"Monto total debe ser un número."]);
+                }
+            }
+            $purchaseOrder->save();
+            return response()->json($purchaseOrder);
+        }
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)

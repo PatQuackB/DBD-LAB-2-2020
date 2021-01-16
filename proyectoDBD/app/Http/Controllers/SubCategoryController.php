@@ -18,14 +18,22 @@ class SubCategoryController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $subCategory = new SubCategory();
-        $subCategory->sub_categories = $request->sub_categories;
-        $subCategory->softDelete = False;
-        $subCategory->save();
-        return response()->json([
-            "message"=> "Se ha creado una orden una subcategoria.",
-            "id"=> $subCategory->id
-        ], 202);    
+        if($request->nombreSubCategoria != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreSubCategoria)){
+                // si es string
+                $subCategory = new SubCategory();
+                $subCategory->nombreSubCategoria = $request->nombreSubCategoria;
+                $subCategory->softDelete = False;
+                $subCategory->save();
+                return response()->json([
+                    "message"=> "Se ha creado una orden una subcategoria.",
+                    "id"=> $subCategory->id
+                ], 202);
+            }
+            return response()->json(["message"=>"Nombre sub categoría debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre sub categoría es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -43,7 +51,19 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::find($id);
         if($subCategory != null){
-            $subCategory->nombreSubCategoria= $request->nombreSubCategoria;
+            // Si no es nulo
+            // atributo
+            if($request->nombreSubCategoria != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreSubCategoria)){
+                    // si es string
+                    $subCategory->nombreSubCategoria = $request->nombreSubCategoria;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre sub categoría debe ser string."]);
+                }
+            }
             $subCategory->save();
             return response()->json($subCategory);
         }

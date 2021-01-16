@@ -27,12 +27,12 @@ class CategoryController extends Controller
                     $category->softDelete = False;
                     $category->save();
                     return response()->json([
-                        "message"=> "Se ha creado una comuna",
+                        "message"=> "Se ha creado una comuna.",
                         "id"=> $category->id
                     ], 202);
                 }else{
                     // Si no es string
-                    return response()->json(["message"=>"NombreCategoria debe ser un string."]);
+                    return response()->json(["message"=>"Nombre categoria debe ser un string."]);
                 }
         }else{
             // Si es nulo
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         if($category != null){
             if($request->nombreCategoria != null){
                 if(is_string($request->nombreCategoria)){
-                    $category->nombreCategoria= $request->nombreCategoria;
+                    $category->nombreCategoria = $request->nombreCategoria;
                     $category->save();
                     return response()->json($category);
                 }else{
@@ -68,7 +68,7 @@ class CategoryController extends Controller
                 return response()->json($category);
             }
         }
-        return response()->json(["message"=>"El id no existe"]);
+        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)

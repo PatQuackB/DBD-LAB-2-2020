@@ -18,11 +18,19 @@ class FairController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $fair = new Fair();
-        $fair->nombreFeria = $request->nombreFeria;
-        $fair->softDelete = False;
-        $fair->save();
-        return response()->json(["message"=> "Se ha creado una feria.", "id"=> $fair->id], 202);
+        if($request->nombreFeria != null){
+            // si atributo no es nulo
+            if(is_string($request->nombreFeria)){ 
+                // si es string
+                $fair = new Fair();
+                $fair->nombreFeria = $request->nombreFeria;
+                $fair->softDelete = False;
+                $fair->save();
+                return response()->json(["message"=> "Se ha creado una feria.", "id"=> $fair->id], 202);
+            }
+            return response()->json(["message"=>"Nombre feria debe ser string."]);
+        }
+        return response()->json(["message"=>"Nombre feria es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -40,7 +48,19 @@ class FairController extends Controller
     {
         $fair = Fair::find($id);
         if($fair != null){
-            $fair->nombreFeria= $request->nombreFeria;
+            // Si no es nulo
+            // atributo
+            if($request->nombreFeria != null){
+                // si atributo no es nulo
+                if(is_string($request->nombreFeria)){ 
+                    // si es string
+                    $fair->nombreFeria = $request->nombreFeria;
+                }
+                else{
+                    // si no es string
+                    return response()->json(["message"=>"Nombre feria debe ser string."]);
+                }
+            }
             $fair->save();
             return response()->json($fair);
         }
