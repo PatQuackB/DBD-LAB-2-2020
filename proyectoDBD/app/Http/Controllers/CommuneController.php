@@ -20,33 +20,25 @@ class CommuneController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'nombreComuna' => 'required'
-         ]
-        );
-        if($this == null)return response()->json(["message"=> "No se ha creado"]);
-        $commune = new Commune();
-        $commune->nombreComuna = $request->nombreComuna;
-        $commune->softDelete = False;
-        $commune->save();
-        return response()->json([
-            "message"=> "Se ha creado una comuna",
-            "id"=> $commune->id
-        ], 202);
-
-        /* Copia aqui abajo
-        $commune = new Commune();
-        $commune->nombreComuna = $request->nombreComuna;
-        $commune->softDelete = False;
-        $commune->save();
-        return response()->json([
-            "message"=> "Se ha creado una categoria",
-            "id"=> $commune->id
-        ], 202);
-        hasta aqui arriba *//*
-        $request->validate([
-            'nombreComuna' => 'required|unique:communes|max:255',
-        ]);*/
+        if($request->nombreComuna != null){
+                if(is_string($request->nombreComuna)){
+                    // Si es string
+                    $commune = new Commune();
+                    $commune->nombreComuna = $request->nombreComuna;
+                    $commune->softDelete = False;
+                    $commune->save();
+                    return response()->json([
+                        "message"=> "Se ha creado una comuna",
+                        "id"=> $commune->id
+                    ], 202);
+                }else{
+                    // Si no es string
+                    return response()->json(["message"=>"NombreComuna debe ser un string."]);
+                }
+        }else{
+            // Si es nulo
+            return response()->json($commune);
+        }
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -63,20 +55,22 @@ class CommuneController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-    /*
-    {
-        "nombreComuna": ""
-        "nombreRegion": ""
-        if($request->nombreComuna == "")
-    }
-    */
         $commune = Commune::find($id);
         if($commune != null){
+            // Si id no es nulo
             if($request->nombreComuna != null){
-                $commune->nombreComuna= $request->nombreComuna;
-                $commune->save();
-                return response()->json($commune);
+                // Si request no es nulo
+                if(is_string($request->nombreComuna)){
+                    // Si request es string
+                    $commune->nombreComuna= $request->nombreComuna;
+                    $commune->save();
+                    return response()->json($commune);
+                }else{
+                    // Si no es string
+                    return response()->json(["message"=>"NombreComuna debe ser un string."]);
+                }
             }else{
+                // Si es nulo
                 return response()->json($commune);
             }
         }

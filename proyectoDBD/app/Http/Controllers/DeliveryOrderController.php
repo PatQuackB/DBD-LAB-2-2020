@@ -18,15 +18,25 @@ class DeliveryOrderController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $deliveryOrder = new DeliveryOrder();
-        $deliveryOrder->estadoDespacho = $request->estadoDespacho;
-        $deliveryOrder->tipoDespacho = $request->tipoDespacho;
-        $deliveryOrder->softDelete = False;
-        $deliveryOrder->save();
-        return response()->json([
-            "message"=> "Se ha creado una orden de despacho.",
-            "id"=> $deliveryOrder->id
-        ], 202);   
+        if($request->estadoDespacho != null){
+            if(is_integer($request->estadoDespacho)){ // añadir min y max
+                if($request->tipo_despacho != null){
+                    if(is_integer($request->tipoDespacho)){
+                        $deliveryOrder = new DeliveryOrder();
+                        $deliveryOrder->softDelete = False;
+                        $deliveryOrder->save();
+                        return response()->json([
+                            "message"=> "Se ha creado una orden de despacho.",
+                            "id"=> $deliveryOrder->id
+                        ], 202);
+                    }
+                    return response()->json(["message"=>"Tipo despacho debe ser número."]);
+                }
+                return response()->json(["message"=>"Tpo despacho debe es obligatorio."]);
+            }
+            return response()->json(["message"=>"Estado despacho debe ser número."]);
+        }
+        return response()->json(["message"=>"Estado despacho es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -44,12 +54,27 @@ class DeliveryOrderController extends Controller
     {
         $deliveryOrder = DeliveryOrder::find($id);
         if($deliveryOrder != null){
-            $deliveryOrder->estadoDespacho= $request->estadoDespacho;
-            $deliveryOrder->tipoDespacho= $request->tipoDespacho;
+            if($request->estadoDespacho != null){
+                if(is_integer($request->estadoDespacho)){ // añadir min y max
+                    $deliveryOrder->estadoDespacho= $request->estadoDespacho;
+                }
+                else{
+                    return response()->json(["message"=>"Estado despacho debe ser número."]);
+                }
+            }
+            if($request->tipo_despacho != null){
+                if(is_integer($request->tipoDespacho)){ // añadir min y max
+                    $deliveryOrder->tipoDespacho= $request->tipoDespacho;
+                }
+                else{
+                    return response()->json(["message"=>"Tipo despacho debe ser número."]);
+                }
+                
+            }
             $deliveryOrder->save();
             return response()->json($deliveryOrder);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Borrar una tupla específica (delete)

@@ -19,14 +19,25 @@ class CategoryController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->nombreCategoria = $request->nombreCategoria;
-        $category->softDelete = False;
-        $category->save();
-        return response()->json([
-            "message"=> "Se ha creado una categoria.",
-            "id"=> $category->id
-        ], 202);
+        if($request->nombreCategoria != null){
+                if(is_string($request->nombreCategoria)){
+                    // Si es string
+                    $category = new Category();
+                    $category->nombreCategoria = $request->nombreCategoria;
+                    $category->softDelete = False;
+                    $category->save();
+                    return response()->json([
+                        "message"=> "Se ha creado una comuna",
+                        "id"=> $category->id
+                    ], 202);
+                }else{
+                    // Si no es string
+                    return response()->json(["message"=>"NombreCategoria debe ser un string."]);
+                }
+        }else{
+            // Si es nulo
+            return response()->json($category);
+        }
     }
     
     //Obtener una tupla especifica de una tabla por id (get)
@@ -45,12 +56,19 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if($category != null){
-            $category->nombreCategoria= $request->nombreCategoria;
-            $category->save();
-            return response()->json($category);
+            if($request->nombreCategoria != null){
+                if(is_string($request->nombreCategoria)){
+                    $category->nombreCategoria= $request->nombreCategoria;
+                    $category->save();
+                    return response()->json($category);
+                }else{
+                    return response()->json(["message"=>"NombreCategoría debe ser un string."]);
+                }
+            }else{
+                return response()->json($category);
+            }
         }
-        if($category->nombreCategoria == null)return response()->json(["message"=>"No se ha ingresado un nombre de categoría."]);
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message"=>"El id no existe"]);
     }
 
     //Borrar una tupla específica (delete)
