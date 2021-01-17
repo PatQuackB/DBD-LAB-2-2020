@@ -10,9 +10,8 @@ class PurchaseOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $purchaseOrder = PurchaseOrder::all();
-        //$purchaseOrder = PurchaseOrder::all()->where($purchaseOrder->softDelete,false);
-        return response()->json($purchaseOrder);
+        $purchaseorder = Purchaseorder::all()->where("softDelete", False);
+        return response()->json($purchaseorder); 
     }
 
     //Crear una nueva tupla (post)
@@ -55,7 +54,8 @@ class PurchaseOrderController extends Controller
     {
         $purchaseOrder = PurchaseOrder::find($id);
         if($purchaseOrder != null){
-            return response()->json($purchaseOrder);
+            if($purchaseOrder->softDelete != True)return response()->json($purchaseOrder);
+            return response()->json(["message"=>"La orden de compra está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -65,6 +65,9 @@ class PurchaseOrderController extends Controller
     {
         $purchaseOrder = PurchaseOrder::find($id);
         if($purchaseOrder != null){
+            if($purchaseOrder->softDelete != False){
+                return response()->json(["message"=>"La Orden de compra deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si no es nulo
             // atributo
             if($request->numeroCompra != null){

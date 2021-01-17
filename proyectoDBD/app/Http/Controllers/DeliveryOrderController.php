@@ -10,9 +10,8 @@ class DeliveryOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $deliveryOrder = DeliveryOrder::all();
-        //$deliveryOrder = DeliveryOrder::all()->where($deliveryOrder->softDelete,false);
-        return response()->json($deliveryOrder);
+        $deliveryOrder =DeliveryOrder::all()->where("softDelete", False);
+        return response()->json($deliveryOrder); 
     }
 
     //Crear una nueva tupla (post)
@@ -44,7 +43,8 @@ class DeliveryOrderController extends Controller
     {
         $deliveryOrder = DeliveryOrder::find($id);
         if($deliveryOrder != null){
-            return response()->json($deliveryOrder);
+            if($deliveryOrder->softDelete != True)return response()->json($deliveryOrder);
+            return response()->json(["message"=>"La orden de despacho está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -54,6 +54,9 @@ class DeliveryOrderController extends Controller
     {
         $deliveryOrder = DeliveryOrder::find($id);
         if($deliveryOrder != null){
+            if($deliveryOrder->softDelete != False){
+                return response()->json(["message"=>"La oden de despacho deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si no es nulo
             // atributo
             if($request->estadoDespacho != null){

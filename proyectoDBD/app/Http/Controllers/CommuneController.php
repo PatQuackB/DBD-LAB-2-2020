@@ -11,9 +11,8 @@ class CommuneController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $commune = Commune::all();
-        //$commune = Commune::all()->where($commune->softDelete,false);
-        return response()->json($commune);
+        $commune = Commune::all()->where("softDelete", False);
+        return response()->json($commune);     
     }
     
 
@@ -57,6 +56,9 @@ class CommuneController extends Controller
     {
         $commune = Commune::find($id);
         if($commune != null){
+            if($commune->softDelete != False){
+                return response()->json(["message"=>"La comuna deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si id no es nulo
             if($request->nombreComuna != null){
                 // Si request no es nulo

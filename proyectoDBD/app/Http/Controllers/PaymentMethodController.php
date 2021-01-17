@@ -10,9 +10,8 @@ class PaymentMethodController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $paymentMethod = PaymentMethod::all();
-        //$paymentMethod = PaymentMethod::all()->where($paymentMethod->softDelete,false);
-        return response()->json($paymentMethod);
+        $paymentMethod =PaymentMethod::all()->where("softDelete", False);
+        return response()->json($paymentMethod); 
     }
 
     //Crear una nueva tupla (post)
@@ -73,7 +72,8 @@ class PaymentMethodController extends Controller
     {
         $paymentMethod = PaymentMethod::find($id);
         if($paymentMethod != null){
-            return response()->json($paymentMethod);
+            if($paymentMethod->softDelete != True)return response()->json($paymentMethod);
+            return response()->json(["message"=>"El Estado de pago está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -83,6 +83,9 @@ class PaymentMethodController extends Controller
     {
         $paymentMethod = PaymentMethod::find($id);
         if($paymentMethod != null){
+            if($paymentMethod->softDelete != False){
+                return response()->json(["message"=>"El Estado de pago deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
             // Si no es nulo
             // atributo
             if($request->estadoPago != null){

@@ -10,8 +10,7 @@ class StreetAddressController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$streetAddress = StreetAddress::all();
-        $streetAddress = StreetAddress::all()->where($streetAddress->softDelete,false);
+        $streetAddress = StreetAddress::all()->where("softDelete", False);
         return response()->json($streetAddress);
     }
 
@@ -42,7 +41,8 @@ class StreetAddressController extends Controller
     {
         $streetAddress = StreetAddress::find($id);
         if($streetAddress != null){
-            return response()->json($streetAddress);
+            if($streetAddress->softDelete != True)return response()->json($streetAddress);
+            return response()->json(["message"=>"La direccion de calle está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -52,6 +52,9 @@ class StreetAddressController extends Controller
     {
         $streetAddress = StreetAddress::find($id);
         if($streetAddress != null){
+            if($streetAddress->softDelete != False){
+                return response()->json(["message"=>"La Direccion de calle deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombreCalle != null){

@@ -10,8 +10,7 @@ class StallController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $stall = Stall::all();
-        //$stall = Stall::all()->where($stall->softDelete,false);
+        $stall = Stall::all()->where("softDelete", False);
         return response()->json($stall);
     }
 
@@ -42,7 +41,8 @@ class StallController extends Controller
     {
         $stall = Stall::find($id);
         if($stall != null){
-            return response()->json($stall);
+            if($stall->softDelete != True)return response()->json($stall);
+            return response()->json(["message"=>"El puesto está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -52,6 +52,9 @@ class StallController extends Controller
     {
         $stall = Stall::find($id);
         if($stall != null){
+            if($stall->softDelete != False){
+                return response()->json(["message"=>"El Puesto deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombrePuesto != null){

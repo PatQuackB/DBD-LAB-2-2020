@@ -10,8 +10,7 @@ class SubCategoryController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$subCategory = SubCategory::all();
-        $subCategory = SubCategory::all()->where($subCategory->softDelete,false);
+        $subCategory = SubCategory::all()->where("softDelete", False);
         return response()->json($subCategory);
     }
 
@@ -41,7 +40,8 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::find($id);
         if($subCategory != null){
-            return response()->json($subCategory);
+            if($subCategory->softDelete != True)return response()->json($subCategory);
+            return response()->json(["message"=>"La subcategoria está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -51,6 +51,9 @@ class SubCategoryController extends Controller
     {
         $subCategory = SubCategory::find($id);
         if($subCategory != null){
+            if($subCategory->softDelete != False){
+                return response()->json(["message"=>"La Subcategoria deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombreSubCategoria != null){

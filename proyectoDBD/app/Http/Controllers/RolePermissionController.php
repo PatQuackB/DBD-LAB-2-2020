@@ -22,6 +22,9 @@ class RolePermissionController extends Controller
         $role = Role::find($request->idRol);
         $permission = Permission::find($request->idPermiso);
 
+        if($role->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que rol esta eliminado/oculto."]);
+        if($permission->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que permiso esta eliminado/oculto."]);
+
         if($role == null and $permission == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($role == null)return response()->json(["message"=> "El identificador de rol no existe."]);
         if($permission == null)return response()->json(["message"=> "El identificador de permiso no existe."]);

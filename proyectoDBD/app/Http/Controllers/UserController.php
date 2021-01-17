@@ -10,8 +10,7 @@ class UserController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $user = User::all();
-        //$user = User::all()->where($user->softDelete,false);
+        $user = User::all()->where("softDelete", False);
         return response()->json($user);
     }
 
@@ -25,7 +24,7 @@ class UserController extends Controller
                 if($request->nombreUsuario != null){
                     if(is_string($request->nombreUsuario)){ 
                         if($request->apellidoUsuario != null){
-                            if(is_string($request->apellidoUsuario)){ /
+                            if(is_string($request->apellidoUsuario)){ 
                                 if($request->correoUsuario != null){
                                     if(is_string($request->correoUsuario)){ 
                                         if($request->correoUsuarioVerificado != null){
@@ -77,7 +76,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if($user != null){
-            return response()->json($user);
+            if($user->softDelete != True)return response()->json($user);
+            return response()->json(["message"=>"El usuario está eliminado."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -86,8 +86,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        if($user != null){
-            // Si no es nulo
+        if($user != null ){
+            if($user->softDelete != False){
+                return response()->json(["message"=>"El deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
+            // Si no es nulo o esta borrado/oculto
             // atributo
             if($request->rutUsuario != null){
                 // si atributo no es nulo

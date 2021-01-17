@@ -10,9 +10,8 @@ class ProductController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $product = Product::all();
-        //$product = Product::all()->where($product->softDelete,false);
-        return response()->json($product);
+        $product = Product::all()->where("softDelete", False);
+        return response()->json($product); 
     }
 
     //Crear una nueva tupla (post)
@@ -56,7 +55,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if($product != null){
-            return response()->json($product);
+            if($product->softDelete != True)return response()->json($product);
+            return response()->json(["message"=>"El producto está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -66,6 +66,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if($product != null){
+            if($product->softDelete != False){
+                return response()->json(["message"=>"El producto deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombreProducto != null){

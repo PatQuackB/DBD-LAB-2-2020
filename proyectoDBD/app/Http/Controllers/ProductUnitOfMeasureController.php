@@ -13,7 +13,7 @@ class ProductUnitOfMeasureController extends Controller
     public function index()
     {
         $productUnitOfMeasure = ProductUnitOfMeasure::all();
-        return response()->json($productUnitOfMeasure);
+        return response()->json($productUnitOfMeasure); 
     }
 
     //Crear una nueva tupla (post)
@@ -21,6 +21,9 @@ class ProductUnitOfMeasureController extends Controller
     {
         $unitOfMeasure = UnitOfMeasure::find($request->idUnidadMedida);
         $product = Product::find($request->idProducto);
+
+        if($unitOfMeasure->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que unidad de medida esta eliminado/oculto."]);
+        if($product->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que producto esta eliminado/oculto."]);
 
         if($unitOfMeasure == null and $product == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($unitOfMeasure == null)return response()->json(["message"=> "El identificador de unidad de medida no existe."]);

@@ -22,6 +22,9 @@ class UserStallController extends Controller
         $user = User::find($request->idUsuario);
         $stall = Stall::find($request->idPuesto);
 
+        if($user->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que usuario esta eliminado/oculto."]);
+        if($stall->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que puesto esta eliminado/oculto."]);
+
         if($user == null and $stall == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($user == null)return response()->json(["message"=> "El identificador de usuario no existe."]);
         if($stall == null)return response()->json(["message"=> "El identificador de puesto no existe."]);

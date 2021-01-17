@@ -10,9 +10,8 @@ class PermissionController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$permission = Permission::all();
-        $permission = Permission::all()->where($permission->softDelete,false);
-        return response()->json($permission);
+        $permission =Permission::all()->where("softDelete", False);
+        return response()->json($permission); 
     }
 
     //Crear una nueva tupla (post)
@@ -38,7 +37,8 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
         if($permission != null){
-            return response()->json($permission);
+            if($permission->softDelete != True)return response()->json($permission);
+            return response()->json(["message"=>"El permiso está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe."]);
     }
@@ -48,6 +48,9 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
         if($permission != null){
+            if($permission->softDelete != False){
+                return response()->json(["message"=>"El permiso deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombrePermiso != null){

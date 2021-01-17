@@ -10,9 +10,8 @@ class FairController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$fair = Fair::all();
-        $fair = Fair::all()->where($fair->softDelete,false);
-        return response()->json($fair);
+        $fair =Fair::all()->where("softDelete", False);
+        return response()->json($fair); 
     }
 
     //Crear una nueva tupla (post)
@@ -38,7 +37,8 @@ class FairController extends Controller
     {
         $fair = Fair::find($id);
         if($fair != null){
-            return response()->json($fair);
+            if($fair->softDelete != True)return response()->json($fair);
+            return response()->json(["message"=>"La feria está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -48,6 +48,9 @@ class FairController extends Controller
     {
         $fair = Fair::find($id);
         if($fair != null){
+            if($fair->softDelete != False){
+                return response()->json(["message"=>"La feria deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
+            }
             // Si no es nulo
             // atributo
             if($request->nombreFeria != null){

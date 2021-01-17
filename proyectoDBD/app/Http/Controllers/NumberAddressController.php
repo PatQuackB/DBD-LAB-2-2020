@@ -10,9 +10,8 @@ class NumberAddressController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        //$numberAddress = NumberAddress::all();
-        $numberAddress = NumberAddress::all()->where($numberAddress->softDelete,false);
-        return response()->json($numberAddress);
+        $numberAddress =NumberAddress::all()->where("softDelete", False);
+        return response()->json($numberAddress); 
     }
 
     //Crear una nueva tupla (post)
@@ -38,7 +37,8 @@ class NumberAddressController extends Controller
     {
         $numberAddress = NumberAddress::find($id);
         if($numberAddress != null){
-            return response()->json($numberAddress);
+            if($numberAddress->softDelete != True)return response()->json($numberAddress);
+            return response()->json(["message"=>"El numero direccion está eliminada."]);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -48,6 +48,9 @@ class NumberAddressController extends Controller
     {
         $numberAddress = NumberAddress::find($id);
         if($numberAddress != null){
+            if($numberAddres->softDelete != False){
+                return response()->json(["message"=>"El numero direccion no puede ser modificado debido a que se encuentra eliminado/oculto"]);
+            }
             // Si no es nulo
             // atributo
             if($request->numeroDireccion != null){
