@@ -12,8 +12,8 @@ class DeliveryOrderPurchaseOrderController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $deliveryOrderPurchaseOrder =DeliveryOrderPurchaseOrder::all();
-        return response()->json($deliveryOrderPurchaseOrder); 
+        $deliveryOrderPurchaseOrder = DeliveryOrderPurchaseOrder::all();
+        return response()->json($deliveryOrderPurchaseOrder);
     }
 
     //Crear una nueva tupla (post)
@@ -21,9 +21,6 @@ class DeliveryOrderPurchaseOrderController extends Controller
     {
         $deliveryOrder = DeliveryOrder::find($request->idDespacho);
         $purchaseOrder = PurchaseOrder::find($request->idOrdenCompra);
-
-        if($deliveryOrder->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que orden de compra esta eliminado/oculto."]);
-        if($purchaseOrder->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que orden de despacho esta eliminado/oculto."]);
 
         if($deliveryOrder == null and $purchaseOrder == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($deliveryOrder == null)return response()->json(["message"=> "El identificador de orden de compra no existe."]);

@@ -12,8 +12,8 @@ class ProductStallController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $productStall =ProductStall::all();
-        return response()->json($productStall); 
+        $productStall = ProductStall::all();
+        return response()->json($productStall);
     }
 
     //Crear una nueva tupla (post)
@@ -21,9 +21,6 @@ class ProductStallController extends Controller
     {
         $stall = Stall::find($request->idPuesto);
         $product = Product::find($request->idProducto);
-
-        if($stall->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que puesto esta eliminado/oculto."]);
-        if($product->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que producto esta eliminado/oculto."]);
 
         if($stall == null and $product == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($stall == null)return response()->json(["message"=> "El identificador de puesto no existe."]);

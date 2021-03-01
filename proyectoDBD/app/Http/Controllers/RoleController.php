@@ -10,7 +10,8 @@ class RoleController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $role = Role::all()->where("softDelete", False);
+        $role = Role::all();
+        //$role = Role::all()->where($role->softDelete,false);
         return response()->json($role);
     }
 
@@ -40,8 +41,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if($role != null){
-            if($role->softDelete != True)return response()->json($role);
-            return response()->json(["message"=>"El rol está eliminada."]);
+            return response()->json($role);
         }
         return response()->json(["message"=>"El id no existe"]);
     }
@@ -51,9 +51,6 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         if($role != null){
-            if($role->softDelete != False){
-                return response()->json(["message"=>"El rol deseado no puede ser modificado debido a que se encuentra eliminado/oculto"]);
-            }
             // Si no es nulo
             // atributo
             if($request->nombreRol != null){

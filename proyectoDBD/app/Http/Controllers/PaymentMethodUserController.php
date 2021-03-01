@@ -12,8 +12,8 @@ class PaymentMethodUserController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $paymentMethodUser =PaymentMethodUser::all();
-        return response()->json($paymentMethodUser); 
+        $paymentMethodUser = PaymentMethodUser::all();
+        return response()->json($paymentMethodUser);
     }
 
     //Crear una nueva tupla (post)
@@ -21,9 +21,6 @@ class PaymentMethodUserController extends Controller
     {
         $paymentMethod = PaymentMethod::find($request->idPago);
         $user = User::find($request->idUsuario);
-
-        if($paymentMethod->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que metodo de pago esta eliminado/oculto."]);
-        if($user->softDelete != False)return response()->json(["message"=> "No se puede crear la relacion, por que usuario esta eliminado/oculto."]);
 
         if($paymentMethod == null and $user == null)return response()->json(["message"=> "Ninguno de los identificadores existe."]);
         if($paymentMethod == null)return response()->json(["message"=> "El identificador de método de pago no existe."]);

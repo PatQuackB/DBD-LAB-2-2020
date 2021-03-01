@@ -10,7 +10,8 @@ class UnitOfMeasureController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $unitOfMeasure = UnitOfMeasure::all()->where("softDelete", False);
+        $unitOfMeasure = UnitOfMeasure::all();
+        //$unitOfMeasure = UnitOfMeasure::all()->where($unitOfMeasure->softDelete,false);
         return response()->json($unitOfMeasure);
     }
 
@@ -40,8 +41,7 @@ class UnitOfMeasureController extends Controller
     {
         $unitOfMeasure = UnitOfMeasure::find($id);
         if($unitOfMeasure != null){
-            if($unitOfMeasure->softDelete != True)return response()->json($unitOfMeasure);
-            return response()->json(["message"=>"La unidad de medida está eliminada."]);
+            return response()->json($unitOfMeasure);
         }
         return response()->json(["message"=>"El id no existe."]);
     }
@@ -51,9 +51,6 @@ class UnitOfMeasureController extends Controller
     {
         $unitOfMeasure = UnitOfMeasure::find($id);
         if($unitOfMeasure != null){
-            if($unitOfMeasure->softDelete != False){
-                return response()->json(["message"=>"La Unidad de medida deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
-            }
             // Si no es nulo
             // atributo
             if($request->nombreUnidadMedida != null){

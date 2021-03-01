@@ -11,8 +11,9 @@ class CategoryController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $category = Category::all()->where("softDelete", False);
-        return response()->json($category); 
+        $category = Category::all();
+        //$category = Category::all()->where($category->softDelete,false);
+        return response()->json($category);
     }
 
     //Crear una nueva tupla (post)
@@ -55,9 +56,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if($category != null){
-            if($category->softDelete != False){
-                return response()->json(["message"=>"La categoria deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
-            }
             if($request->nombreCategoria != null){
                 if(is_string($request->nombreCategoria)){
                     $category->nombreCategoria = $request->nombreCategoria;

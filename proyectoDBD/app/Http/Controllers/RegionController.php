@@ -10,7 +10,8 @@ class RegionController extends Controller
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $region = Region::all()->where("softDelete", False);
+        $region = Region::all();
+        //$region = Region::all()->where($region->softDelete,false);
         return response()->json($region);
     }
 
@@ -51,9 +52,6 @@ class RegionController extends Controller
     {
         $region = Region::find($id);
         if($region != null){
-            if($region->softDelete != False){
-                return response()->json(["message"=>"La region deseada no puede ser modificada debido a que se encuentra eliminada/oculta"]);
-            }
             // Si no es nulo
             // atributo
             if($request->nombreRegion != null){
