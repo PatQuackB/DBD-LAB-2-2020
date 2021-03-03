@@ -25,34 +25,33 @@ class UserController extends Controller
                 if($request->nombreUsuario != null){
                     if(is_string($request->nombreUsuario)){ 
                         if($request->apellidoUsuario != null){
-                            if(is_string($request->apellidoUsuario)){ /
+                            if(is_string($request->apellidoUsuario)){ 
                                 if($request->correoUsuario != null){
                                     if(is_string($request->correoUsuario)){ 
-                                        if($request->correoUsuarioVerificado != null){
-                                            if($request->correoUsuarioVerificado instanceof DateTime){ 
+                                        //if($request->correoUsuarioVerificado != null){
+                                            //if($request->correoUsuarioVerificado instanceof DateTime){ 
                                                 if($request->contraseniaUsuario != null){
                                                     if(is_string($request->contraseniaUsuario)){ 
                                                         $user = new User();
                                                         $user->rutUsuario = $request->rutUsuario;
                                                         $user->nombreUsuario = $request->nombreUsuario;
+                                                        $user->idCalle = 1;
+                                                        $user->idRol = 1;
                                                         $user->apellidoUsuario = $request->apellidoUsuario;
                                                         $user->correoUsuario = $request->correoUsuario;
-                                                        $user->correoUsuarioVerificado = now();//$request->correoUsuarioVerificado;
+                                                        //$user->correoUsuarioVerificado = now();//$request->correoUsuarioVerificado;
                                                         $user->contraseniaUsuario = $request->contraseniaUsuario;
                                                         $user->softDelete = False;
                                                         $user->save();
-                                                        return response()->json([
-                                                            "message"=> "Se ha creado un usuario.",
-                                                            "id"=> $user->id
-                                                        ], 202);
+                                                        return redirect('welcome');
                                                     }
                                                     return response()->json(["message"=>"Contraseña usuario debe ser string."]);
                                                 }
                                                 return response()->json(["message"=>"Contraseña usuario es obligatorio."]);
-                                            }
-                                            return response()->json(["message"=>"Correo usuario verificado debe ser una fecha."]);
-                                        }
-                                        return response()->json(["message"=>"Correo usuario verificado es obligatorio."]);
+                                            //}
+                                            //return response()->json(["message"=>"Correo usuario verificado debe ser una fecha."]);
+                                        //}
+                                        //return response()->json(["message"=>"Correo usuario verificado es obligatorio."]);
                                     }
                                     return response()->json(["message"=>"Correo usuario debe ser string."]);
                                 }
@@ -177,5 +176,18 @@ class UserController extends Controller
             return response()->json(["message"=>"No es posible realizar la operación debido a que el usuario no está eliminado."]);
         }
         return response()->json(["message"=>"El id no existe."]);
+    }
+
+    // Show nuevo
+    public function showNuevo(Request $request)
+    {
+        $user = User::all()->where('softDelete',false)
+        ->where('correoUsuario', $request->correoUsuario)
+        ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
+
+        if($user != NULL){
+            return redirect('home')->with('id', $user->id);
+        }
+        return redirect('iniciarSesion');
     }
 }

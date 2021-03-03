@@ -13,9 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/prueba', function () {
+    return view('prueba');
+});
+
+Route::get('/registro', function () {
+    return view('registro');
+});
+
+Route::get('/iniciarSesion', function () {
+    return view('iniciarSesion');
+});
+
+
 
 //Category
 Route::get('/category', 'CategoryController@index');
@@ -188,10 +206,11 @@ Route::get('/unitOfMeasure/restore/{id}', 'UnitOfMeasureController@restore');
 //User
 Route::get('/user', 'UserController@index');
 Route::get('/user/{id}', 'UserController@show');
-Route::post('/user/create', 'UserController@store');
+Route::post('/user/create', 'UserController@store')->name('UserStore');
 Route::put('/user/update/{id}', 'UserController@update');
 Route::get('/user/destroy/{id}', 'UserController@destroy');
 Route::get('/user/restore/{id}', 'UserController@restore');
+Route::get('/user/showNuevo', 'UserController@showNuevo')->name('UserInicioSesion');
 
 //UserStall
 Route::get('/userStall', 'UserStallController@index');
