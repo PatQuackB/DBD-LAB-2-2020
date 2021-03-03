@@ -78,7 +78,8 @@ class UserController extends Controller
         if($user != null){
             return response()->json($user);
         }
-        return response()->json(["message"=>"El id no existe"]);
+        //return view('perfil')->with('user',$user);
+        return view('perfil', compact('user'));
     }
 
     //Modificar una tupla especifica (put)
@@ -179,14 +180,15 @@ class UserController extends Controller
     }
 
     // Show nuevo
-    public function showNuevo(Request $request)
+    public function nuevoShow(Request $request)
     {
         $user = User::all()->where('softDelete',false)
         ->where('correoUsuario', $request->correoUsuario)
         ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
 
         if($user != NULL){
-            return redirect('home')->with('id', $user->id);
+            //return view('home', compact('user'));
+            return redirect('home')->with('user', $user);
         }
         return redirect('iniciarSesion');
     }

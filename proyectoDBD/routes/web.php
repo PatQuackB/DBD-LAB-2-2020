@@ -33,6 +33,9 @@ Route::get('/iniciarSesion', function () {
     return view('iniciarSesion');
 });
 
+Route::get('/perfil', function () {
+    return view('perfil');
+});
 
 
 //Category
@@ -205,12 +208,12 @@ Route::get('/unitOfMeasure/restore/{id}', 'UnitOfMeasureController@restore');
 
 //User
 Route::get('/user', 'UserController@index');
+Route::get('/user/nuevoShow', 'UserController@nuevoShow')->name('UserInicioSesion');
 Route::get('/user/{id}', 'UserController@show');
 Route::post('/user/create', 'UserController@store')->name('UserStore');
 Route::put('/user/update/{id}', 'UserController@update');
 Route::get('/user/destroy/{id}', 'UserController@destroy');
 Route::get('/user/restore/{id}', 'UserController@restore');
-Route::get('/user/showNuevo', 'UserController@showNuevo')->name('UserInicioSesion');
 
 //UserStall
 Route::get('/userStall', 'UserStallController@index');
