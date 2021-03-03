@@ -5,23 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
+    <link rel="stylesheet" href="css/estructuraGenericaStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
-<body>
+<body class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
        
-            <a href="/welcome"><img src="https://www.flaticon.es/svg/vstatic/svg/1147/1147934.svg?token=exp=1614741773~hmac=482e5d0e878d1b48e873083b880d5fa5" alt="" width="30" height="20" class="d-inline-block align-top"></a>
-            <a class="navbar-brand" href="/welcome" style="font-size: 44px">Fenlinea/a>
+            <a href="/welcome"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+            <a class="navbar-brand" href="/welcome" style="font-size: 44px">Fenlinea </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav position-absolute end-0">
-                <a class="nav-link" aria-current="page" href="/laravel">Carrito</a>
-                <a href="/welcome"><img src="https://www.flaticon.es/svg/vstatic/svg/1170/1170678.svg?token=exp=1614739877~hmac=48234af98c237f03000eb01d217de0fc" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
-                <a class="nav-link" href="/laravel">Perfil</a>
-                <a href="/welcome"><img src="https://www.flaticon.es/svg/vstatic/svg/1077/1077063.svg?token=exp=1614740020~hmac=968cdc2587d6dd33e3b01923c143bd26" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
+                <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom" ></a>
+
+                <a class="nav-link" style="padding-top: 10.5%;" href="/laravel">Perfil</a>
+                <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>
