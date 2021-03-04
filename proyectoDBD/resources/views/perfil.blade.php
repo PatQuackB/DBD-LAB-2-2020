@@ -31,7 +31,7 @@
         </div>
     </nav>
 
-    <h1>Hola! {{$user->nombreUsuario}}</h1>
+    <h1>Hola {{$user->nombreUsuario}}!</h1>
 
     <div class="card">
       <div class="card-header">

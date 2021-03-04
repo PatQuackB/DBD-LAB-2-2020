@@ -36,10 +36,11 @@
     <br>
 
     <h2> Productos Disponibles </h2>
+    <br>
     @forelse($productos as $productos)
       <div class="card">
         <div class="card-header">
-          <h2>{{$productos->nombreProducto}}</h2>
+          <h3>{{$productos->nombreProducto}}</h3>
         </div>
         <div class="card-body">
           <p>Precio: ${{$productos->precioProducto}} / {{$productos->nombreUnidadMedida}}</p>

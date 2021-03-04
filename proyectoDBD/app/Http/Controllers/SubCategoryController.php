@@ -54,7 +54,7 @@ class SubCategoryController extends Controller
             // Si no es nulo
             // atributo
             if($request->nombreSubCategoria != null){
-                // si atributo no es nulo
+                // si atrlto no es nulo
                 if(is_string($request->nombreSubCategoria)){
                     // si es string
                     $subCategory->nombreSubCategoria = $request->nombreSubCategoria;

@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-
+use App\Models\Region;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,8 +44,8 @@ Route::get('/perfil', function () {
 });
 
 Route::get('/perfilModificar/{id}', function ($id) {
-    //$user=User::find($id);
-    return view('perfilModificar')->with('id', $id);
+    $regions = DB::table('regions');
+    return view('perfilModificar')->with('id', $id)->with('regions', $regions);
 });
 /*
 Route::get('/)

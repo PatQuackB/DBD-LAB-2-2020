@@ -23,7 +23,7 @@ class NumberAddressController extends Controller
             if(is_string($request->numeroDireccion)){ 
                 // si es string
                 $numberAddress = new NumberAddress();
-                $numberAddress->numeroDireccion = $request->numeroDireccion;
+                $numberAddress->numeroCalle = $request->numeroCalle;
                 $numberAddress->softDelete = False;
                 $numberAddress->save();
                 return response()->json(["message"=> "Se ha creado un número de dirección.", "id"=> $numberAddress->id], 202);

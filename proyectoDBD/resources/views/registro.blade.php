@@ -35,52 +35,79 @@
         <form action="{{route('UserStore')}}" method="POST">
             <div class="form-group">
                 <label for="exampleInputNombre">Nombres</label>
-                <input type="text" class="form-control" name="nombreUsuario" placeholder="Elsa">
+                <input type="text" class="form-control" name="nombreUsuario">
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputApellido">Apellidos</label>
-                <input type="text" class="form-control" name="apellidoUsuario" placeholder="Polindo">
+                <input type="text" class="form-control" name="apellidoUsuario">
             </div>
             <br>
             <div class="form-group">
-                <label for="exampleInputRut">Rut</label>
-                <input type="text" class="form-control" name="rutUsuario" placeholder="69469469-4">
+                <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
+                <input type="text" class="form-control" name="rutUsuario">
             </div>
             <br>
+            <div class="form-group">
+                <label for="region">Region</label>
+                <select name="region">
+                    <option value="I Region de Tarapaca">I Region de Tarapaca</option>
+                    <option value="II Region de Antofagasta">II Region de Antofagasta</option>
+                    <option value="III Region de Atacama">III Region de Atacama</option>
+                    <option value="IV Region de Coquimbo">IV Region de Coquimbo</option>
+                    <option value="V Region de Valparaiso">V Region de Valparaiso</option>
+                    <option value="VI Region del Libertador General Bernardo OHiggins">VI Region del Libertador General Bernardo OHiggins</option>
+                    <option value="VII Region del Maule">VII Region del Maule</option>
+                    <option value="VIII Region del Biobio">VIII Region del Biobio</option>
+                    <option value="IX Region de La Araucania">IX Region de La Araucania</option>
+                    <option value="X Region de Los Lagos">X Region de Los Lagos</option>
+                    <option value="XI Region Aysen del General Carlos Ibañez del Campo">XI Region Aysen del General Carlos Ibañez del Campo</option>
+                    <option value="XII Region de Magallanes y Antartica Chilena">XII Region de Magallanes y Antartica Chilena</option>
+                    <option value="XIII Region Metropolitana de Santiago">XIII Region Metropolitana de Santiago</option>
+                    <option value="XIV Region de Los Rios">XIV Region de Los Rios</option>
+                    <option value="XV Region de Arica y Parinacota">XV Region de Arica y Parinacota</option>
+                    <option value="XVI Region de Ñuble">XVI Region de Ñuble</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputNombre">Comuna</label>
+                <input type="text" class="form-control" name="nombreComuna">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputNombre">Nombre calle</label>
+                <input type="text" class="form-control" name="nombreCalle">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputNombre">Número calle</label>
+                <input type="text" class="form-control" name="numeroCalle">
+            </div>
             <div class="form-group">
                 <label for="exampleInputCorreo">Correo</label>
-                <input type="text" class="form-control" name="correoUsuario" placeholder="elsa.polindo@gmail.com">
+                <input type="text" class="form-control" name="correoUsuario">
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputNombre">Contraseña</label>
-                <input type="password" class="form-control" name="contraseniaUsuario" placeholder="Htf32TKo8">
+                <input type="password" class="form-control" name="contraseniaUsuario">
             </div>
             <br>
-            <!--
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Region</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+            <div class="form-grupo">
+                <label>Seleccione su rol dentro de la página: </label>
+                <br>
+                <label for="Vendedor">
+                    <input type="radio" name="nombreRol" value="Vendedor">
+                    Vendedor
+                </label>
+                <label for="Comprador">
+                    <input type="radio" name="nombreRol" value="Comprador">
+                    Comprador
+                </label>
+            </div>
+
             <br>
-            <select class="form-select " aria-label="Default select example">
-                <option selected>Comuna</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <br>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Rol</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <br>
-            -->
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
     </div>

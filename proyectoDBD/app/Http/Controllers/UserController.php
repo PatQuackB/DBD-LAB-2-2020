@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Region;
+use App\Models\Commune;
+use App\Models\StreetAddress;
+use App\Models\NumberAddress;
+use App\Models\Role;
+
 
 class UserController extends Controller
 {
@@ -18,6 +24,7 @@ class UserController extends Controller
     }
 
     //Crear una nueva tupla (post)
+    /*
     public function store(Request $request)
     {
         if($request->rutUsuario != null){
@@ -70,7 +77,57 @@ class UserController extends Controller
             return response()->json(["message"=>"RUT usuario debe ser string."]);
         }
         return response()->json(["message"=>"RUT usuario es obligatorio."]);
+    }*/
+
+    
+
+
+    public function store(Request $request)
+    {
+        $region = new Region();
+        $region->nombreRegion = $request->nombreRegion;
+        $region->softDelete = False;
+        $region->save(); 
+
+        $commune = new Commune();
+        $commune->nombreComuna = $request->nombreComuna;
+        $commune->idRegion = $region->id;
+        $commune->softDelete = False;
+        $commune->save();
+
+        $streetAddress = new StreetAddress();
+        $streetAddress->nombreCalle = $request->nombreCalle;
+        $streetAddress->softDelete = False;
+        $streetAddress->save();
+
+        $numberAddress = new NumberAddress();
+        $numberAddress->numeroCalle = $request->numeroCalle;
+        $numberAddress->idCalle = $streetAddress->id;
+        $numberAddress->idComuna = $commune->id;
+        $numberAddress->softDelete = False;
+        $numberAddress->save();
+
+        $role = new Role();
+        $role->nombreRol = $request->nombreRol;
+        $role->softDelete = False;
+        $role->save();
+
+        $user = new User();
+        $user->rutUsuario = $request->rutUsuario;
+        $user->nombreUsuario = $request->nombreUsuario;
+        $user->idCalle = $streetAddress->id;
+        $user->idRol = $role->id;
+        $user->apellidoUsuario = $request->apellidoUsuario;
+        $user->correoUsuario = $request->correoUsuario;
+        $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $user->softDelete = False;
+        $user->save();
+        return redirect('welcome');
+                                                    
     }
+
+
+
     
 
     //Obtener una tupla especifica de una tabla por id (get)
@@ -89,75 +146,58 @@ class UserController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
-        //return $request;
         $user = User::find($id);
-        //print_r($request);
+        $region = new Region();
+        $region->nombreRegion = $request->nombreRegion;
+        $region->softDelete = False;
+        $region->save(); 
+
+        $commune->nombreComuna = $request->nombreComuna;
+        $commune->idRegion = $region->id;
+        $commune->softDelete = False;
+        $commune->save();
+
+        $streetAddress = new StreetAddress();
+        $streetAddress->nombreCalle = $request->nombreCalle;
+        $streetAddress->softDelete = False;
+        $streetAddress->save();
+
+        $numberAddress = new NumberAddress();
+        $numberAddress->numeroCalle = $request->numeroCalle;
+        $numberAddress->idCalle = $streetAddress->id;
+        $numberAddress->idComuna = $commune->id;
+        $numberAddress->softDelete = False;
+        $numberAddress->save();
+
+        $role = new Role();
+        $role->nombreRol = $request->nombreRol;
+        $role->softDelete = False;
+        $role->save();
+
+
+        $user->rutUsuario = $request->rutUsuario;
+        $user->nombreUsuario = $request->nombreUsuario;
+        $user->idCalle = $streetAddress->id;
+        $user->idRol = $role->id;
+        $user->apellidoUsuario = $request->apellidoUsuario;
+        $user->correoUsuario = $request->correoUsuario;
+        $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $user->softDelete = False;
+        $user->save();
+        /*return redirect('welcome');
+
+
+
+
+
+        $user = User::find($id);
         $user->contraseniaUsuario = $request->contraseniaUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->nombreUsuario = $request->nombreUsuario;
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->rutUsuario = $request->rutUsuario;
-        $user->save();
-        //return redirect('perfil')->with('user',$user);
+        $user->save();*/
         return view('perfil', compact('user'));
-        if($user != null){
-            // Si no es nulo
-            // atributo
-            /*if($request->rutUsuario != null){
-                // si atributo no es nulo
-                if(is_string($request->rutUsuario)){
-                    // si es string
-                    $user->rutUsuario = $request->rutUsuario;
-                }
-                else{
-                    // si no es string
-                    return response()->json(["message"=>"RUT usuario debe ser string."]);
-                }
-            }
-            if($request->nombreUsuario != null){
-                if(is_string($request->nombreUsuario)){
-                    $user->nombreUsuario = $request->nombreUsuario;
-                }
-                else{
-                    return response()->json(["message"=>"Nombre usuario debe ser string."]);
-                }
-            }
-            if($request->apellidoUsuario != null){
-                if(is_string($request->apellidoUsuario)){
-                    $user->apellidoUsuario = $request->apellidoUsuario;
-                }
-                else{
-                    return response()->json(["message"=>"Apellido usuario debe ser string."]);
-                }
-            }
-            if($request->correoUsuario != null){
-                if(is_string($request->correoUsuario)){
-                    $user->correoUsuario = $request->correoUsuario;
-                }
-                else{
-                    return response()->json(["message"=>"Correo usuario debe ser string."]);
-                }
-            }
-            if($request->correoUsuarioVerificado != null){
-                if($request->correoUsuarioVerificado instanceof DateTime){
-                    $user->correoUsuarioVerificado = $request->correoUsuarioVerificado;
-                }
-                else{
-                    return response()->json(["message"=>"Correo usuario verificado debe ser una fecha."]);
-                }
-            }
-            if($request->contraseniaUsuario != null){
-                if(is_string($request->contraseniaUsuario)){
-                    $user->contraseniaUsuario = $request->contraseniaUsuario;
-                }
-                else{
-                    return response()->json(["message"=>"Contraseña usuario debe ser string."]);
-                }
-            }*/
-            
-            //return redirect('user/{{$user->id}}');
-        }
-        return response()->json(["message"=>"El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)
