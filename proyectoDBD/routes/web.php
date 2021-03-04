@@ -47,6 +47,9 @@ Route::get('/perfilModificar/{id}', function ($id) {
     //$user=User::find($id);
     return view('perfilModificar')->with('id', $id);
 });
+/*
+Route::get('/)
+*/
 
 
 /*Route::resource('categories', 'CategoryController');
