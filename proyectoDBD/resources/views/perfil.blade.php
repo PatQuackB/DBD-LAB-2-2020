@@ -13,9 +13,8 @@
 <body class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-       
-            <a href="/welcome"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-            <a class="navbar-brand" href="/welcome" style="font-size: 44px">Fenlinea </a>
+            <a href="/home/{{$user->id}}"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+            <a class="navbar-brand" href="/home/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,12 +31,25 @@
         </div>
     </nav>
 
-    <h1>Hola! {{$user->id}}</h1>
+    <h1>Hola! {{$user->nombreUsuario}}</h1>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Datos Personales</h2>
+      </div>
+      <div class="card-body">
+        <p>Nombres: {{$user->nombreUsuario}}</p>
+        <p>Apellidos: {{$user->apellidoUsuario}}</p>
+        <p>Rut: {{$user->rutUsuario}}</p>
+        <p>Correo: {{$user->correoUsuario}}</p>
+        <a href="/perfilModificar/{{$user->id}}" class="btn btn-primary">Editar Datos</a>
+      </div>
+    </div>
 
 
 
 
-    <!-- PIE DE PAGINA -->
+    <!-- PIE DE PAGINA 
     <footer>
           <div class= "pie">
             <div class ="col-sm-7" id="info" style="width: 50%;">
@@ -99,6 +111,6 @@
               <a href="">Términos y Condiciones</a>
             </div>
           </div>
-        </footer>
+        </footer>-->  
 </body>
 </html>

@@ -11,10 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body class="container-fluid">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a href="/home/{{$user->id}}"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-            <a class="navbar-brand" href="/home/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
+            <a href="/home/$id"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+            <a class="navbar-brand" href="/home/$id" style="font-size: 44px">Fenlinea </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,39 +23,50 @@
                 <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
                 <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom" ></a>
 
-                <a class="nav-link" style="padding-top: 10.5%;" href="/user/{{$user->id}}">Perfil</a>
-                <a href="/user/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+                <a class="nav-link" style="padding-top: 10.5%;" href="/user/{{$id}}">Perfil</a>
+                <a href="/user/{{$id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>
         </div>
     </nav>
 
+    <h1>Modificar Perfil</h1>
 
-    <h1>Home</h1>
-    <br>
+    <div class="container">
+        <form action="{{route('users.update', $id)}}" method="POST">
+            @method('PUT')
+            <div class="form-group">
+                <label for="exampleInputNombre">Nombres</label>
+                <input type="text" class="form-control" name="nombreUsuario" value="" placeholder="Elsa">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputApellido">Apellidos</label>
+                <input type="text" class="form-control" name="apellidoUsuario" value="" placeholder="Polindo">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputRut">Rut</label>
+                <input type="text" class="form-control" name="rutUsuario" value="" placeholder="69469469-4">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputCorreo">Correo</label>
+                <input type="text" class="form-control" name="correoUsuario" value="" placeholder="elsa.polindo@gmail.com">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputNombre">Contraseña</label>
+                <input type="password" class="form-control" name="contraseniaUsuario" value="" placeholder="Htf32TKo8">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
+    </div>
 
-    <h2> Productos Disponibles </h2>
-    @forelse($productos as $productos)
-      <div class="card">
-        <div class="card-header">
-          <h2>{{$productos->nombreProducto}}</h2>
-        </div>
-        <div class="card-body">
-          <p>Precio: ${{$productos->precioProducto}} / {{$productos->nombreUnidadMedida}}</p>
-          <p>Stock: {{$productos->stockProducto}}</p>
-        </div>
-      </div>
-      <br>
-    @empty
-      <p>Sin productos</p>
-
-    @endforelse
 
 
-
-
-    
 
     <!-- PIE DE PAGINA -->
     <!--

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+//use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -74,9 +76,11 @@ class UserController extends Controller
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
+
         $user = User::find($id);
         if($user != null){
-            return response()->json($user);
+            return view('perfil', compact('user'));
+            //return response()->json($user);
         }
         //return view('perfil')->with('user',$user);
         return view('perfil', compact('user'));
@@ -85,11 +89,21 @@ class UserController extends Controller
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
+        //return $request;
         $user = User::find($id);
+        //print_r($request);
+        $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $user->correoUsuario = $request->correoUsuario;
+        $user->nombreUsuario = $request->nombreUsuario;
+        $user->apellidoUsuario = $request->apellidoUsuario;
+        $user->rutUsuario = $request->rutUsuario;
+        $user->save();
+        //return redirect('perfil')->with('user',$user);
+        return view('perfil', compact('user'));
         if($user != null){
             // Si no es nulo
             // atributo
-            if($request->rutUsuario != null){
+            /*if($request->rutUsuario != null){
                 // si atributo no es nulo
                 if(is_string($request->rutUsuario)){
                     // si es string
@@ -139,9 +153,9 @@ class UserController extends Controller
                 else{
                     return response()->json(["message"=>"Contraseña usuario debe ser string."]);
                 }
-            }
-            $user->save();
-            return response()->json($user);
+            }*/
+            
+            //return redirect('user/{{$user->id}}');
         }
         return response()->json(["message"=>"El id no existe."]);
     }
@@ -182,13 +196,18 @@ class UserController extends Controller
     // Show nuevo
     public function nuevoShow(Request $request)
     {
+        $productos = DB::table('products')
+        ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+        ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+        ->get();
+        
         $user = User::all()->where('softDelete',false)
         ->where('correoUsuario', $request->correoUsuario)
         ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
 
         if($user != NULL){
-            //return view('home', compact('user'));
-            return redirect('home')->with('user', $user);
+            return view('home')->with('user',$user)->with('productos', $productos);
+            //return view('home')->with('user', $user);
         }
         return redirect('iniciarSesion');
     }

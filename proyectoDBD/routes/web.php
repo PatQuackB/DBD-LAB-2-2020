@@ -1,6 +1,7 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,13 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/home/{id}', function ($id) {
+    $productos = DB::table('products')
+    ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+    ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+    ->get();
+    $user=User::find($id);
+    return view('home')->with('user', $user)->with('productos', $productos);
 });
 
 Route::get('/prueba', function () {
@@ -36,6 +42,22 @@ Route::get('/iniciarSesion', function () {
 Route::get('/perfil', function () {
     return view('perfil');
 });
+
+Route::get('/perfilModificar/{id}', function ($id) {
+    //$user=User::find($id);
+    return view('perfilModificar')->with('id', $id);
+});
+
+
+/*Route::resource('categories', 'CategoryController');
+Route::resource('communes', 'CategoryController');
+Route::resource('deliveryOrders', 'CategoryController');
+Route::resource('deliveryOrdersPurchaseOrder', 'CategoryController');
+Route::resource('categories', 'CategoryController');
+Route::resource('categories', 'CategoryController');
+Route::resource('categories', 'CategoryController');*/
+
+Route::resource('users', 'UserController');
 
 
 //Category
@@ -211,7 +233,7 @@ Route::get('/user', 'UserController@index');
 Route::get('/user/nuevoShow', 'UserController@nuevoShow')->name('UserInicioSesion');
 Route::get('/user/{id}', 'UserController@show');
 Route::post('/user/create', 'UserController@store')->name('UserStore');
-Route::put('/user/update/{id}', 'UserController@update');
+Route::put('/user/update/{id}', 'UserController@update')->name('UserUpdate');
 Route::get('/user/destroy/{id}', 'UserController@destroy');
 Route::get('/user/restore/{id}', 'UserController@restore');
 

@@ -11,8 +11,8 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::all();
-        //$product = Product::all()->where($product->softDelete,false);
-        return response()->json($product);
+
+        return redirect('home');
     }
 
     //Crear una nueva tupla (post)
