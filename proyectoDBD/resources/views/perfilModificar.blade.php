@@ -23,8 +23,8 @@
                 <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
                 <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom" ></a>
 
-                <a class="nav-link" style="padding-top: 10.5%;" href="/user/{{$id}}">Perfil</a>
-                <a href="/user/{{$id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+                <a class="nav-link" style="padding-top: 10.5%;" href="">Perfil</a>
+                <a href="" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>
@@ -32,8 +32,9 @@
     </nav>
 
     <h1>Modificar Perfil</h1>
+    <!--
     <div class="container">
-        <form action="{{route('users.update', $id)}}" method="POST">
+        <form action="{{route('users.update', $user->id)}}" method="PUT">
             @method('PUT')
             
             <div class="form-group">
@@ -51,6 +52,7 @@
                 <input type="text" class="form-control" name="rutUsuario">
             </div>
             <br>
+            
             <div class="form-group">
                 <label for="region">Region</label>
                 <select name="region">
@@ -60,7 +62,7 @@
                     @empty
                       Sin regiones
                     @endforelse
-                    <!--<option value="I Region de Tarapaca">I Region de Tarapaca</option>
+                    <option value="I Region de Tarapaca">I Region de Tarapaca</option>
                     <option value="II Region de Antofagasta">II Region de Antofagasta</option>
                     <option value="III Region de Atacama">III Region de Atacama</option>
                     <option value="IV Region de Coquimbo">IV Region de Coquimbo</option>
@@ -75,10 +77,11 @@
                     <option value="XIII Region Metropolitana de Santiago">XIII Region Metropolitana de Santiago</option>
                     <option value="XIV Region de Los Rios">XIV Region de Los Rios</option>
                     <option value="XV Region de Arica y Parinacota">XV Region de Arica y Parinacota</option>
-                    <option value="XVI Region de Ñuble">XVI Region de Ñuble</option>-->
+                    <option value="XVI Region de Ñuble">XVI Region de Ñuble</option>
                 </select>
             </div>
             <br>
+            
             <div class="form-group">
                 <label for="exampleInputNombre">Comuna</label>
                 <input type="text" class="form-control" name="nombreComuna">
@@ -93,6 +96,7 @@
                 <label for="exampleInputNombre">Número calle</label>
                 <input type="text" class="form-control" name="numeroCalle">
             </div>
+            
             <div class="form-group">
                 <label for="exampleInputCorreo">Correo</label>
                 <input type="text" class="form-control" name="correoUsuario">
@@ -103,24 +107,26 @@
                 <input type="password" class="form-control" name="contraseniaUsuario">
             </div>
             <br>
+    
             <div class="form-grupo">
                 <label>Seleccione su rol dentro de la página: </label>
                 <br>
                 <label for="Vendedor">
-                    <input type="radio" name="nombreRol" value="Vendedor">
+                    <input type="radio" name="nombreRol" value="2">
                     Vendedor
                 </label>
                 <label for="Comprador">
-                    <input type="radio" name="nombreRol" value="Comprador">
+                    <input type="radio" name="nombreRol" value="1">
                     Comprador
                 </label>
             </div>
+            
 
             <br>
             <button type="submit" class="btn btn-primary">Modificar</button>
         </form>
     </div>
-
+  -->
 
 
 

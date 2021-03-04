@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
 
             $table->string('nombreProducto');
             $table->integer('precioProducto');
+            $table->string('urlImagen')->nullable();
             $table->unsignedBigInteger('stockProducto');
             $table->boolean('softDelete');
             

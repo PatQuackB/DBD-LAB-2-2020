@@ -32,7 +32,7 @@
     <h1>Inicia Sesion</h1>
 
     <div class="container" style="padding-bottom: 5%;">
-        <form action="{{route('UserInicioSesion')}}" method="GET">
+        <form action="{{route('userInicioSesion')}}" method="GET">
             <div class="form-group">
                 <label for="exampleInputCorreo">Correo</label>
                 <input type="text" class="form-control" name="correoUsuario" placeholder="elsa.polindo@gmail.com">

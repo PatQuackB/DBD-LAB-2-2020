@@ -23,8 +23,8 @@
                 <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
                 <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom" ></a>
 
-                <a class="nav-link" style="padding-top: 10.5%;" href="/user/{{$user->id}}">Perfil</a>
-                <a href="/user/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+                <a class="nav-link" style="padding-top: 10.5%;" href="/perfil/{{$user->id}}">Perfil</a>
+                <a href="/perfil/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>

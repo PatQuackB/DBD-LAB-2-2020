@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Region;
+use App\Models\Commune;
 
 class RegionController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
     public function index()
     {
-        $region = Region::all();
-        //$region = Region::all()->where($region->softDelete,false);
-        return response()->json($region);
+        //$region = Region::all();
+        $region = Region::all()->where('softDelete',false);
+        $commune = Commune::all()->where('softDelete',false);
+        return view('registro', compact('region', 'commune'));
+        //return response()->json($region);
     }
 
     //Crear una nueva tupla (post)

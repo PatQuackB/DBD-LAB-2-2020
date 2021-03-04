@@ -18,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav position-absolute end-0">
-                <a class="nav-link" aria-current="page" href="/registro">Registrarse</a>
+                <a class="nav-link" aria-current="page" href="{{route('regionIndex')}}">Registrarse</a>
                 <a href="/registro"><img src="https://www.flaticon.es/svg/vstatic/svg/4298/4298122.svg?token=exp=1614751637~hmac=51e58cf8e57f2527819b39213274e371" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
                 <a class="nav-link" href="/iniciarSesion">Iniciar Sesión</a>
                 <a href="/iniciarSesion"><img src="https://www.flaticon.es/svg/vstatic/svg/328/328371.svg?token=exp=1614741116~hmac=ce0d37136c5d4a530f0a619d5ef3c69b" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>

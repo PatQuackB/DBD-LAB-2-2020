@@ -79,64 +79,43 @@ class UserController extends Controller
         return response()->json(["message"=>"RUT usuario es obligatorio."]);
     }*/
 
-    
+
 
 
     public function store(Request $request)
     {
-        $region = new Region();
-        $region->nombreRegion = $request->nombreRegion;
-        $region->softDelete = False;
-        $region->save(); 
-
-        $commune = new Commune();
-        $commune->nombreComuna = $request->nombreComuna;
-        $commune->idRegion = $region->id;
-        $commune->softDelete = False;
-        $commune->save();
-
-        $streetAddress = new StreetAddress();
-        $streetAddress->nombreCalle = $request->nombreCalle;
-        $streetAddress->softDelete = False;
-        $streetAddress->save();
-
-        $numberAddress = new NumberAddress();
-        $numberAddress->numeroCalle = $request->numeroCalle;
-        $numberAddress->idCalle = $streetAddress->id;
-        $numberAddress->idComuna = $commune->id;
-        $numberAddress->softDelete = False;
-        $numberAddress->save();
-
-        $role = new Role();
-        $role->nombreRol = $request->nombreRol;
-        $role->softDelete = False;
-        $role->save();
-
         $user = new User();
         $user->rutUsuario = $request->rutUsuario;
         $user->nombreUsuario = $request->nombreUsuario;
-        $user->idCalle = $streetAddress->id;
-        $user->idRol = $role->id;
+        $user->idRol = $request->idRol;
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
-        $user->softDelete = False;
+        $user->softDelete = false;
         $user->save();
-        return redirect('welcome');
-                                                    
+        return redirect('iniciarSesion');
     }
 
 
 
-    
+
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
-
         $user = User::find($id);
-        if($user != null){
+        if ($user != null) {
             return view('perfil', compact('user'));
+            //return response()->json($user);
+        }
+        //return view('perfil')->with('user',$user);
+        return view('perfil', compact('user')); //                  REVISAR AQUI
+    }
+    public function showEditarPerfil($id)
+    {
+        $user = User::find($id);
+        if ($user != null) {
+            return view('perfilModificar', compact('user'));
             //return response()->json($user);
         }
         //return view('perfil')->with('user',$user);
@@ -147,56 +126,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $region = new Region();
-        $region->nombreRegion = $request->nombreRegion;
-        $region->softDelete = False;
-        $region->save(); 
-
-        $commune->nombreComuna = $request->nombreComuna;
-        $commune->idRegion = $region->id;
-        $commune->softDelete = False;
-        $commune->save();
-
-        $streetAddress = new StreetAddress();
-        $streetAddress->nombreCalle = $request->nombreCalle;
-        $streetAddress->softDelete = False;
-        $streetAddress->save();
-
-        $numberAddress = new NumberAddress();
-        $numberAddress->numeroCalle = $request->numeroCalle;
-        $numberAddress->idCalle = $streetAddress->id;
-        $numberAddress->idComuna = $commune->id;
-        $numberAddress->softDelete = False;
-        $numberAddress->save();
-
-        $role = new Role();
-        $role->nombreRol = $request->nombreRol;
-        $role->softDelete = False;
-        $role->save();
-
 
         $user->rutUsuario = $request->rutUsuario;
         $user->nombreUsuario = $request->nombreUsuario;
-        $user->idCalle = $streetAddress->id;
-        $user->idRol = $role->id;
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
-        $user->softDelete = False;
+        $user->softDelete = false;
         $user->save();
-        /*return redirect('welcome');
-
-
-
-
-
-        $user = User::find($id);
-        $user->contraseniaUsuario = $request->contraseniaUsuario;
-        $user->correoUsuario = $request->correoUsuario;
-        $user->nombreUsuario = $request->nombreUsuario;
-        $user->apellidoUsuario = $request->apellidoUsuario;
-        $user->rutUsuario = $request->rutUsuario;
-        $user->save();*/
         return view('perfil', compact('user'));
     }
 
@@ -204,49 +141,55 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if($user != null){
-            if($user->softDelete){
-                return response()->json(["message"=>"El usuario ya está eliminado."]);         
+        if ($user != null) {
+            if ($user->softDelete) {
+                return response()->json(["message" => "El usuario ya está eliminado."]);
             }
             $user->softDelete = True;
             $user->save();
-            return response()->json(["message"=>"El usuario ha sido eliminado."]);
+            return response()->json(["message" => "El usuario ha sido eliminado."]);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message" => "El id no existe."]);
     }
 
     //Vuelve a false el atributo softDelete en una tupla específica 
     public function restore($id)
     {
         $user = User::find($id);
-        if($user != null){
-            if($user->softDelete){
+        if ($user != null) {
+            if ($user->softDelete) {
                 $user->softDelete = False;
                 $user->save();
                 return response()->json([
-                    "message"=> "Se ha recuperado el usuario.",
-                    "id"=> $user->id
+                    "message" => "Se ha recuperado el usuario.",
+                    "id" => $user->id
                 ], 202);
             }
-            return response()->json(["message"=>"No es posible realizar la operación debido a que el usuario no está eliminado."]);
+            return response()->json(["message" => "No es posible realizar la operación debido a que el usuario no está eliminado."]);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message" => "El id no existe."]);
     }
 
     // Show nuevo
     public function nuevoShow(Request $request)
     {
         $productos = DB::table('products')
-        ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
-        ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
-        ->get();
-        
-        $user = User::all()->where('softDelete',false)
-        ->where('correoUsuario', $request->correoUsuario)
-        ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
+            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+            ->get();
 
-        if($user != NULL){
-            return view('home')->with('user',$user)->with('productos', $productos);
+        $user = User::all()->where('softDelete', false)
+            ->where('correoUsuario', $request->correoUsuario)
+            ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
+        /*
+        $productos = DB::table('products')
+            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+            ->get();
+        $user = User::find($id);*/
+
+        if ($user != NULL) {
+            return view('home', compact('user', 'productos'));
             //return view('home')->with('user', $user);
         }
         return redirect('iniciarSesion');

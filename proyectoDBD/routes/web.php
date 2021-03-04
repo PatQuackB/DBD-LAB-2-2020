@@ -14,54 +14,42 @@ use App\Models\Region;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
 
-Route::get('/home/{id}', function ($id) {
-    $productos = DB::table('products')
-    ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
-    ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
-    ->get();
-    $user=User::find($id);
-    return view('home')->with('user', $user)->with('productos', $productos);
-});
 
-Route::get('/prueba', function () {
-    return view('prueba');
-});
-
-Route::get('/registro', function () {
-    return view('registro');
-});
-
-Route::get('/iniciarSesion', function () {
-    return view('iniciarSesion');
-});
-
-Route::get('/perfil', function () {
+/*Route::get('/perfil', function () {
     return view('perfil');
-});
+});*/
 
-Route::get('/perfilModificar/{id}', function ($id) {
+/*Route::get('/perfilModificar/{id}', function ($id) {
     $regions = DB::table('regions');
     return view('perfilModificar')->with('id', $id)->with('regions', $regions);
-});
+});*/
+
 /*
-Route::get('/)
-*/
-
-
-/*Route::resource('categories', 'CategoryController');
-Route::resource('communes', 'CategoryController');
-Route::resource('deliveryOrders', 'CategoryController');
-Route::resource('deliveryOrdersPurchaseOrder', 'CategoryController');
 Route::resource('categories', 'CategoryController');
-Route::resource('categories', 'CategoryController');
-Route::resource('categories', 'CategoryController');*/
-
+Route::resource('communes', 'CommuneController');
+Route::resource('deliveryOrders', 'DeliveryOrderController');
+Route::resource('deliveryOrdersPurchaseOrder', 'DeliveryOrderPurchaseOrderController');
+Route::resource('fairs', 'FairController');
+Route::resource('numberAddresses', 'NumberAddressController');
+Route::resource('paymentMethods', 'PaymentMethodController');
+Route::resource('paymentMethodUsers', 'PaymentMethodUserController');
+Route::resource('permissions', 'PermissionController');
+Route::resource('products', 'ProductController');
+Route::resource('productStalls', 'ProductStallController');
+Route::resource('productUnitOfMeasures', 'ProductUnitOfMeasureController');
+Route::resource('purchaseOrders', 'PurchaseOrderController');
+Route::resource('purchaseOrderProducts', 'PurchaseOrderProductController');
+Route::resource('regions', 'RegionController');
+Route::resource('roles', 'RoleController');
+Route::resource('rolePermissions', 'RolePermissionController');
+Route::resource('stalls', 'StallController');
+Route::resource('streetAddresses', 'StreetAddressController');
+Route::resource('subCategories', 'SubCategoryController');
+Route::resource('unitOfMeasures', 'UnitOfMeasureController');
 Route::resource('users', 'UserController');
-
+Route::resource('userStalls', 'UserStallController');
+*/
 
 //Category
 Route::get('/category', 'CategoryController@index');
@@ -176,7 +164,7 @@ Route::get('/purchaseOrderProduct/destroy/{id}', 'PurchaseOrderProductController
 Route::get('/purchaseOrderProduct/restore/{id}', 'PurchaseOrderProductController@restore');
 
 //Region
-Route::get('/region', 'RegionController@index');
+Route::get('/registro', 'RegionController@index')->name('regionIndex'); //ESTE NOMBRE SE USA PARA LLAMAR A LA RUTA; DESDE HREF O DESDE ACTION
 Route::get('/region/{id}', 'RegionController@show');
 Route::post('/region/create', 'RegionController@store');
 Route::put('/region/update/{id}', 'RegionController@update');
@@ -233,10 +221,12 @@ Route::get('/unitOfMeasure/restore/{id}', 'UnitOfMeasureController@restore');
 
 //User
 Route::get('/user', 'UserController@index');
-Route::get('/user/nuevoShow', 'UserController@nuevoShow')->name('UserInicioSesion');
-Route::get('/user/{id}', 'UserController@show');
-Route::post('/user/create', 'UserController@store')->name('UserStore');
-Route::put('/user/update/{id}', 'UserController@update')->name('UserUpdate');
+Route::get('/home', 'UserController@nuevoShow')->name('userInicioSesion');
+Route::get('/perfil/{id}', 'UserController@show');
+Route::get('/perfilModificar/{id}', 'UserController@showEditarPerfil');
+
+Route::post('/iniciarSesion', 'UserController@store')->name('userStore');
+Route::put('/modificar/{id}', 'UserController@update')->name('userUpdate');
 Route::get('/user/destroy/{id}', 'UserController@destroy');
 Route::get('/user/restore/{id}', 'UserController@restore');
 

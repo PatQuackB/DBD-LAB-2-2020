@@ -59,8 +59,12 @@ class DatabaseSeeder extends Seeder
             [ 'id' => 15, 'nombreRegion' => 'XV Region de Arica y Parinacota', 'softDelete' => false,'created_at' => now()],
             [ 'id' => 16, 'nombreRegion' => 'XVI Region de Ñuble', 'softDelete' => false,'created_at' => now()]
            ]);
+        Role::insert([
+            ['id' => 1, 'nombreRol' => "Comprador", 'softDelete' => false,'created_at' => now()],
+            ['id' => 2, 'nombreRol' => "Vendedor", 'softDelete' => false,'created_at' => now()]
+        ]);
+
         StreetAddress::factory($cantidadSeeders)->create();
-        Role::factory($cantidadSeeders)->create();
         UnitOfMeasure::factory($cantidadSeeders)->create();
         Category::factory($cantidadSeeders)->create();
         Permission::factory($cantidadSeeders)->create();
