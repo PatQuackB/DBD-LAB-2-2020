@@ -23,7 +23,7 @@ class RoleFactory extends Factory
     {
         return [
             'nombreRol'=>$this->faker->jobTitle,
-            'softDelete'=>$this->faker->boolean
+            'softDelete'=>$this->faker->randomElement($array = array (false))
         ];
     }
 }

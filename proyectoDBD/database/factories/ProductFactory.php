@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'nombreProducto'=>$this->faker->name,
             'precioProducto'=>$this->faker->numberBetween($min=1000,$max=20000),
             'stockProducto'=>$this->faker->randomNumber($nbDigits = 4, $strict = false),
-            'softDelete'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->randomElement($array = array (false)),
 
             //Foranea
             //'idCategoria'=>Category::factory()

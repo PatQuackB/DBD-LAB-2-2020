@@ -18,14 +18,14 @@ class ProductController extends Controller
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
-        if($request->nombreProducto != null){
+        if ($request->nombreProducto != null) {
             // si atributo no es nulo
-            if(is_string($request->nombreProducto)){ 
+            if (is_string($request->nombreProducto)) {
                 // si es string
-                if($request->precioProducto != null){
-                    if(is_integer($request->precioProducto)){ 
-                        if($request->stockProducto != null){
-                            if(is_integer($request->stockProducto)){ 
+                if ($request->precioProducto != null) {
+                    if (is_integer($request->precioProducto)) {
+                        if ($request->stockProducto != null) {
+                            if (is_integer($request->stockProducto)) {
                                 $product = new Product();
                                 $product->nombreProducto = $request->nombreProducto;
                                 $product->precioProducto = $request->precioProducto;
@@ -33,155 +33,181 @@ class ProductController extends Controller
                                 $product->softDelete = False;
                                 $product->save();
                                 return response()->json([
-                                    "message"=> "Se ha creado un producto.",
-                                    "id"=> $product->id
+                                    "message" => "Se ha creado un producto.",
+                                    "id" => $product->id
                                 ], 202);
                             }
-                            return response()->json(["message"=>"Stock producto debe ser número."]);
+                            return response()->json(["message" => "Stock producto debe ser número."]);
                         }
-                        return response()->json(["message"=>"Stock producto es obligatorio."]);
+                        return response()->json(["message" => "Stock producto es obligatorio."]);
                     }
-                    return response()->json(["message"=>"Precio producto debe ser número."]);
+                    return response()->json(["message" => "Precio producto debe ser número."]);
                 }
-                return response()->json(["message"=>"Precio producto es obligatorio."]);
+                return response()->json(["message" => "Precio producto es obligatorio."]);
             }
-            return response()->json(["message"=>"Nombre producto debe ser string."]);
+            return response()->json(["message" => "Nombre producto debe ser string."]);
         }
-        return response()->json(["message"=>"Nombre producto es obligatorio."]);
-        
+        return response()->json(["message" => "Nombre producto es obligatorio."]);
     }
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
     {
         $product = Product::find($id);
-        if($product != null){
+        if ($product != null) {
             return response()->json($product);
         }
-        return response()->json(["message"=>"El id no existe"]);
+        return response()->json(["message" => "El id no existe"]);
+    }
+
+    // Show 2
+    public function show2($id)
+    {
+        $producto = Product::find($id);
+        if ($producto != null) {
+            return view('producto', compact('producto'));
+        }
+        return view('producto', compact('producto')); //                  REVISAR AQUI
     }
 
     //Modificar una tupla especifica (put)
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        if($product != null){
+        if ($product != null) {
             // Si no es nulo
             // atributo
-            if($request->nombreProducto != null){
+            if ($request->nombreProducto != null) {
                 // si atributo no es nulo
-                if(is_string($request->nombreProducto)){ 
+                if (is_string($request->nombreProducto)) {
                     // si es string
                     $product->nombreProducto = $request->nombreProducto;
-                }
-                else{
+                } else {
                     // si no es string
-                    return response()->json(["message"=>"Nombre producto debe ser string."]);
+                    return response()->json(["message" => "Nombre producto debe ser string."]);
                 }
             }
-            if($request->precioProducto != null){
-                if(is_integer($request->precioProducto)){ 
+            if ($request->precioProducto != null) {
+                if (is_integer($request->precioProducto)) {
                     $product->precioProducto = $request->precioProducto;
-                }
-                else{
-                    return response()->json(["message"=>"Precio producto debe ser número."]);
+                } else {
+                    return response()->json(["message" => "Precio producto debe ser número."]);
                 }
             }
-            if($request->stockProducto != null){
-                if(is_integer($request->stockProducto)){ 
+            if ($request->stockProducto != null) {
+                if (is_integer($request->stockProducto)) {
                     $product->stockProducto = $request->stockProducto;
-                }
-                else{
-                    return response()->json(["message"=>"Stock producto debe ser número."]);
+                } else {
+                    return response()->json(["message" => "Stock producto debe ser número."]);
                 }
             }
             $product->save();
             return response()->json($product);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message" => "El id no existe."]);
     }
 
     //Borrar una tupla específica (delete)
     public function destroy($id)
     {
         $product = Product::find($id);
-        if($product != null){
-            if($product->softDelete){
-                return response()->json(["message"=>"El producto ya está eliminado."]);         
+        if ($product != null) {
+            if ($product->softDelete) {
+                return response()->json(["message" => "El producto ya está eliminado."]);
             }
             $product->softDelete = True;
             $product->save();
-            return response()->json(["message"=>"El producto ha sido eliminado."]);
+            return response()->json(["message" => "El producto ha sido eliminado."]);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message" => "El id no existe."]);
     }
 
     //Vuelve a false el atributo softDelete en una tupla específica 
     public function restore($id)
     {
         $product = Product::find($id);
-        if($product != null){
-            if($product->softDelete){
+        if ($product != null) {
+            if ($product->softDelete) {
                 $product->softDelete = False;
                 $product->save();
                 return response()->json([
-                    "message"=> "Se ha recuperado el producto.",
-                    "id"=> $product->id
+                    "message" => "Se ha recuperado el producto.",
+                    "id" => $product->id
                 ], 202);
             }
-            return response()->json(["message"=>"No es posible realizar la operación debido a que el producto no está eliminado."]);
+            return response()->json(["message" => "No es posible realizar la operación debido a que el producto no está eliminado."]);
         }
-        return response()->json(["message"=>"El id no existe."]);
+        return response()->json(["message" => "El id no existe."]);
     }
 
     // Controlador carrito
-    /*
     public function agregarAlCarrito($id)
-    {
-        $product = Product::find($id);
- 
-        if($product == NULL) { 
-            return response()->json(["message"=>"El id no existe."]);
-        }
- 
-        $carrito = session()->get('carrito');
- 
-        // si el carrito es nulo, este es el primer producto
-        if($carrito == NULL) {
-            $carrito = [
-                    $id => [
-                        "nombre" => $product->nombreProducto,
-                        "cantidad" => 1,
-                        "precio" => $product->precioProducto
-                    ]
-            ];
- 
-            session()->put('carrito', $carrito);
- 
-            return redirect()->back();
-        }
- 
-        // si el producto no es nulo, y el producto esta, le agrega 1
-        if(isset($carrito[$id])){
- 
-            $carrito[$id]['cantidad']++;
- 
-            session()->put('carrito', $carrito);
- 
-            return redirect()->back();
- 
-        }
- 
-        // si el objeto no esta en el carrito, lo agrega con cantidad 1
-        $carrito[$id] = [
-            "name" => $product->nombreProducto,
-            "quantity" => 1,
-            "price" => $product->precioProducto
-        ];
- 
-        session()->put('carrito', $carrito);
- 
-        return redirect()->back();
-    }
+    {
+        $product = Product::find($id);
+
+        if ($product == NULL) {
+            return response()->json(["message" => "El id no existe."]);
+        }
+
+        $carrito = session()->get('carrito');
+
+        // si el carrito es nulo, este es el primer producto
+        if ($carrito == NULL) {
+            $carrito =
+                [
+                    $id =>
+                    [
+                        "nombre" => $product->nombreProducto,
+                        "cantidad" => 1,
+                        "precio" => $product->precioProducto
+                    ]
+                ];
+
+            session()->put('carrito', $carrito);
+
+            return redirect()->back()->with('success', 'Producto agregado al carrito.');
+        }
+
+        // si el producto no es nulo, y el producto esta, le agrega 1
+        if (isset($carrito[$id])) {
+
+            $carrito[$id]['cantidad']++;
+
+            session()->put('carrito', $carrito);
+
+            return redirect()->back()->with('success', 'Producto incrementado en una unidad.');
+        }
+
+        // si el objeto no esta en el carrito, lo agrega con cantidad 1
+        $carrito[$id] =
+            [
+                "name" => $product->nombreProducto,
+                "quantity" => 1,
+                "price" => $product->precioProducto
+            ];
+
+        session()->put('carrito', $carrito);
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito.');
+    }
+
+    // Ir al carrito
+    /*
+    public function carrito()
+    {
+        $productos = Product::all();
+
+        foreach($productos as $producto){
+            if(session->has($producto->$id)){
+                $arreglo = 
+            }
+        }
+        
+        $carrito = $
+        if ($producto != null) {
+            return view('producto', compact('producto'));
+        }
+        return view('producto', compact('producto')); //                  REVISAR AQUI
+    }
     */
 }

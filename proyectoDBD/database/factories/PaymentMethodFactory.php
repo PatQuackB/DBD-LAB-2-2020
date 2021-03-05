@@ -29,7 +29,7 @@ class PaymentMethodFactory extends Factory
             'ultimosNumerosTarjeta'=>$this->faker->text,
             'mesVencimiento'=>$this->faker->numberBetween($min=1,$max=12),
             'anioVencimiento'=>$this->faker->numberBetween($min=0,$max=99),
-            'softDelete'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->randomElement($array = array (false)),
 
             //Foranea
             //'idDespacho'=>DeliveryOrder::factory()

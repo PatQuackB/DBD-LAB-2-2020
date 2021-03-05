@@ -19,9 +19,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav position-absolute end-0">
                 <a class="nav-link" aria-current="page" href="{{route('regionIndex')}}">Registrarse</a>
-                <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                 <a class="nav-link" href="/iniciarSesion">Iniciar Sesión</a>
-                <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>

@@ -22,11 +22,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
+          @if($user->idRol == 2)
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
+          <a href="" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          @else
+          @endif
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/welcome">Carrito</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
-          <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
@@ -59,8 +64,16 @@
 
   @endforelse
 
+  <!--
+  <div class="form-grupo">
+    @forelse($comuna as $productos)
 
-
+    <label>Seleccione su rol dentro de la página: </label>
+    <br>
+    <input type="radio" name="idRol" value="2" required> Vendedor(a)  
+    <input type="radio" name="idRol" value="1" required> Comprador(a)
+  </div>
+  -->
 
 
 

@@ -24,7 +24,7 @@ class SubCategoryFactory extends Factory
     {
         return [
             'nombreSubCategoria'=>$this->faker->name,
-            'softDelete'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->randomElement($array = array (false)),
 
             //Foranea
             //'idCategoria'=>Category::factory()

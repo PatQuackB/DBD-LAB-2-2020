@@ -23,7 +23,7 @@ class UnitOfMeasureFactory extends Factory
     {
         return [
             'nombreUnidadMedida'=>$this->faker->name,
-            'softDelete'=>$this->faker->boolean
+            'softDelete'=>$this->faker->randomElement($array = array (false))
         ];
     }
 }

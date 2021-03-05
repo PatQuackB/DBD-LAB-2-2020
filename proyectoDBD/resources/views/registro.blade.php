@@ -22,9 +22,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav position-absolute end-0">
                     <a class="nav-link" aria-current="page" href="/registro">Registrarse</a>
-                    <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                    <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                     <a class="nav-link" href="/iniciarSesion">Iniciar Sesión</a>
-                    <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                    <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                     &nbsp &nbsp &nbsp
                 </div>
             </div>
@@ -67,10 +67,10 @@
                 <input type="radio" name="idRol" value="1" required> Comprador(a)
             </div>
             <br>
-            <div class="form-group">
+            <div class="form-group" class="required">
                 <label for="region">Region</label>
-                <select name="idRegion">
-                    <option selected>Selecciones una Region</option>
+                <select name="idRegion" class="form-select" id="validationDefault04" required>
+                    <option selected disabled value="">Selecciones una Region</option>
                     @forelse ($region as $region)
                     <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
                     @empty
@@ -81,8 +81,8 @@
             <br>
             <div class="form-group">
                 <label for="region">Comuna</label>
-                <select name="idComuna">
-                    <option selected>Selecciones una Comuna</option>
+                <select name="idComuna" class="form-select" id="validationDefault04" required>
+                    <option selected disabled value="">Selecciones una Comuna</option>
                     @forelse ($commune as $commune)
                     <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
                     @empty
@@ -94,8 +94,8 @@
 
             <div class="form-group">
                 <label for="region">Nombre calle</label>
-                <select name="idNombreCalle">
-                    <option selected>Selecciones una Calle</option>
+                <select name="idNombreCalle" class="form-select" id="validationDefault04" required>
+                    <option selected disabled value="">Selecciones una Calle</option>
                     @forelse ($streetAddress as $streetAddress)
                     <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
                     @empty
@@ -106,8 +106,8 @@
             <br>
             <div class="form-group">
                 <label for="region">Número calle</label>
-                <select name="idNumeroCalle">
-                    <option selected>Selecciones N° Calle</option> 
+                <select name="idNumeroCalle" class="form-select" id="validationDefault04" required>
+                    <option selected disabled value="">Selecciones N° Calle</option> 
                     @forelse ($numberAddress as $numberAddress)
                     <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
                     @empty

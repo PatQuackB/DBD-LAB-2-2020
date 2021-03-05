@@ -92,8 +92,10 @@ class UserController extends Controller
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
         $user->idCalle = $request->idNombreCalle;
+        
 
         $user->softDelete = false;
+
         $user->save();
         return redirect('iniciarSesion');
     }
@@ -151,14 +153,23 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        if($request->rutUsuario != NULL)
         $user->rutUsuario = $request->rutUsuario;
         $user->nombreUsuario = $request->nombreUsuario;
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $user->idRol = $request->idRol;
         $user->softDelete = false;
         $user->save();
-        return view('perfil', compact('user'));
+
+        $rol = Role::find($user->idRol);
+        $calle = StreetAddress::find($user->idCalle);
+        $numeroCalle = NumberAddress::all()->where('idCalle', $calle->id)->first();
+        $comuna = Commune::all()->where('id', $numeroCalle->idComuna)->first();
+        $region = Region::find($comuna->idRegion);
+
+        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region','rol'));
     }
 
     //Borrar una tupla específica (delete)

@@ -20,9 +20,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav position-absolute end-0">
                 <a class="nav-link" aria-current="page" href="/registro">Registrarse</a>
-                <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                 <a class="nav-link" href="/iniciarSesion">Iniciar Sesión</a>
-                <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="20" height="40" class="d-inline-block align-bottom"></a>
+                <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
                 &nbsp &nbsp &nbsp
             </div>
             </div>
@@ -35,7 +35,7 @@
         <form action="{{route('userInicioSesion')}}" method="GET">
             <div class="form-group">
                 <label for="exampleInputCorreo">Correo</label>
-                <input type="text" class="form-control" name="correoUsuario" placeholder="elsa.polindo@gmail.com">
+                <input type="text" class="form-control" name="correoUsuario" placeholder="nombre.apellido@gmail.com">
             </div>
             <br>
             <div class="form-group">

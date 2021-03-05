@@ -25,7 +25,7 @@ class StallFactory extends Factory
     {
         return [
             'nombrePuesto'=>$this->faker->company,
-            'softDelete'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->randomElement($array = array (false)),
             //Foranea
             //'idFeria'=>Fair::factory(),
             'idFeria' => Fair::all()->random()->id,
