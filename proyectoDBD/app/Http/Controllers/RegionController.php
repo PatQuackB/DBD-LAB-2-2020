@@ -16,8 +16,8 @@ class RegionController extends Controller
         //$region = Region::all();
         $region = Region::all()->where('softDelete',false);
         $commune = Commune::all()->where('softDelete',false);
-        $numberAddress = NumberAddress::all()->take(4)->where('softDelete',false);
-        $streetAddress = StreetAddress::all()->take(2)->where('softDelete',false);
+        $numberAddress = NumberAddress::all()->where('softDelete',false);
+        $streetAddress = StreetAddress::all()->where('softDelete',false);
         return view('registro', compact('region', 'commune', 'numberAddress', 'streetAddress'));
         //return response()->json($region);
     }

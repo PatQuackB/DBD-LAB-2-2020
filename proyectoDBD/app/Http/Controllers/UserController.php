@@ -91,8 +91,8 @@ class UserController extends Controller
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
-        $numeroDireccion = NumberAddress::all()->where('numeroCalle', $request->numeroCalle)->where('idComuna', $request->idComuna);
-        $user->idCalle = $numeroDireccion->idCalle;
+        $user->idCalle = $request->idNombreCalle;
+
         $user->softDelete = false;
         $user->save();
         return redirect('iniciarSesion');
@@ -112,6 +112,17 @@ class UserController extends Controller
         return view('perfil', compact('user')); //                  REVISAR AQUI
     }
 
+    public function irPerfil($id)
+    {
+        $user = User::find($id);
+        $calle = StreetAddress::find($user->idCalle);
+        $numeroCalle = NumberAddress::all()->where('idCalle', $calle->id)->first();
+        //print($numeroCalle);
+        $comuna = Commune::all()->where('id', $numeroCalle->idComuna)->first();
+        $region = Region::find($comuna->idRegion);
+
+        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region'));
+    }
     public function homeBack($id)
     {
         $user = User::find($id);
@@ -125,13 +136,14 @@ class UserController extends Controller
     public function showEditarPerfil($id)
     {
         $user = User::find($id);
-        $regions = Region::all();
-        if ($user != null) {
-            return view('perfilModificar', compact('user', 'regions'));
+        $region = Region::all();
+        $commune = Commune::all()->where('softDelete',false);
+        $numberAddress = NumberAddress::all()->where('softDelete',false);
+        $streetAddress = StreetAddress::all()->where('softDelete',false);
+        return view('perfilModificar', compact('user', 'region', 'commune', 'numberAddress', 'streetAddress'));
             //return response()->json($user);
-        }
         //return view('perfil')->with('user',$user);
-        return view('perfil', compact('user'));
+        //return view('perfil', compact('user'));
     }
 
     //Modificar una tupla especifica (put)

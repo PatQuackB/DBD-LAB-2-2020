@@ -15,7 +15,7 @@
 <body class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a href="/homeBack/{{$user->id}}"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+      <a href="/homeBack/{{$user->id}}"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
       <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
-          <a class="nav-link" style="padding-top: 10.5%;" href="/perfil/{{$user->id}}">Perfil</a>
-          <a href="/perfil/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
+          <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
@@ -81,53 +81,52 @@
           Comprador
         </label>
       </div>
-      <!--
-            <div class="form-group">
-                <label for="region">Region</label>
-                <select name="region">
-                    @forelse ($regions as $regions)
-                        <option value="{{ $regions->nombreRegion }}">{{ $regions->nombreRegion }}</option>
-
-                    @empty
-                      Sin regiones
-                    @endforelse
-                    <option value="I Region de Tarapaca">I Region de Tarapaca</option>
-                    <option value="II Region de Antofagasta">II Region de Antofagasta</option>
-                    <option value="III Region de Atacama">III Region de Atacama</option>
-                    <option value="IV Region de Coquimbo">IV Region de Coquimbo</option>
-                    <option value="V Region de Valparaiso">V Region de Valparaiso</option>
-                    <option value="VI Region del Libertador General Bernardo OHiggins">VI Region del Libertador General Bernardo OHiggins</option>
-                    <option value="VII Region del Maule">VII Region del Maule</option>
-                    <option value="VIII Region del Biobio">VIII Region del Biobio</option>
-                    <option value="IX Region de La Araucania">IX Region de La Araucania</option>
-                    <option value="X Region de Los Lagos">X Region de Los Lagos</option>
-                    <option value="XI Region Aysen del General Carlos Ibañez del Campo">XI Region Aysen del General Carlos Ibañez del Campo</option>
-                    <option value="XII Region de Magallanes y Antartica Chilena">XII Region de Magallanes y Antartica Chilena</option>
-                    <option value="XIII Region Metropolitana de Santiago">XIII Region Metropolitana de Santiago</option>
-                    <option value="XIV Region de Los Rios">XIV Region de Los Rios</option>
-                    <option value="XV Region de Arica y Parinacota">XV Region de Arica y Parinacota</option>
-                    <option value="XVI Region de Ñuble">XVI Region de Ñuble</option>
-                </select>
-            </div>
-            <br>
-            
-            <div class="form-group">
-                <label for="exampleInputNombre">Comuna</label>
-                <input type="text" class="form-control" name="nombreComuna">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputNombre">Nombre calle</label>
-                <input type="text" class="form-control" name="nombreCalle">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputNombre">Número calle</label>
-                <input type="text" class="form-control" name="numeroCalle">
-            </div>
-            -->
+      <div class="form-group">
+        <label for="region">Region</label>
+        <select name="idRegion">
+          @forelse ($region as $region)
+          <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
+          @empty
+          Sin regiones
+          @endforelse
+        </select>
+      </div>
       <br>
-      <button type="submit" class="btn btn-primary">Modificar</button>
+      <div class="form-group">
+        <label for="region">Comuna</label>
+        <select name="idComuna">
+          @forelse ($commune as $commune)
+          <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
+          @empty
+          Sin comunas
+          @endforelse
+        </select>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="region">Nombre calle</label>
+        <select name="idNombreCalle">
+          @forelse ($streetAddress as $streetAddress)
+          <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
+          @empty
+          Sin calles
+          @endforelse
+        </select>
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="region">Número calle</label>
+        <select name="idNumeroCalle">
+          @forelse ($numberAddress as $numberAddress)
+          <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
+          @empty
+          Sin numeros
+          @endforelse
+        </select>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Modificar Datos</button>
     </form>
   </div>
 

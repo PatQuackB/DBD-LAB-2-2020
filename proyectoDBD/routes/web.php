@@ -216,6 +216,7 @@ Route::get('/unitOfMeasure/destroy/{id}', 'UnitOfMeasureController@destroy');
 Route::get('/unitOfMeasure/restore/{id}', 'UnitOfMeasureController@restore');
 
 //User
+Route::get('/perfilShow/{id}', 'UserController@irPerfil')->name('userPerfil');
 Route::get('/homeBack/{id}', 'UserController@homeBack')->name('userHome');
 Route::get('/home', 'UserController@nuevoShow')->name('userInicioSesion');
 Route::get('/perfil/{id}', 'UserController@show');

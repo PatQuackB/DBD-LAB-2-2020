@@ -15,7 +15,7 @@
 <body class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a href="/homeBack/{{$user->id}}"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+      <a href="/homeBack/{{$user->id}}"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
       <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
-          <a class="nav-link" style="padding-top: 10.5%;" href="/perfil/{{$user->id}}">Perfil</a>
-          <a href="/perfil/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
+          <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
@@ -48,6 +48,12 @@
       <p>Apellidos: {{$user->apellidoUsuario}}</p>
       <p>Rut: {{$user->rutUsuario}}</p>
       <p>Correo: {{$user->correoUsuario}}</p>
+      <!--<h4>Dirección:</h4><br>-->
+      <p>Calle: {{$calle->nombreCalle}}</p>
+      <p>Número: {{$numeroCalle->numeroCalle}}</p>
+      <p>Comuna: {{$comuna->nombreComuna}}</p>
+      <p>Región: {{$region->nombreRegion}}</p>
+      <br>
       <a href="/perfilModificar/{{$user->id}}" class="btn btn-primary">Editar Datos</a>
 
     </div>

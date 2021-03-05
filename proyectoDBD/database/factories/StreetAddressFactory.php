@@ -23,7 +23,7 @@ class StreetAddressFactory extends Factory
     {
         return [
             'nombreCalle'=>$this->faker->streetName,
-            'softDelete'=>$this->faker->boolean
+            'softDelete'=>$this->faker->randomElement($array = array (false))
         ];
     }
 }

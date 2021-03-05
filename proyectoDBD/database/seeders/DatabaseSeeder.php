@@ -39,8 +39,7 @@ class DatabaseSeeder extends Seeder
     {
         $cantidadSeeders = 15;
 
-        Fair::factory($cantidadSeeders)->create();
-        //Region::factory($cantidadSeeders)->create();
+        /*
         Region::insert([
             ['id' => 1, 'nombreRegion' => 'I Region de Tarapaca', 'softDelete' => false, 'created_at' => now()],
             ['id' => 2, 'nombreRegion' => 'II Region de Antofagasta', 'softDelete' => false, 'created_at' => now()],
@@ -59,7 +58,6 @@ class DatabaseSeeder extends Seeder
             ['id' => 15, 'nombreRegion' => 'XV Region de Arica y Parinacota', 'softDelete' => false, 'created_at' => now()],
             ['id' => 16, 'nombreRegion' => 'XVI Region de Ñuble', 'softDelete' => false, 'created_at' => now()]
         ]);
-
         Commune::insert([
             ['id' => 1, 'nombreComuna' => 'Alto Hospicio', 'idRegion' => 1, 'softDelete' => false, 'created_at' => now()],
             ['id' => 2, 'nombreComuna' => 'Iquique', 'idRegion' => 1, 'softDelete' => false, 'created_at' => now()],
@@ -125,10 +123,6 @@ class DatabaseSeeder extends Seeder
             ['id' => 62, 'nombreComuna' => 'Chillán', 'idRegion' => 16, 'softDelete' => false, 'created_at' => now()],
             ['id' => 63, 'nombreComuna' => 'Quillón', 'idRegion' => 16, 'softDelete' => false, 'created_at' => now()],
             ['id' => 64, 'nombreComuna' => 'Quirihue', 'idRegion' => 16, 'softDelete' => false, 'created_at' => now()]
-        ]);
-        Role::insert([
-            ['id' => 1, 'nombreRol' => "Comprador", 'softDelete' => false, 'created_at' => now()],
-            ['id' => 2, 'nombreRol' => "Vendedor", 'softDelete' => false, 'created_at' => now()]
         ]);
         StreetAddress::insert([
             ['id' => 1, 'nombreCalle' => "Alameda", 'softDelete' => false, 'created_at' => now()],
@@ -260,7 +254,6 @@ class DatabaseSeeder extends Seeder
             ['id' => 127, 'nombreCalle' => "Alameda", 'softDelete' => false, 'created_at' => now()],
             ['id' => 128, 'nombreCalle' => "Matucana", 'softDelete' => false, 'created_at' => now()]
         ]);
-
         NumberAddress::insert([
             ['id' => 1, 'numeroCalle' => "2898", 'idComuna' => '1', 'idCalle' => '1', 'softDelete' => false, 'created_at' => now()],
             ['id' => 2, 'numeroCalle' => "3015", 'idComuna' => '1', 'idCalle' => '1', 'softDelete' => false, 'created_at' => now()],
@@ -535,7 +528,17 @@ class DatabaseSeeder extends Seeder
             ['id' => 256, 'numeroCalle' => "1540", 'idComuna' => '64', 'idCalle' => '128', 'softDelete' => false, 'created_at' => now()]
 
         ]);
+            */
+        Role::insert([
+            ['id' => 1, 'nombreRol' => "Comprador", 'softDelete' => false, 'created_at' => now()],
+            ['id' => 2, 'nombreRol' => "Vendedor", 'softDelete' => false, 'created_at' => now()]
+        ]);
 
+        Fair::factory($cantidadSeeders)->create();
+        Region::factory($cantidadSeeders)->create();
+        Commune::factory($cantidadSeeders)->create();
+        StreetAddress::factory($cantidadSeeders)->create();
+        NumberAddress::factory($cantidadSeeders)->create();
         UnitOfMeasure::factory($cantidadSeeders)->create();
         Category::factory($cantidadSeeders)->create();
         Permission::factory($cantidadSeeders)->create();

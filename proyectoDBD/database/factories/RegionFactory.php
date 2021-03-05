@@ -22,8 +22,8 @@ class RegionFactory extends Factory
     public function definition()
     {
         return [
-             //'nombreRegion'=>$this->faker->state
-             'nombreRegion' => $this->faker->randomElement($array = array (
+             'nombreRegion'=>$this->faker->state
+             /*'nombreRegion' => $this->faker->randomElement($array = array (
                 'I Region de Tarapaca',
                 'II Region de Antofagasta',
                 'III Region de Atacama',
@@ -40,8 +40,8 @@ class RegionFactory extends Factory
                 'XIV Region de Los Rios',
                 'XV Region de Arica y Parinacota',
                 'XVI Region de Ñuble',
-             )),
-             'softDelete'=>$this->faker->boolean
+             ))*/,
+             'softDelete'=>$this->faker->randomElement($array = array (false))
         ];
     }
 }

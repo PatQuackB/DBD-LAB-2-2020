@@ -25,7 +25,7 @@ class NumberAddressFactory extends Factory
     {
         return [
             'numeroCalle'=>$this->faker->buildingNumber,
-            'softDelete'=>$this->faker->boolean,
+            'softDelete'=>$this->faker->randomElement($array = array (false)),
 
             //Foraneas
             //'idComuna'=>Commune::factory(),
