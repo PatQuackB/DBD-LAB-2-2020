@@ -14,16 +14,13 @@ use App\Models\Region;
 |
 */
 
+Route::get('/welcome', function(){
+    return view('welcome');
+});
+Route::get('/iniciarSesion', function(){
+    return view('iniciarSesion');
+});
 
-
-/*Route::get('/perfil', function () {
-    return view('perfil');
-});*/
-
-/*Route::get('/perfilModificar/{id}', function ($id) {
-    $regions = DB::table('regions');
-    return view('perfilModificar')->with('id', $id)->with('regions', $regions);
-});*/
 
 /*
 Route::resource('categories', 'CategoryController');
@@ -220,13 +217,12 @@ Route::get('/unitOfMeasure/destroy/{id}', 'UnitOfMeasureController@destroy');
 Route::get('/unitOfMeasure/restore/{id}', 'UnitOfMeasureController@restore');
 
 //User
-Route::get('/user', 'UserController@index');
+Route::get('/homeBack/{id}', 'UserController@homeBack')->name('userHome');
 Route::get('/home', 'UserController@nuevoShow')->name('userInicioSesion');
 Route::get('/perfil/{id}', 'UserController@show');
 Route::get('/perfilModificar/{id}', 'UserController@showEditarPerfil');
-
 Route::post('/iniciarSesion', 'UserController@store')->name('userStore');
-Route::put('/modificar/{id}', 'UserController@update')->name('userUpdate');
+Route::put('/perfilEditado/{id}', 'UserController@update')->name('userUpdate');
 Route::get('/user/destroy/{id}', 'UserController@destroy');
 Route::get('/user/restore/{id}', 'UserController@restore');
 

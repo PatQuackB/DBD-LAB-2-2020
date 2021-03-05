@@ -106,16 +106,26 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user != null) {
             return view('perfil', compact('user'));
-            //return response()->json($user);
         }
-        //return view('perfil')->with('user',$user);
         return view('perfil', compact('user')); //                  REVISAR AQUI
     }
+
+    public function homeBack($id)
+    {
+        $user = User::find($id);
+        $productos = DB::table('products')
+            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+            ->get();
+        return view('home', compact('user', 'productos'));
+    }
+
     public function showEditarPerfil($id)
     {
         $user = User::find($id);
+        $regions = Region::all();
         if ($user != null) {
-            return view('perfilModificar', compact('user'));
+            return view('perfilModificar', compact('user', 'regions'));
             //return response()->json($user);
         }
         //return view('perfil')->with('user',$user);
@@ -126,7 +136,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
         $user->rutUsuario = $request->rutUsuario;
         $user->nombreUsuario = $request->nombreUsuario;
         $user->apellidoUsuario = $request->apellidoUsuario;
@@ -181,16 +190,9 @@ class UserController extends Controller
         $user = User::all()->where('softDelete', false)
             ->where('correoUsuario', $request->correoUsuario)
             ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
-        /*
-        $productos = DB::table('products')
-            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
-            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
-            ->get();
-        $user = User::find($id);*/
 
         if ($user != NULL) {
             return view('home', compact('user', 'productos'));
-            //return view('home')->with('user', $user);
         }
         return redirect('iniciarSesion');
     }

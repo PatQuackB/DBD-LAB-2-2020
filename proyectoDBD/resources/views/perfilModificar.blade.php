@@ -1,58 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
 
-    <link rel="stylesheet" href="css/estructuraGenericaStyle.css">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/estructuraGenericaStyle.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
+
 <body class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a href="/home/$id"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-            <a class="navbar-brand" href="/home/$id" style="font-size: 44px">Fenlinea </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav position-absolute end-0">
-                <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
-                <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom" ></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="/homeBack/{{$user->id}}"><img src="img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+      <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav position-absolute end-0">
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
-                <a class="nav-link" style="padding-top: 10.5%;" href="">Perfil</a>
-                <a href="" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
-                &nbsp &nbsp &nbsp
-            </div>
-            </div>
+          <a class="nav-link" style="padding-top: 10.5%;" href="/perfil/{{$user->id}}">Perfil</a>
+          <a href="/perfil/{{$user->id}}" style="padding-right: 5%;"><img src="img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+
+          <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
+
+          &nbsp &nbsp &nbsp
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
 
-    <h1>Modificar Perfil</h1>
-    <!--
-    <div class="container">
-        <form action="{{route('users.update', $user->id)}}" method="PUT">
-            @method('PUT')
-            
-            <div class="form-group">
-                <label for="exampleInputNombre">Nombres</label>
-                <input type="text" class="form-control" name="nombreUsuario">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputApellido">Apellidos</label>
-                <input type="text" class="form-control" name="apellidoUsuario">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
-                <input type="text" class="form-control" name="rutUsuario">
-            </div>
-            <br>
-            
+  <h1>Modificar Perfil</h1>
+
+  <div class="container">
+    <form action="{{route('userUpdate', $user->id)}}" method="POST">
+      @method('PUT')
+
+      <div class="form-group">
+        <label for="exampleInputNombre">Nombres</label>
+        <input type="text" class="form-control" name="nombreUsuario">
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="exampleInputApellido">Apellidos</label>
+        <input type="text" class="form-control" name="apellidoUsuario">
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
+        <input type="text" class="form-control" name="rutUsuario">
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="exampleInputCorreo">Correo</label>
+        <input type="text" class="form-control" name="correoUsuario">
+      </div>
+      <br>
+      <div class="form-group">
+        <label for="exampleInputNombre">Contraseña</label>
+        <input type="password" class="form-control" name="contraseniaUsuario">
+      </div>
+      <br>
+
+      <div class="form-grupo">
+        <label>Seleccione su rol dentro de la página: </label>
+        <br>
+        <label for="Vendedor">
+          <input type="radio" name="nombreRol" value="2">
+          Vendedor
+        </label>
+        <label for="Comprador">
+          <input type="radio" name="nombreRol" value="1">
+          Comprador
+        </label>
+      </div>
+      <!--
             <div class="form-group">
                 <label for="region">Region</label>
                 <select name="region">
@@ -96,42 +125,17 @@
                 <label for="exampleInputNombre">Número calle</label>
                 <input type="text" class="form-control" name="numeroCalle">
             </div>
-            
-            <div class="form-group">
-                <label for="exampleInputCorreo">Correo</label>
-                <input type="text" class="form-control" name="correoUsuario">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputNombre">Contraseña</label>
-                <input type="password" class="form-control" name="contraseniaUsuario">
-            </div>
-            <br>
-    
-            <div class="form-grupo">
-                <label>Seleccione su rol dentro de la página: </label>
-                <br>
-                <label for="Vendedor">
-                    <input type="radio" name="nombreRol" value="2">
-                    Vendedor
-                </label>
-                <label for="Comprador">
-                    <input type="radio" name="nombreRol" value="1">
-                    Comprador
-                </label>
-            </div>
-            
-
-            <br>
-            <button type="submit" class="btn btn-primary">Modificar</button>
-        </form>
-    </div>
-  -->
+            -->
+      <br>
+      <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+  </div>
 
 
 
-    <!-- PIE DE PAGINA -->
-    <!--
+
+  <!-- PIE DE PAGINA -->
+  <!--
     <footer>
           <div class= "pie">
             <div class ="col-sm-7" id="info" style="width: 50%;">
@@ -196,4 +200,5 @@
         </footer>
         -->
 </body>
+
 </html>
