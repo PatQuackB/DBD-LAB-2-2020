@@ -115,13 +115,14 @@ class UserController extends Controller
     public function irPerfil($id)
     {
         $user = User::find($id);
+        $rol = Role::find($user->idRol);
         $calle = StreetAddress::find($user->idCalle);
         $numeroCalle = NumberAddress::all()->where('idCalle', $calle->id)->first();
         //print($numeroCalle);
         $comuna = Commune::all()->where('id', $numeroCalle->idComuna)->first();
         $region = Region::find($comuna->idRegion);
 
-        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region'));
+        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region','rol'));
     }
     public function homeBack($id)
     {

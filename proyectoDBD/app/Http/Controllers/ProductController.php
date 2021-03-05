@@ -133,4 +133,55 @@ class ProductController extends Controller
         }
         return response()->json(["message"=>"El id no existe."]);
     }
+
+    // Controlador carrito
+    /*
+    public function agregarAlCarrito($id)
+    {
+        $product = Product::find($id);
+ 
+        if($product == NULL) { 
+            return response()->json(["message"=>"El id no existe."]);
+        }
+ 
+        $carrito = session()->get('carrito');
+ 
+        // si el carrito es nulo, este es el primer producto
+        if($carrito == NULL) {
+            $carrito = [
+                    $id => [
+                        "nombre" => $product->nombreProducto,
+                        "cantidad" => 1,
+                        "precio" => $product->precioProducto
+                    ]
+            ];
+ 
+            session()->put('carrito', $carrito);
+ 
+            return redirect()->back();
+        }
+ 
+        // si el producto no es nulo, y el producto esta, le agrega 1
+        if(isset($carrito[$id])){
+ 
+            $carrito[$id]['cantidad']++;
+ 
+            session()->put('carrito', $carrito);
+ 
+            return redirect()->back();
+ 
+        }
+ 
+        // si el objeto no esta en el carrito, lo agrega con cantidad 1
+        $carrito[$id] = [
+            "name" => $product->nombreProducto,
+            "quantity" => 1,
+            "price" => $product->precioProducto
+        ];
+ 
+        session()->put('carrito', $carrito);
+ 
+        return redirect()->back();
+    }
+    */
 }

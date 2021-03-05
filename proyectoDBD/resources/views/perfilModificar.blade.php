@@ -29,7 +29,7 @@
           <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           &nbsp &nbsp &nbsp
         </div>
@@ -45,27 +45,27 @@
 
       <div class="form-group">
         <label for="exampleInputNombre">Nombres</label>
-        <input type="text" class="form-control" name="nombreUsuario">
+        <input type="text" class="form-control" name="nombreUsuario" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputApellido">Apellidos</label>
-        <input type="text" class="form-control" name="apellidoUsuario">
+        <input type="text" class="form-control" name="apellidoUsuario" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
-        <input type="text" class="form-control" name="rutUsuario">
+        <input type="text" class="form-control" name="rutUsuario" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputCorreo">Correo</label>
-        <input type="text" class="form-control" name="correoUsuario">
+        <input type="text" class="form-control" name="correoUsuario" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputNombre">Contraseña</label>
-        <input type="password" class="form-control" name="contraseniaUsuario">
+        <input type="password" class="form-control" name="contraseniaUsuario" required>
       </div>
       <br>
 
@@ -73,11 +73,11 @@
         <label>Seleccione su rol dentro de la página: </label>
         <br>
         <label for="Vendedor">
-          <input type="radio" name="nombreRol" value="2">
+          <input type="radio" name="nombreRol" value="2" required>
           Vendedor
         </label>
         <label for="Comprador">
-          <input type="radio" name="nombreRol" value="1">
+          <input type="radio" name="nombreRol" value="1" required>
           Comprador
         </label>
       </div>

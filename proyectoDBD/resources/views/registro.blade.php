@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
-            <a href="/laravel"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+            <a href="/welcome"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
             <a class="navbar-brand" href="/welcome">Fenlinea</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,39 +37,40 @@
         <form action="{{route('userStore')}}" method="POST">
             <div class="form-group">
                 <label for="exampleInputNombre">Nombres</label>
-                <input type="text" class="form-control" name="nombreUsuario">
+                <input type="text" class="form-control" name="nombreUsuario" required>
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputApellido">Apellidos</label>
-                <input type="text" class="form-control" name="apellidoUsuario">
+                <input type="text" class="form-control" name="apellidoUsuario" required>
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
-                <input type="text" class="form-control" name="rutUsuario">
+                <input type="text" class="form-control" name="rutUsuario" required>
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputCorreo">Correo</label>
-                <input type="text" class="form-control" name="correoUsuario">
+                <input type="text" class="form-control" name="correoUsuario" required>
             </div>
             <br>
             <div class="form-group">
                 <label for="exampleInputNombre">Contraseña</label>
-                <input type="password" class="form-control" name="contraseniaUsuario">
+                <input type="password" class="form-control" name="contraseniaUsuario" required>
             </div>
             <br>
             <div class="form-grupo">
                 <label>Seleccione su rol dentro de la página: </label>
                 <br>
-                <input type="radio" name="idRol" value="2"> Vendedor(a)  
-                <input type="radio" name="idRol" value="1"> Comprador(a)
+                <input type="radio" name="idRol" value="2" required> Vendedor(a)  
+                <input type="radio" name="idRol" value="1" required> Comprador(a)
             </div>
             <br>
             <div class="form-group">
                 <label for="region">Region</label>
                 <select name="idRegion">
+                    <option selected>Selecciones una Region</option>
                     @forelse ($region as $region)
                     <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
                     @empty
@@ -81,6 +82,7 @@
             <div class="form-group">
                 <label for="region">Comuna</label>
                 <select name="idComuna">
+                    <option selected>Selecciones una Comuna</option>
                     @forelse ($commune as $commune)
                     <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
                     @empty
@@ -93,6 +95,7 @@
             <div class="form-group">
                 <label for="region">Nombre calle</label>
                 <select name="idNombreCalle">
+                    <option selected>Selecciones una Calle</option>
                     @forelse ($streetAddress as $streetAddress)
                     <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
                     @empty
@@ -104,6 +107,7 @@
             <div class="form-group">
                 <label for="region">Número calle</label>
                 <select name="idNumeroCalle">
+                    <option selected>Selecciones N° Calle</option> 
                     @forelse ($numberAddress as $numberAddress)
                     <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
                     @empty

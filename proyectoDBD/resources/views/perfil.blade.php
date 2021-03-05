@@ -29,7 +29,7 @@
           <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
           
           &nbsp &nbsp &nbsp
         </div>
@@ -46,6 +46,7 @@
     <div class="card-body">
       <p>Nombres: {{$user->nombreUsuario}}</p>
       <p>Apellidos: {{$user->apellidoUsuario}}</p>
+      <p>Rol: {{$rol->nombreRol}}</p>
       <p>Rut: {{$user->rutUsuario}}</p>
       <p>Correo: {{$user->correoUsuario}}</p>
       <!--<h4>Dirección:</h4><br>-->
@@ -58,6 +59,25 @@
 
     </div>
   </div>
+  <br>
+
+  @if($rol->nombreRol == 'Vendedor')
+    <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Usuario Tipo {{$rol->nombreRol}}</h5>
+          <p class="card-text">Por ser usuario tipo {{$rol->nombreRol}} puedes crear un producto.</p>
+          <a href="#" class="btn btn-primary">Crear Producto</a>
+        </div>
+      </div>
+    </div>
+  @else
+  @endif
+
+
+
+
 
 
 
