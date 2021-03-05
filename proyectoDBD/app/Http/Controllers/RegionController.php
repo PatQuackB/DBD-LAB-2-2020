@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Region;
 use App\Models\Commune;
+use App\Models\StreetAddress;
+use App\Models\NumberAddress;
 
 class RegionController extends Controller
 {
@@ -14,7 +16,9 @@ class RegionController extends Controller
         //$region = Region::all();
         $region = Region::all()->where('softDelete',false);
         $commune = Commune::all()->where('softDelete',false);
-        return view('registro', compact('region', 'commune'));
+        $numberAddress = NumberAddress::all()->take(4)->where('softDelete',false);
+        $streetAddress = StreetAddress::all()->take(2)->where('softDelete',false);
+        return view('registro', compact('region', 'commune', 'numberAddress', 'streetAddress'));
         //return response()->json($region);
     }
 

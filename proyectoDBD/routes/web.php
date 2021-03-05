@@ -21,7 +21,6 @@ Route::get('/iniciarSesion', function(){
     return view('iniciarSesion');
 });
 
-
 /*
 Route::resource('categories', 'CategoryController');
 Route::resource('communes', 'CommuneController');

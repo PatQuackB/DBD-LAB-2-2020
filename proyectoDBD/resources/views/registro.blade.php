@@ -63,54 +63,57 @@
             <div class="form-grupo">
                 <label>Seleccione su rol dentro de la página: </label>
                 <br>
-                <input type="radio" name="idRol" value="2">Vendedor
-                <input type="radio" name="idRol" value="1">Comprador
+                <input type="radio" name="idRol" value="2"> Vendedor(a)  
+                <input type="radio" name="idRol" value="1"> Comprador(a)
             </div>
+            <br>
             <!--
             <div class="form-group">
-            
                 <label for="region">Region</label>
                 <select name="idRegion">
                     @forelse ($region as $region)
-                            <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
+                    <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
                     @empty
-                        Sin regiones
+                    Sin regiones
                     @endforelse
-                    
-                    <option value="I Region de Tarapaca">I Region de Tarapaca</option>
-                    <option value="II Region de Antofagasta">II Region de Antofagasta</option>
-                    <option value="III Region de Atacama">III Region de Atacama</option>
-                    <option value="IV Region de Coquimbo">IV Region de Coquimbo</option>
-                    <option value="V Region de Valparaiso">V Region de Valparaiso</option>
-                    <option value="VI Region del Libertador General Bernardo OHiggins">VI Region del Libertador General Bernardo OHiggins</option>
-                    <option value="VII Region del Maule">VII Region del Maule</option>
-                    <option value="VIII Region del Biobio">VIII Region del Biobio</option>
-                    <option value="IX Region de La Araucania">IX Region de La Araucania</option>
-                    <option value="X Region de Los Lagos">X Region de Los Lagos</option>
-                    <option value="XI Region Aysen del General Carlos Ibañez del Campo">XI Region Aysen del General Carlos Ibañez del Campo</option>
-                    <option value="XII Region de Magallanes y Antartica Chilena">XII Region de Magallanes y Antartica Chilena</option>
-                    <option value="XIII Region Metropolitana de Santiago">XIII Region Metropolitana de Santiago</option>
-                    <option value="XIV Region de Los Rios">XIV Region de Los Rios</option>
-                    <option value="XV Region de Arica y Parinacota">XV Region de Arica y Parinacota</option>
-                    <option value="XVI Region de Ñuble">XVI Region de Ñuble</option> 
+                </select>
+            </div>
+            -->
+            <br>
+            <div class="form-group">
+                <label for="region">Comuna</label>
+                <select name="idComuna">
+                    @forelse ($commune as $commune)
+                    <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
+                    @empty
+                    Sin comunas
+                    @endforelse
                 </select>
             </div>
             <br>
+            <!--
             <div class="form-group">
-                <label for="exampleInputNombre">Comuna</label>
-                <input type="text" class="form-control" name="nombreComuna">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputNombre">Nombre calle</label>
-                <input type="text" class="form-control" name="nombreCalle">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputNombre">Número calle</label>
-                <input type="text" class="form-control" name="numeroCalle">
+                <label for="region">Nombre calle</label>
+                <select name="nombreCalle">
+                    @forelse ($streetAddress as $streetAddress)
+                    <option value="{{$streetAddress->nombreCalle}}">{{ $streetAddress->nombreCalle }}</option>
+                    @empty
+                    Sin calles
+                    @endforelse
+                </select>
             </div>
             -->
+            <br>
+            <div class="form-group">
+                <label for="region">Número calle</label>
+                <select name="numeroCalle">
+                    @forelse ($numberAddress as $numberAddress)
+                    <option value="{{$numberAddress->numeroCalle}}">{{ $numberAddress->numeroCalle }}</option>
+                    @empty
+                    Sin numeros
+                    @endforelse
+                </select>
+            </div>
             <br>
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>

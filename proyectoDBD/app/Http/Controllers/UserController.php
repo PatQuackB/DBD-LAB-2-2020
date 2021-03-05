@@ -91,6 +91,8 @@ class UserController extends Controller
         $user->apellidoUsuario = $request->apellidoUsuario;
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
+        $numeroDireccion = NumberAddress::select($request->numeroCalle)->where('idComuna', $request->idComuna);
+        $user->idCalle = $numeroDireccion->idCalle;
         $user->softDelete = false;
         $user->save();
         return redirect('iniciarSesion');

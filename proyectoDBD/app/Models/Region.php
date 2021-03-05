@@ -12,4 +12,5 @@ class Region extends Model
     public function Commune(){
         return $this->hasMany(Commune::class);
     }
+
 }

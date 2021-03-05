@@ -16,5 +16,5 @@ class Commune extends Model
     public function Region(){
         return $this->belongsTo(Region::class);
     }  
-    
+
 }
