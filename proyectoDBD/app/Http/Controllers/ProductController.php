@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -63,11 +64,11 @@ class ProductController extends Controller
     // Show 2
     public function show2($id)
     {
-        $producto = Product::find($id);
-        if ($producto != null) {
-            return view('producto', compact('producto'));
+        $product = Product::find($id);
+        if ($product != null) {
+            return view('producto', compact('product'));
         }
-        return view('producto', compact('producto')); //                  REVISAR AQUI
+        return view('producto', compact('product'));
     }
 
     //Modificar una tupla especifica (put)
@@ -143,6 +144,21 @@ class ProductController extends Controller
     // Controlador carrito
     public function agregarAlCarrito($id)
     {
+        session()->flush();
+        $product = Product::find($id);
+
+        if ($product == NULL) {
+            return response()->json(["message" => "El id no existe."]);
+        }
+
+        session()->put($product);
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito.');
+    }
+
+    // Controlador carrito
+    public function agregarAlCarrito2($id)
+    {
         $product = Product::find($id);
 
         if ($product == NULL) {
@@ -181,9 +197,9 @@ class ProductController extends Controller
         // si el objeto no esta en el carrito, lo agrega con cantidad 1
         $carrito[$id] =
             [
-                "name" => $product->nombreProducto,
-                "quantity" => 1,
-                "price" => $product->precioProducto
+                "nombre" => $product->nombreProducto,
+                "cantidad" => 1,
+                "precio" => $product->precioProducto
             ];
 
         session()->put('carrito', $carrito);
@@ -192,22 +208,20 @@ class ProductController extends Controller
     }
 
     // Ir al carrito
-    /*
     public function carrito()
     {
-        $productos = Product::all();
+        $carrito = session()->get('carrito');
 
-        foreach($productos as $producto){
-            if(session->has($producto->$id)){
-                $arreglo = 
-            }
-        }
-        
-        $carrito = $
-        if ($producto != null) {
-            return view('producto', compact('producto'));
-        }
-        return view('producto', compact('producto')); //                  REVISAR AQUI
+        /*
+        $productos = DB::table('products')
+        ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+        ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+        ->find('id', $carrito);
+        */
+
+
+        //print_r($productos);
+
+        return view('carrito', compact('carrito'));
     }
-    */
 }

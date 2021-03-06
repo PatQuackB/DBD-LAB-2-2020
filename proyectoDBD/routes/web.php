@@ -123,6 +123,7 @@ Route::get('/permission/restore/{id}', 'PermissionController@restore');
 Route::get('/product', 'ProductController@index');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
 Route::get('/agregarAlCarrito/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::get('/carrito', 'ProductController@carrito')->name('carrito');
 Route::get('/product/{id}', 'ProductController@show');
 Route::post('/product/create', 'ProductController@store');
 Route::put('/product/update/{id}', 'ProductController@update');

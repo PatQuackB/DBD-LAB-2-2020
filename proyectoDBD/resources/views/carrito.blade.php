@@ -14,26 +14,26 @@
 
 
 <body class="container-fluid">
-<!--
+  <!--
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a href="/homeBack/{{$user->id}}"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-      <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
+      <a href="/homeBack/userid"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+      <a class="navbar-brand" href="/homeBack/userid" style="font-size: 44px">Fenlinea </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
-          @if($user->idRol == 2)
+          if userid 2
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
           <a href="" style="padding-right: 5%;"><img src="" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
-          @else
-          @endif
+          else
+          endif
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/welcome">Carrito</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
-          <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
-          <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/userid">Perfil</a>
+          <a href="/perfilShow/userid" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
@@ -50,21 +50,19 @@
 
   <h2> Productos Seleccionados </h2>
   <br>
-  @forelse()
+  @foreach($carrito as $producto)
   <div class="card">
     <div class="card-header">
-      <h3>{{$productos->nombreProducto}}</h3>
+      <h3>{{$producto['nombre']}}</h3>
     </div>
     <div class="card-body">
-      <p>Precio: ${{$productos->precioProducto}} / {{$productos->nombreUnidadMedida}}</p>
-      <p>Stock: {{$productos->stockProducto}}</p>
+      <p>Precio: ${{$producto['precio']}}</p>
+      <p>Cantidad: {{$producto['cantidad']}}</p>
     </div>
   </div>
   <br>
-  @empty
-  <p>Sin productos</p>
 
-  @endforelse
+  @endforeach
 
 
 
