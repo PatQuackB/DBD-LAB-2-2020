@@ -23,10 +23,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
+          @if($user->idRol == 2)
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
           <a href="" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
-          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/carrito">Carrito</a>
-          <a href="/carrito" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="{{route('irPuesto', $user->id)}}">Mi Puesto</a>
+          <a href="{{route('irPuesto', $user->id)}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/miPuesto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          @else
+          @endif
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/carrito/{{$user->id}}">Carrito</a>
+          <a href="/carrito/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Perfil</a>
           <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
@@ -52,15 +58,15 @@
       <p>Stock: {{ $product->stockProducto }}</p>
       <hr color="blue" size=3>
       @forelse($feriantes as $feriantes)
-        <p></p>
-        <h6>Nombre Puesto:</h6> {{$feriantes->nombrePuesto}}</p>
-        <p>
-        <h6>Nombre Feriante:</h6> {{ $feriantes->nombreUsuario }}</p>
-        <hr color="blue" size=3>
+      <p></p>
+      <h6>Nombre Puesto:</h6> {{$feriantes->nombrePuesto}}</p>
+      <p>
+      <h6>Nombre Feriante:</h6> {{ $feriantes->nombreUsuario }}</p>
+      <hr color="blue" size=3>
       @empty
-        <p>Sin feriantes</p>
+      <p>Sin feriantes</p>
       @endforelse
-      <a href="/agregarAlCarrito/{{$product->id}}" class="btn btn-primary">Agregar Al Carrito</a>
+      <a href="/agregarAlCarrito/{{$product->id}}/{{$user->id}}" class="btn btn-primary">Agregar Al Carrito</a>
     </div>
   </div>
 

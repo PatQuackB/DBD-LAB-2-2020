@@ -14,36 +14,6 @@
 
 
 <body class="container-fluid">
-  <!--
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a href="/homeBack/userid"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-      <a class="navbar-brand" href="/homeBack/userid" style="font-size: 44px">Fenlinea </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav position-absolute end-0">
-          if userid 2
-          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
-          <a href="" style="padding-right: 5%;"><img src="" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
-          else
-          endif
-          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/welcome">Carrito</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/005-milk carton.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
-
-          <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/userid">Perfil</a>
-          <a href="/perfilShow/userid" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
-
-          <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
-
-          &nbsp &nbsp &nbsp
-        </div>
-      </div>
-    </div>
-  </nav>
--->
 
   <h1>Carrito de Compras</h1>
   <br>
@@ -51,94 +21,27 @@
   <h2> Productos Seleccionados </h2>
   <br>
   @forelse($carrito as $producto)
+  $valorTotal = $valorTotal + $producto['total'];
   <div class="card">
     <div class="card-header">
       <h3>{{$producto['nombre']}}</h3>
     </div>
     <div class="card-body">
       <p>Precio: ${{$producto['precio']}}</p>
-      <p>Cantidad: {{$producto['cantidad']}</p>
+      <p>Cantidad: {{$producto['cantidad']}}</p>
+      <p>Total del producto: ${{$producto['total']}}</p>
     </div>
   </div>
   <br>
   @empty
   <p>Sin productos</p>
   @endforelse
-  <!--
-  @forelse({{$carrito}}) as $producto)
 
-  @empty
-  <p>Sin productos</p>
-  @endforelse
-  -->
-
-
-
-  <!-- PIE DE PAGINA -->
-  <!--
-    <footer>
-          <div class= "pie">
-            <div class ="col-sm-7" id="info" style="width: 50%;">
-              <h3>Mas información de la empresa</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-
-            <div class ="col-sm-2" style="width: 20%;">
-                <h3>Redes sociales</h3>
-                <div class="rowFooter">
-                    <a href=""><img src="img/rrss/facebook.png"></a>
-                    <label>Síguenos en Facebook</label>
-                </div>
-                <div class="rowFooter">
-                  <a href=""><img src="img/rrss/twitter.png"></a>
-                    <label>Síguenos en Twitter</label>
-                </div>
-                <div class="rowFooter">
-                  <a href=""><img src="img/rrss/instagram.png"></a>
-                    <label>Síguenos en Instagram</label>
-                </div>
-            
-            </div>
-
-            <div class ="col-sm-3" style="width: 30%;">
-                <h3>Contáctanos</h3>
-                <div class="rowFooter">
-                  <img src="img/rrss/house.png">
-                  <label>Calle 1234,
-                    Comuna
-                    Ciudad
-                  </label>
-                </div>
-
-                <div class="rowFooter">
-                  <img src="img/rrss/smartphone.png">
-                  <label>+56 9 1234 5678</label>
-                </div>
-
-                <div class="rowFooter">
-                  <img src="img/rrss/contact.png">
-                  <label>correo.electronico@mail.com</label>
-                </div>
-            </div>
-          </div>
-
-          <div class="copy-right">
-            <div class="copyright">
-              © 2020 Todos los derechos reservados | <a href="">PAGINA</a>
-            </div>
-            <div class="politicas">
-              <a href="">EMPRESA</a> |
-              <a href="">Privación y Política</a> |
-              <a href="">Términos y Condiciones</a>
-            </div>
-          </div>
-        </footer>
-        -->
+  <div class="card">
+    <div class="card-header">
+        <h3>Total de la compra: ${{$valorTotal}}</h3>
+    </div>
+  </div>
 </body>
 
 </html>

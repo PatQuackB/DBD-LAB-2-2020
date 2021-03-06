@@ -38,6 +38,28 @@ class StallController extends Controller
         return response()->json(["message"=>"Nombre puesto es obligatorio."]);
     }
     
+    public function crearPuesto(Request $request, $id){
+        $puestoCreado = true; 
+        $user = User::find($id);
+        $puesto = new Stall();
+        $puesto->nombrePuesto = $request->nombrePuesto;
+        $puesto->softDelete = false;
+        $puesto->save();
+        
+        $puestoUsuario = new UserStall();
+        $puestoUsuario->idUsuario = $user->id;
+        $puestoUsuario->idPuesto = $puesto->id;
+        $puestoUsuario->save();
+
+        $stalls = DB::table('users')
+            ->join('user_stalls', 'users.id', '=', 'user_stalls.idUsuario')
+            ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
+            ->select('stalls.id as idStall', 'users.id as idUser', 'stalls.nombrePuesto', 'stalls.idCalle')
+            ->get()
+            ->where('idUser', $user->id);
+
+        return view('puesto', compact('user', 'stalls', 'puestoCreado'));
+    }
 
     //Obtener una tupla especifica de una tabla por id (get)
     public function show($id)
@@ -113,6 +135,8 @@ class StallController extends Controller
         //$userStall = UserStall::all()->where('idUsuario', $user->id);
         //$stall = Stall::find($userStall->idPuesto);
 
+        $puestoCreado = false; 
+
         $stalls = DB::table('users')
             ->join('user_stalls', 'users.id', '=', 'user_stalls.idUsuario')
             ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
@@ -120,7 +144,7 @@ class StallController extends Controller
             ->get()
             ->where('idUser', $user->id);
         //print_r($stalls);
-        return view('puesto', compact('user', 'stalls'));
+        return view('puesto', compact('user', 'stalls', 'puestoCreado'));
     }
 
 

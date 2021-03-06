@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductStall;
 use App\Models\User;
 use App\Models\Region;
 use App\Models\Commune;
 use App\Models\StreetAddress;
 use App\Models\NumberAddress;
+use App\Models\UnitOfMeasure;
+use App\Models\ProductUnitOfMeasure;
 use App\Models\Role;
 
 class ProductController extends Controller
@@ -25,8 +28,53 @@ class ProductController extends Controller
     public function irCrearProducto($id)
     {
         $user = User::find($id);
-        return view('crearProducto', compact('user'));
+        $unidadMedida = UnitOfMeasure::all();
+        $productoCreado = false;
+
+        $stalls = DB::table('users')
+            ->join('user_stalls', 'users.id', '=', 'user_stalls.idUsuario')
+            ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
+            ->select('stalls.id as idStall', 'users.id as idUser', 'stalls.nombrePuesto', 'stalls.idCalle')
+            ->get()
+            ->where('idUser', $user->id);
+
+
+        return view('crearProducto', compact('user', 'productoCreado', 'unidadMedida', 'stalls'));
     }    
+
+
+    //Crear una nueva tupla (post)
+    public function store2(Request $request, $id)
+    {
+        $user = User::find($id);
+        $product = new Product();
+        $unidadMedida = UnitOfMeasure::all();
+        $product->nombreProducto = $request->nombreProducto;
+        $product->precioProducto = $request->precioProducto;
+        $product->stockProducto = $request->stockProducto;
+        $product->softDelete = False;
+        $product->save();
+        $stalls = DB::table('users')
+            ->join('user_stalls', 'users.id', '=', 'user_stalls.idUsuario')
+            ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
+            ->select('stalls.id as idStall', 'users.id as idUser', 'stalls.nombrePuesto', 'stalls.idCalle')
+            ->get()
+            ->where('idUser', $user->id);
+
+        $productoUnidadMedida = new ProductUnitOfMeasure();
+        $productoUnidadMedida->idUnidadMedida = $request->idUnidadMedida;
+        $productoUnidadMedida->idProducto = $product->id;
+        $productoUnidadMedida->save();
+        
+        $puestoProducto = new ProductStall();
+        $puestoProducto->idPuesto = $request->idPuesto;
+        $puestoProducto->idProducto = $product->id;
+        $puestoProducto->save();
+        
+        $productoCreado = true; 
+        return view('crearProducto', compact('user', 'productoCreado', 'stalls', 'unidadMedida'));
+
+    }   
 
     //Crear una nueva tupla (post)
     public function store(Request $request)
@@ -178,21 +226,19 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if ($product == NULL) {
-            return response()->json(["message" => "El id no existe."]);
-        }
-
         $carrito = session()->get('carrito');
 
         // si el carrito es nulo, este es el primer producto
-        if ($carrito == NULL) {
+        if ($carrito == "vacio") {
+            session()->forget('carrito');
             $carrito =
                 [
                     $id =>
                     [
                         "nombre" => $product->nombreProducto,
                         "cantidad" => 1,
-                        "precio" => $product->precioProducto
+                        "precio" => $product->precioProducto,
+                        "total" => $product->precioProducto
                     ]
                 ];
 
@@ -205,6 +251,7 @@ class ProductController extends Controller
         if (isset($carrito[$id])) {
 
             $carrito[$id]['cantidad']++;
+            $carrito[$id]['total'] = $carrito[$id]['total'] + $product->precioProducto;
 
             session()->put('carrito', $carrito);
 
@@ -216,7 +263,8 @@ class ProductController extends Controller
             [
                 "nombre" => $product->nombreProducto,
                 "cantidad" => 1,
-                "precio" => $product->precioProducto
+                "precio" => $product->precioProducto,
+                "total" => $product->precioProducto
             ];
 
         session()->put('carrito', $carrito);
@@ -225,20 +273,15 @@ class ProductController extends Controller
     }
 
     // Ir al carrito
-    public function carrito()
+    public function carrito($id)
     {
+        $user = User::find($id);
+        session()->put('carrito', "Vacio");
         $carrito = session()->get('carrito');
-        //print_r(collect($carrito));
-        print_r(collect(['1', ['precio'=>"caca",'cantidad'>"mascaca"]]));
-        $productos = Product::all();
-
-        /*
-        $productos = DB::table('products')
-        ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
-        ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
-        ->find('id', $carrito);
-        */
-
-        return view('carrito', $carrito);
+        if(NULL == $carrito){
+            return response()->json(["message" => "El carrito es nulo."]);
+        }
+        $valorTotal = 0;
+        return view('carrito', compact('carrito', 'user', 'valorTotal'));
     }
 }

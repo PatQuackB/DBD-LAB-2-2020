@@ -26,11 +26,14 @@
           @if($user->idRol == 2)
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
           <a href="" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Mi Puesto</a>
+          <a href="{{route('irPuesto', $user->id)}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/miPuesto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
           @else
           @endif
 
-          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
-          <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/carrito/{{$user->id}}">Carrito</a>
+          <a href="/carrito/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
           <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>

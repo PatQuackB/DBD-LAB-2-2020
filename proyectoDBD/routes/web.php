@@ -122,12 +122,13 @@ Route::get('/permission/restore/{id}', 'PermissionController@restore');
 
 //Product
 Route::get('/crearProducto/{id}', 'ProductController@irCrearProducto')->name('crearProducto');
+Route::post('/crearProducto/{id}', 'ProductController@store2')->name('crearNuevoProducto');
 
 Route::get('/product', 'ProductController@index');
 Route::get('/eliminarSession', 'ProductController@eliminarSession');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
-Route::get('/agregarAlCarrito/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
-Route::get('/carrito', 'ProductController@carrito')->name('carrito');
+Route::get('/agregarAlCarrito/{id}/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::get('/carrito/{id}', 'ProductController@carrito')->name('carrito');
 Route::get('/product/{id}', 'ProductController@show');
 Route::post('/product/create', 'ProductController@store');
 Route::put('/product/update/{id}', 'ProductController@update');
@@ -193,7 +194,7 @@ Route::get('/rolePermission/restore/{id}', 'RolePermissionController@restore');
 //Stall
 Route::get('/stall', 'StallController@index');
 Route::get('/stall/{id}', 'StallController@irPuesto')->name('irPuesto');
-Route::post('/stall/create', 'StallController@store');
+Route::post('/stall/{id}', 'StallController@crearPuesto')->name('crearNuevoPuesto');
 Route::put('/stall/update/{id}', 'StallController@update');
 Route::get('/stall/destroy/{id}', 'StallController@destroy');
 Route::get('/stall/restore/{id}', 'StallController@restore');
