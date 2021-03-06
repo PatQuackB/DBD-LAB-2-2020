@@ -92,7 +92,6 @@ class UserController extends Controller
         $user->correoUsuario = $request->correoUsuario;
         $user->contraseniaUsuario = $request->contraseniaUsuario;
         $user->idCalle = $request->idNombreCalle;
-        
 
         $user->softDelete = false;
 
@@ -123,8 +122,11 @@ class UserController extends Controller
         //print($numeroCalle);
         $comuna = Commune::all()->where('id', $numeroCalle->idComuna)->first();
         $region = Region::find($comuna->idRegion);
+        $puesto = DB::table('user_stalls')
+            ->where('user_stalls.idUsuario', $id)
+            ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto');
 
-        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region','rol'));
+        return view('perfil', compact('user', 'calle', 'numeroCalle', 'comuna', 'region','rol', 'puesto'));
     }
     public function homeBack($id)
     {

@@ -5,136 +5,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Crear Producto</title>
     <link rel="stylesheet" href="css/estructuraGenericaStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+      <div class="container-fluid">
+        <a href="/homeBack/{{$user->id}}"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+        <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav position-absolute end-0">
+            @if($user->idRol == 2)
+            <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
+            <a href="/crearProducto" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+            @else
+            @endif
+            <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/laravel">Carrito</a>
+            <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/carrito.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
-            <a href="/welcome"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-            <a class="navbar-brand" href="/welcome">Fenlinea</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav position-absolute end-0">
-                    <a class="nav-link" aria-current="page" href="/registro">Registrarse</a>
-                    <a href="/registro"><img src="../img/cuteFoodSVG/bananas.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
-                    <a class="nav-link" href="/iniciarSesion">Iniciar Sesión</a>
-                    <a href="/iniciarSesion"><img src="../img/cuteFoodSVG/orange.svg" alt="" width="35" height="70" class="d-inline-block align-bottom"></a>
-                    &nbsp &nbsp &nbsp
-                </div>
-            </div>
+            <a class="nav-link" style="padding-top: 10.5%;" href="/perfilShow/{{$user->id}}">Perfil</a>
+            <a href="/perfilShow/{{$user->id}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/barba.svg" alt="Perfil" width="35" height="70" class="d-inline-block align-bottom"></a>
+
+            <a class="nav-link" style="padding-top: 10.5%;" href="/welcome">Cerrar sesión</a>
+            <a href="/welcome" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/037-dust.svg" alt="logout" width="35" height="70" class="d-inline-block align-bottom"></a>
+
+            &nbsp &nbsp &nbsp
+          </div>
         </div>
+      </div>
     </nav>
 
-    <h1>Registro</h1>
+    <h1>Crear Producto</h1>
 
     <div class="container">
-        <form action="{{route('userStore')}}" method="POST">
+        <form class="row g-3 needs-validation" action="{{route('userStore')}}" method="POST">
             <div class="form-group">
-                <label for="exampleInputNombre">Nombres</label>
-                <input type="text" pattern=".{1,25}" class="form-control" name="nombreUsuario" required placeholder="Ingrese su nombre. (Max 25 caracteres)">
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputApellido">Apellidos</label>
-                <input type="text" pattern=".{1,25}" class="form-control" name="apellidoUsuario" required placeholder="Ingrese su Apellido. (Max 25 caracteres)">
+                <label for="exampleInputNombre">Nombre</label>
+                <input type="text" pattern=".{1,50}" class="form-control" name="nombreProducto" required placeholder="Ingrese nombre del producto. (Max 50 caracteres)">
             </div>
             <br>
             <div class="form-group">
-                <label for="txt_rut">Rut</label>
-                <input type="text" class="form-control" id="txt_rut" onkeyup="checkRut(this)" name="rutUsuario" required placeholder="Sin puntos y con guion, ejemplo: 12345678-9">
-
-            </div>
-            
-
-            
-            <br>
-            <div class="form-group">
-                <label for="exampleInputCorreo">Correo</label>
-                <input type="email" class="form-control" name="correoUsuario" required placeholder="Ingrese su correo electronico">
+                <label for="exampleInputApellido">Precio Producto</label>
+                <input type="number" class="form-control" name="precioProducto" required placeholder="Ingrese el precio del producto.">
             </div>
             <br>
             <div class="form-group">
-                <!-- <label for="exampleInputNombre">Contraseña</label> -->
-                <label for="psw">Contraseña</label>
-                <input 
-                type="password" 
-                id="psw" 
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                class="form-control" 
-                name="contraseniaUsuario" 
-                placeholder="Debe contener al menos un número, una letra mayúscula, una letra minúscula, y al menos 8 o más caracteres " required>
-            </div>
-            <div id="message">
-                <h3>La contraseña debe contener:</h3>
-                <p id="letter" class="invalid">Una <b>letra</b> minuscula</p>
-                <p id="capital" class="invalid">Una <b>letra</b> mayuscula</p>
-                <p id="number" class="invalid">Un <b>numero</b></p>
-                <p id="length" class="invalid">Minimo <b>8 caracteres</b></p>
-            </div>
+                <label for="exampleInputStock">Stock</label>
+                <input type="number" class="form-control" name="stockProducto" required placeholder="Ingrese el stock del producto">
+            </div>        
             <br>
-            <div class="form-grupo">
-                <label>Seleccione su rol dentro de la página: </label>
-                <br>
-                <input type="radio" name="idRol" value="2" required> Vendedor(a)  
-                <input type="radio" name="idRol" value="1" required> Comprador(a)
-            </div>
-            <br>
-            <div class="form-group" class="required">
-                <label for="region">Region</label>
-                <select name="idRegion" class="form-select" id="validationDefault04" required>
-                    <option selected disabled value="">Selecciones una Region</option>
-                    @forelse ($region as $region)
-                    <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
-                    @empty
-                    Sin regiones
-                    @endforelse
-                </select>
+            <div class="col-md-3">
+              <label for="validationCustom04">Unidad de medida</label>
+              <select class="form-select" required>
+                <option selected disabled value="">Seleccione una unidad de medida</option>
+                <option>No hay unidades</option>
+              </select>
             </div>
             <br>
             <div class="form-group">
-                <label for="region">Comuna</label>
-                <select name="idComuna" class="form-select" id="validationDefault04" required>
-                    <option selected disabled value="">Selecciones una Comuna</option>
-                    @forelse ($commune as $commune)
-                    <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
-                    @empty
-                    Sin comunas
-                    @endforelse
-                </select>
+              <label for="validationCustom04">Nombre Puesto</label>
+              <select class="form-select" required>
+                <option selected disabled value="">Seleccione un puesto</option>
+                <option>No hay puestos</option>
+              </select>
             </div>
-            <br>
-
-            <div class="form-group">
-                <label for="region">Nombre calle</label>
-                <select name="idNombreCalle" class="form-select" id="validationDefault04" required>
-                    <option selected disabled value="">Selecciones una Calle</option>
-                    @forelse ($streetAddress as $streetAddress)
-                    <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
-                    @empty
-                    Sin calles
-                    @endforelse
-                </select>
+            <div class="col-12">
+              <button type="submit" id="submit" class="btn btn-primary">Crear Producto</button>
             </div>
-            <br>
-            <div class="form-group">
-                <label for="region">Número calle</label>
-                <select name="idNumeroCalle" class="form-select" id="validationDefault04" required>
-                    <option selected disabled value="">Selecciones N° Calle</option> 
-                    @forelse ($numberAddress as $numberAddress)
-                    <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
-                    @empty
-                    Sin numeros
-                    @endforelse
-                </select>
-            </div>
-            <br>
-            <button type="submit" id="submit" class="btn btn-primary">Registrarse</button>
         </form>
     </div>
 </body>

@@ -121,6 +121,8 @@ Route::get('/permission/destroy/{id}', 'PermissionController@destroy');
 Route::get('/permission/restore/{id}', 'PermissionController@restore');
 
 //Product
+Route::get('/crearProducto/{id}', 'ProductController@irCrearProducto')->name('crearProducto');
+
 Route::get('/product', 'ProductController@index');
 Route::get('/eliminarSession', 'ProductController@eliminarSession');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
@@ -190,7 +192,7 @@ Route::get('/rolePermission/restore/{id}', 'RolePermissionController@restore');
 
 //Stall
 Route::get('/stall', 'StallController@index');
-Route::get('/stall/{id}', 'StallController@show');
+Route::get('/stall/{id}', 'StallController@irPuesto')->name('irPuesto');
 Route::post('/stall/create', 'StallController@store');
 Route::put('/stall/update/{id}', 'StallController@update');
 Route::get('/stall/destroy/{id}', 'StallController@destroy');

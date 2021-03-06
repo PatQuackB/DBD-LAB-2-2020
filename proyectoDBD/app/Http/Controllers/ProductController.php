@@ -22,6 +22,12 @@ class ProductController extends Controller
         return redirect('home');
     }
 
+    public function irCrearProducto($id)
+    {
+        $user = User::find($id);
+        return view('crearProducto', compact('user'));
+    }    
+
     //Crear una nueva tupla (post)
     public function store(Request $request)
     {
@@ -80,6 +86,7 @@ class ProductController extends Controller
         ->join('stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
         ->join('user_stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
         ->join('users', 'users.id', '=', 'user_stalls.idUsuario')
+        //->join()
         ->get();
 
         $product = Product::find($id);

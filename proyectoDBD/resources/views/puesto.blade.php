@@ -23,11 +23,11 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav position-absolute end-0">
           @if($user->idRol == 2)
-          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="{{route('crearProducto', $user->id)}}">Crear producto</a>
-          <a href="{{route('crearProducto', $user->id)}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Crear producto</a>
+          <a href="" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
 
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="">Mi Puesto</a>
-          <a href="{{route('irPuesto', $user->id)}}" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
+          <a href="/puesto" style="padding-right: 5%;"><img src="../img/iconosMercadoSVG/crearProducto.svg" alt="Carrito" width="35" height="70" class="d-inline-block align-bottom"></a>
           @else
           @endif
           <a class="nav-link" style="padding-top: 10.5%;" aria-current="page" href="/welcome">Carrito</a>
@@ -46,47 +46,15 @@
   </nav>
 
 
-  <h1>Home</h1>
+  <h1>Mi Puesto</h1>
   <br>
+<!--
+  @forelse($stalls as $puesto)
+    @if($puesto->nombrePuesto !=)
+    -->
 
 
-  <div class="container">
-    <form action="{{route('filtrarComuna', $user->id)}}" method="GET">
-      <div class="form-group" class="required">
-        <label for="region">Filtrar por Comuna</label>
-        <select name="idComuna" class="form-select" id="validationDefault04" required>
-          <option selected disabled value="">Seleccione una Comuna</option>
-          @foreach ($commune as $comuna)
-          <option value="{{$comuna->id}}">{{ $comuna->nombreComuna }}</option>
-          @endforeach
-        </select>
-        <button type="submit" id="submit" class="btn btn-primary">Filtrar</button>
-      </div>
-    </form>
-  </div>
 
-
-    <h2> Productos Disponibles </h2>
-    <br>
-
-    @forelse($productos as $producto)
-    <div class="col-sm-4">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{$producto->nombreProducto}}</h5>
-          <p class="card-text"></p>
-          <p>Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
-          <p>Stock: {{$producto->stockProducto}}</p>
-          </p>
-
-          <a href="/producto/{{$producto->id}}" class="btn btn-primary">Ver Detalle</a>
-        </div>
-      </div>
-    </div>
-    @empty
-    <h3>Sin productos</h3>
-    @endforelse
 
 
 

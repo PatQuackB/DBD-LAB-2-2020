@@ -54,6 +54,7 @@
       <p>Nombres: {{$user->nombreUsuario}}</p>
       <p>Apellidos: {{$user->apellidoUsuario}}</p>
       <p>Rol: {{$rol->nombreRol}}</p>
+
       <p>Rut: {{$user->rutUsuario}}</p>
       <p>Correo: {{$user->correoUsuario}}</p>
       <!--<h4>Dirección:</h4><br>-->

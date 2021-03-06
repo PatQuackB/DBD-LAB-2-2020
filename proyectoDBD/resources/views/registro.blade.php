@@ -85,6 +85,7 @@
                 <input type="radio" name="idRol" value="1" required> Comprador(a)
             </div>
             <br>
+
             <div class="form-group" class="required">
                 <label for="region">Region</label>
                 <select name="idRegion" class="form-select" id="validationDefault04" required>

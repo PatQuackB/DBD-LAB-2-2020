@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\UserStall;
 use Illuminate\Http\Request;
 use App\Models\Stall;
 
@@ -103,4 +105,23 @@ class StallController extends Controller
         }
         return response()->json(["message"=>"El id no existe."]);
     }
+
+    
+    public function irPuesto($id)
+    {
+        $user = User::find($id);
+        //$userStall = UserStall::all()->where('idUsuario', $user->id);
+        //$stall = Stall::find($userStall->idPuesto);
+
+        $stalls = DB::table('users')
+            ->join('user_stalls', 'users.id', '=', 'user_stalls.idUsuario')
+            ->join('stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
+            ->select('stalls.id as idStall', 'users.id as idUser', 'stalls.nombrePuesto', 'stalls.idCalle')
+            ->get()
+            ->where('idUser', $user->id);
+        //print_r($stalls);
+        return view('puesto', compact('user', 'stalls'));
+    }
+
+
 }

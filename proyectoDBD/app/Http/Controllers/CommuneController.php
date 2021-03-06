@@ -29,9 +29,9 @@ class CommuneController extends Controller
             ->join('product_stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
             ->join('products', 'products.id', '=', 'product_stalls.idProducto')
             ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
-            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedid')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
             ->get();
-        print_r($productos);
+            //print_r($productos);
             
         return  view('home', compact('user', 'productos', 'commune'));
     }
