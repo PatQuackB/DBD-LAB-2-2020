@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\Region;
+use App\Models\Commune;
+use App\Models\StreetAddress;
+use App\Models\NumberAddress;
+use App\Models\Role;
 
 class ProductController extends Controller
 {
@@ -64,11 +70,23 @@ class ProductController extends Controller
     // Show 2
     public function show2($id)
     {
+        $user = User::find($id);
+        $rol = Role::find($user->idRol);
+        //$product = Product::find($id);
+
+    
+        $feriantes = DB::table('product_stalls')
+        ->where('product_stalls.idProducto', $id)
+        ->join('stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
+        ->join('user_stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
+        ->join('users', 'users.id', '=', 'user_stalls.idUsuario')
+        ->get();
+
         $product = Product::find($id);
         if ($product != null) {
-            return view('producto', compact('product'));
+            return view('producto', compact('product', 'user', 'rol', 'feriantes'));
         }
-        return view('producto', compact('product'));
+        return view('producto', compact('product', 'user', 'rol', 'feriantes'));
     }
 
     //Modificar una tupla especifica (put)
@@ -142,22 +160,14 @@ class ProductController extends Controller
     }
 
     // Controlador carrito
-    public function agregarAlCarrito($id)
+    public function eliminarSession()
     {
         session()->flush();
-        $product = Product::find($id);
-
-        if ($product == NULL) {
-            return response()->json(["message" => "El id no existe."]);
-        }
-
-        session()->put($product);
-
-        return redirect()->back()->with('success', 'Producto agregado al carrito.');
+        return view('/welcome');
     }
 
     // Controlador carrito
-    public function agregarAlCarrito2($id)
+    public function agregarAlCarrito($id)
     {
         $product = Product::find($id);
 
@@ -211,6 +221,9 @@ class ProductController extends Controller
     public function carrito()
     {
         $carrito = session()->get('carrito');
+        //print_r(collect($carrito));
+        print_r(collect(['1', ['precio'=>"caca",'cantidad'>"mascaca"]]));
+        $productos = Product::all();
 
         /*
         $productos = DB::table('products')
@@ -219,9 +232,6 @@ class ProductController extends Controller
         ->find('id', $carrito);
         */
 
-
-        //print_r($productos);
-
-        return view('carrito', compact('carrito'));
+        return view('carrito', $carrito);
     }
 }

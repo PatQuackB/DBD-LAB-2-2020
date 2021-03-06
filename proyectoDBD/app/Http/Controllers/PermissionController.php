@@ -11,7 +11,7 @@ class PermissionController extends Controller
     public function index()
     {
         //$permission = Permission::all();
-        $permission = Permission::all()->where($permission->softDelete,false);
+        $permission = Permission::all()->where('softDelete',false);
         return response()->json($permission);
     }
 

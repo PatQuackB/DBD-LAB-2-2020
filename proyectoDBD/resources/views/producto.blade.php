@@ -7,17 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página Principal</title>
 
-  <link rel="stylesheet" href="../css/estructuraGenericaStyle.css"> 
+  <link rel="stylesheet" href="../css/estructuraGenericaStyle.css">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 
 <body class="container-fluid">
-<!-- PIE DE PAGINA 
+  <!-- Head DE PAGINA -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a href="/welcome"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
-      <a class="navbar-brand" href="welcome" style="font-size: 44px">Fenlinea </a>
+      <a href="/homeBack/{{$user->id}}"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
+      <a class="navbar-brand" href="/homeBack/{{$user->id}}" style="font-size: 44px">Fenlinea </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -39,39 +39,33 @@
       </div>
     </div>
   </nav>
-  -->
 
   <h1>Producto</h1>
   <br>
 
   <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{$product->nombreProducto}}</h5>
-        <p class="card-text">
-          <p>Precio: ${{$product->precioProducto}} / {{$product->nombreUnidadMedida}}</p>
-          <p>Stock: {{$product->stockProducto}}</p>        
-          <!--
-          @foreach($feriantes as $feriante)
-            <hr>
-            <p>Feriante: {{feriante->nombreUsuario}}</p>
-          @endforeach
-          -->
-        </p>
-
-        <a href="/agregarAlCarrito/{{$product->id}}" class="btn btn-primary">Agregar Al Carrito</a>   
-      </div>
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ $product->nombreProducto }}</h5>
+      <p class="card-text"></p>
+      <p>Precio: {{ $product->precioProducto }} / {{ $product->nombreUnidadMedida }}</p>
+      <p>Stock: {{ $product->stockProducto }}</p>
+      <hr color="blue" size=3>
+      @forelse($feriantes as $feriantes)
+        <p></p>
+        <h6>Nombre Puesto:</h6> {{$feriantes->nombrePuesto}}</p>
+        <p>
+        <h6>Nombre Feriante:</h6> {{ $feriantes->nombreUsuario }}</p>
+        <hr color="blue" size=3>
+      @empty
+        <p>Sin feriantes</p>
+      @endforelse
+      <a href="/agregarAlCarrito/{{$product->id}}" class="btn btn-primary">Agregar Al Carrito</a>
     </div>
+  </div>
 
-    
-<!--
-      $feriantes = DB::table('product_stalls')
-      ->where('product_stalls.idProducto', $id)
-      ->join('stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
-      ->join('user_stalls', 'stalls.id', '=', 'user_stalls.idPuesto')
-      ->join('users', 'users.id', '=', 'user_stalls.idUsuario')
-      ->select(product_stalls.idUsuario)
--->
+
+
 
 
 

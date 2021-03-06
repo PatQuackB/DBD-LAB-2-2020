@@ -46,99 +46,114 @@
   <h1>Home</h1>
   <br>
 
-  <h2> Productos Disponibles </h2>
-  <br>
 
-  @forelse($productos as $productos)
-  <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{$productos->nombreProducto}}</h5>
-        <p class="card-text">
-          <p>Precio: ${{$productos->precioProducto}} / {{$productos->nombreUnidadMedida}}</p>
-          <p>Stock: {{$productos->stockProducto}}</p>        
-        </p>
-        
-
-
-        <a href="/producto/{{$productos->id}}" class="btn btn-primary">Ver Detalle</a>
+  <div class="container">
+    <form action="{{route('filtrarComuna', $user->id)}}" method="GET">
+      <div class="form-group" class="required">
+        <label for="region">Filtrar por Comuna</label>
+        <select name="idComuna" class="form-select" id="validationDefault04" required>
+          <option selected disabled value="">Seleccione una Comuna</option>
+          @foreach ($commune as $comuna)
+          <option value="{{$comuna->id}}">{{ $comuna->nombreComuna }}</option>
+          @endforeach
+        </select>
+        <button type="submit" id="submit" class="btn btn-primary">Filtrar</button>
       </div>
-    </div>
+    </form>
   </div>
-  @empty
-  <p>Sin productos</p>
-  @endforelse
 
 
+    <h2> Productos Disponibles </h2>
+    <br>
 
+    @forelse($productos as $producto)
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{$producto->nombreProducto}}</h5>
+          <p class="card-text"></p>
+          <p>Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
+          <p>Stock: {{$producto->stockProducto}}</p>
+          </p>
 
-
-
-
-  <!-- PIE DE PAGINA -->
-  <footer>
-    <div class="pie">
-      <div class="col-sm-7" id="info" style="width: 50%;">
-        <h3>Mas información de la empresa</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-
-      <div class="col-sm-2" style="width: 20%;">
-        <h3>Redes sociales</h3>
-        <div class="rowFooter">
-          <a href=""><img src="../img/rrss/facebook.png"></a>
-          <label>Síguenos en Facebook</label>
-        </div>
-        <div class="rowFooter">
-          <a href=""><img src="../img/rrss/twitter.png"></a>
-          <label>Síguenos en Twitter</label>
-        </div>
-        <div class="rowFooter">
-          <a href=""><img src="../img/rrss/instagram.png"></a>
-          <label>Síguenos en Instagram</label>
-        </div>
-
-      </div>
-
-      <div class="col-sm-3" style="width: 30%;">
-        <h3>Contáctanos</h3>
-        <div class="rowFooter">
-          <img src="../img/rrss/house.png">
-          <label>Calle 1234,
-            Comuna
-            Ciudad
-          </label>
-        </div>
-
-        <div class="rowFooter">
-          <img src="../img/rrss/smartphone.png">
-          <label>+56 9 1234 5678</label>
-        </div>
-
-        <div class="rowFooter">
-          <img src="../img/rrss/contact.png">
-          <label>correo.electronico@mail.com</label>
+          <a href="/producto/{{$producto->id}}" class="btn btn-primary">Ver Detalle</a>
         </div>
       </div>
     </div>
+    @empty
+    <h3>Sin productos</h3>
+    @endforelse
 
-    <div class="copy-right">
-      <div class="copyright">
-        © 2020 Todos los derechos reservados | <a href="">PAGINA</a>
+
+
+
+
+
+
+    <!-- PIE DE PAGINA -->
+    <footer>
+      <div class="pie">
+        <div class="col-sm-7" id="info" style="width: 50%;">
+          <h3>Mas información de la empresa</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+
+        <div class="col-sm-2" style="width: 20%;">
+          <h3>Redes sociales</h3>
+          <div class="rowFooter">
+            <a href=""><img src="../img/rrss/facebook.png"></a>
+            <label>Síguenos en Facebook</label>
+          </div>
+          <div class="rowFooter">
+            <a href=""><img src="../img/rrss/twitter.png"></a>
+            <label>Síguenos en Twitter</label>
+          </div>
+          <div class="rowFooter">
+            <a href=""><img src="../img/rrss/instagram.png"></a>
+            <label>Síguenos en Instagram</label>
+          </div>
+
+        </div>
+
+        <div class="col-sm-3" style="width: 30%;">
+          <h3>Contáctanos</h3>
+          <div class="rowFooter">
+            <img src="../img/rrss/house.png">
+            <label>Calle 1234,
+              Comuna
+              Ciudad
+            </label>
+          </div>
+
+          <div class="rowFooter">
+            <img src="../img/rrss/smartphone.png">
+            <label>+56 9 1234 5678</label>
+          </div>
+
+          <div class="rowFooter">
+            <img src="../img/rrss/contact.png">
+            <label>correo.electronico@mail.com</label>
+          </div>
+        </div>
       </div>
-      <div class="politicas">
-        <a href="">EMPRESA</a> |
-        <a href="">Privación y Política</a> |
-        <a href="">Términos y Condiciones</a>
+
+      <div class="copy-right">
+        <div class="copyright">
+          © 2020 Todos los derechos reservados | <a href="">PAGINA</a>
+        </div>
+        <div class="politicas">
+          <a href="">EMPRESA</a> |
+          <a href="">Privación y Política</a> |
+          <a href="">Términos y Condiciones</a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
 
 </body>
 

@@ -129,11 +129,12 @@ class UserController extends Controller
     public function homeBack($id)
     {
         $user = User::find($id);
+        $commune = Commune::all()->where('softDelete',false);
         $productos = DB::table('products')
             ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
             ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
             ->get();
-        return view('home', compact('user', 'productos'));
+        return view('home', compact('user', 'productos', 'commune'));
     }
 
     public function showEditarPerfil($id)
@@ -143,7 +144,16 @@ class UserController extends Controller
         $commune = Commune::all()->where('softDelete',false);
         $numberAddress = NumberAddress::all()->where('softDelete',false);
         $streetAddress = StreetAddress::all()->where('softDelete',false);
-        return view('perfilModificar', compact('user', 'region', 'commune', 'numberAddress', 'streetAddress'));
+
+        $rolSeleccionada = Role::find($user->idRol);
+        $calleSeleccionada = StreetAddress::find($user->idCalle);
+        $numeroCalleSeleccionada = NumberAddress::all()->where('idCalle', $calleSeleccionada->id)->first();
+        //print($numeroCalle);
+        $comunaSeleccionada = Commune::all()->where('id', $numeroCalleSeleccionada->idComuna)->first();
+        $regionSeleccionada = Region::find($comunaSeleccionada->idRegion);
+
+
+        return view('perfilModificar', compact('user', 'region', 'commune', 'numberAddress', 'streetAddress', 'rolSeleccionada', 'calleSeleccionada', 'numeroCalleSeleccionada', 'comunaSeleccionada', 'regionSeleccionada'));
             //return response()->json($user);
         //return view('perfil')->with('user',$user);
         //return view('perfil', compact('user'));
@@ -217,8 +227,9 @@ class UserController extends Controller
             ->where('correoUsuario', $request->correoUsuario)
             ->where('contraseniaUsuario', $request->contraseniaUsuario)->first();
 
+        $commune = Commune::all()->where('softDelete',false);
         if ($user != NULL) {
-            return view('home', compact('user', 'productos'));
+            return view('home', compact('user', 'productos', 'commune'));
         }
         return redirect('iniciarSesion');
     }

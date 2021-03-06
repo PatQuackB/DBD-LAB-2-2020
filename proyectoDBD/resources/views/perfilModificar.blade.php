@@ -50,42 +50,59 @@
 
       <div class="form-group">
         <label for="exampleInputNombre">Nombres</label>
-        <input type="text" class="form-control" name="nombreUsuario" placeholder="{{ $user->nombreUsuario }}" required>
+        <input type="text" pattern=".{1,25}" class="form-control" name="nombreUsuario" placeholder="{{ $user->nombreUsuario }}" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputApellido">Apellidos</label>
-        <input type="text" class="form-control" name="apellidoUsuario" placeholder="{{ $user->nombreUsuario }}" required>
+        <input type="text" pattern=".{1,25}" class="form-control" name="apellidoUsuario" placeholder="{{ $user->apellidoUsuario }}" required>
       </div>
       <br>
       <div class="form-group">
-        <label for="exampleInputRut">Rut (sin puntos y con guion)</label>
-        <input type="text" class="form-control" name="rutUsuario" placeholder="{{ $user->nombreUsuario }}" required>
+        <label for="txt_rut">Rut (sin puntos y con guion)</label>
+        <input type="text" class="form-control" id="txt_rut" onkeyup="checkRut(this)" name="rutUsuario" placeholder="{{ $user->rutUsuario }}" required>
       </div>
       <br>
       <div class="form-group">
         <label for="exampleInputCorreo">Correo</label>
-        <input type="text" class="form-control" name="correoUsuario" placeholder="{{ $user->nombreUsuario }}" required>
+        <input type="email" class="form-control" name="correoUsuario" placeholder="{{ $user->correoUsuario }}" required>
       </div>
       <br>
       <div class="form-group">
-        <label for="exampleInputNombre">Contraseña</label>
-        <input type="password" class="form-control" name="contraseniaUsuario" placeholder="{{ $user->nombreUsuario }}" required>
+        <label for="psw">Contraseña</label>
+        <input type="password" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" name="contraseniaUsuario" placeholder="********" required>
       </div>
+      <div id="message">
+                <h5>La contraseña debe contener al menos:</h5>
+                <p id="letter" class="invalid">Una <b>letra</b> minuscula</p>
+                <p id="capital" class="invalid">Una <b>letra</b> mayuscula</p>
+                <p id="number" class="invalid">Un <b>numero</b></p>
+                <p id="length" class="invalid">Minimo <b>8 caracteres</b></p>
+      </div>      
       <br>
 
       <div class="form-grupo">
         <label>Seleccione su rol dentro de la página: </label>
         <br>
-        <input type="radio" name="idRol" value="2" required> Vendedor(a)
+        @if($rolSeleccionada == "2")
+        <input type="radio" name="idRol" value="2" required checked="checked"> Vendedor(a)
         <input type="radio" name="idRol" value="1" required> Comprador(a)
+        @else
+        <input type="radio" name="idRol" value="2" required> Vendedor(a)
+        <input type="radio" name="idRol" value="1" required checked="checked"> Comprador(a)
+        @endif
       </div>
       <br>
-      <div class="form-group">
+      <div class="form-group"  class="required">
         <label for="region">Region</label>
-        <select name="idRegion">
+        <select name="idRegion"  class="form-select" id="validationDefault04" required>
+          <option disabled value="">Seleccione una Comuna</option>
           @forelse ($region as $region)
-          <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
+            @if($regionSeleccionada->id == $region->id)
+              <option value="{{$region->id}}" selected>{{ $region->nombreRegion }}</option>
+            @else
+              <option value="{{$region->id}}">{{ $region->nombreRegion }}</option>
+            @endif
           @empty
           Sin regiones
           @endforelse
@@ -94,9 +111,14 @@
       <br>
       <div class="form-group">
         <label for="region">Comuna</label>
-        <select name="idComuna">
+        <select name="idComuna" class="form-select" id="validationDefault04" required>
+          <option disabled value="">Seleccione una Comuna</option>
           @forelse ($commune as $commune)
-          <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
+            @if($comunaSeleccionada->id == $commune->id)
+              <option value="{{$commune->id}}" selected>{{ $commune->nombreComuna }}</option>
+            @else
+              <option value="{{$commune->id}}">{{ $commune->nombreComuna }}</option>
+            @endif
           @empty
           Sin comunas
           @endforelse
@@ -106,9 +128,14 @@
 
       <div class="form-group">
         <label for="region">Nombre calle</label>
-        <select name="idNombreCalle">
+        <select name="idNombreCalle" class="form-select" id="validationDefault04" required>
+          <option disabled value="">Seleccione una Calle</option>
           @forelse ($streetAddress as $streetAddress)
-          <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
+            @if($calleSeleccionada->id == $streetAddress->id)
+              <option value="{{$streetAddress->id}}" selected>{{ $streetAddress->nombreCalle }}</option>
+            @else
+              <option value="{{$streetAddress->id}}">{{ $streetAddress->nombreCalle }}</option>
+            @endif
           @empty
           Sin calles
           @endforelse
@@ -117,9 +144,14 @@
       <br>
       <div class="form-group">
         <label for="region">Número calle</label>
-        <select name="idNumeroCalle">
+        <select name="idNumeroCalle" class="form-select" id="validationDefault04" required>
+          <option disabled value="">Seleccione N° Calle</option> 
           @forelse ($numberAddress as $numberAddress)
-          <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
+            @if($numeroCalleSeleccionada->id == $numberAddress->id)
+              <option value="{{$numberAddress->id}}" selected>{{ $numberAddress->numeroCalle }}</option>
+            @else
+              <option value="{{$numberAddress->id}}">{{ $numberAddress->numeroCalle }}</option>
+            @endif
           @empty
           Sin numeros
           @endforelse
@@ -199,3 +231,154 @@
 </body>
 
 </html>
+
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+
+function checkRut(rut) {
+    // Despejar Puntos
+    var valor = rut.value.replace('.','');
+    // Despejar Guión
+    valor = valor.replace('-','');
+    
+    // Aislar Cuerpo y Dígito Verificador
+    cuerpo = valor.slice(0,-1);
+    dv = valor.slice(-1).toUpperCase();
+    
+    // Formatear RUN
+    rut.value = cuerpo + '-'+ dv
+    
+    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+    if(cuerpo.length < 7) { rut.setCustomValidity("RUT Incompleto"); return false;}
+    
+    // Calcular Dígito Verificador
+    suma = 0;
+    multiplo = 2;
+    
+    // Para cada dígito del Cuerpo
+    for(i=1;i<=cuerpo.length;i++) {
+    
+        // Obtener su Producto con el Múltiplo Correspondiente
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        
+        // Sumar al Contador General
+        suma = suma + index;
+        
+        // Consolidar Múltiplo dentro del rango [2,7]
+        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+  
+    }
+    
+    // Calcular Dígito Verificador en base al Módulo 11
+    dvEsperado = 11 - (suma % 11);
+    
+    // Casos Especiales (0 y K)
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    // Validar que el Cuerpo coincide con su Dígito Verificador
+    if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
+    
+    // Si todo sale bien, eliminar errores (decretar que es válido)
+    rut.setCustomValidity('');
+}
+
+</script>
+
+<style>
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "\2713";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "\2717";
+}
+
+</style>
+

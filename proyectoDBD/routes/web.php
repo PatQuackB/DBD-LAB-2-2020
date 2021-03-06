@@ -57,6 +57,7 @@ Route::get('/category/restore/{id}', 'CategoryController@restore');
 
 //Commune
 Route::get('/commune', 'CommuneController@index');
+Route::get('/homeBackFiltrado/{id}', 'CommuneController@filtrarPorComuna')->name('filtrarComuna');
 Route::get('/commune/{id}', 'CommuneController@show');
 Route::post('/commune/create', 'CommuneController@store');
 Route::put('/commune/update/{id}', 'CommuneController@update');
@@ -121,6 +122,7 @@ Route::get('/permission/restore/{id}', 'PermissionController@restore');
 
 //Product
 Route::get('/product', 'ProductController@index');
+Route::get('/eliminarSession', 'ProductController@eliminarSession');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
 Route::get('/agregarAlCarrito/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
 Route::get('/carrito', 'ProductController@carrito')->name('carrito');

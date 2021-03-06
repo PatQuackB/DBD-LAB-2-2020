@@ -1,0 +1,58 @@
+
+
+
+-------- CONTROLADOR COMUNA ----------
+
+$productosComuna = DB::table('number_addresses')
+->where('number_addresses.idComuna', $id)
+->join('street_addresses', 'street_addresses.id', '=', 'number_addresses.idCalle')
+->join('stalls', 'stalls.idCalle', '=', 'street_addresses.id')
+->join('product_stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
+->join('products', 'products.id', '=', 'product_stalls.idProducto')
+->get();
+
+
+
+
+-------- VISTA FILTRARCOMUNA ----------
+
+<h2> Productos Disponibles </h2>
+<br>
+
+@forelse($productosComuna-> as $producto)
+<div class="col-sm-4">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+    <h5 class="card-title">{{$producto->nombreProducto}}</h5>
+    <p class="card-text"></p>
+    <p>Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
+    <p>Stock: {{$producto->stockProducto}}</p>
+    </p>
+    <a href="/producto/{{$productos->id}}" class="btn btn-primary">Ver Detalle</a>
+    </div>
+</div>
+</div>
+@empty
+<h3>Sin productos en la Comuna {{productosComuna->nombreComuna}}</h3>
+@endforelse
+
+
+
+-------- AGREGAR A HOME ----------
+
+  <div class="container">
+    <form action="{{route('userStore')}}" method="POST">
+      <div class="form-group" class="required">
+        <label for="region">Filtrar por Comuna</label>
+        <select name="idComuna" class="form-select" id="validationDefault04" required>
+          <option selected disabled value="">Selecciones una Comuna</option>
+          @foreach ($commune as $comuna)
+          <option value="{{$comuna->id}}">{{ $comuna->nombreComuna }}</option>
+          @endforeach
+        </select>
+        <button type="submit" id="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </form>
+  </div>
+

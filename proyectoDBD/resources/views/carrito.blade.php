@@ -50,22 +50,27 @@
 
   <h2> Productos Seleccionados </h2>
   <br>
-  @foreach($carrito as $producto)
+  @forelse($carrito as $producto)
   <div class="card">
     <div class="card-header">
       <h3>{{$producto['nombre']}}</h3>
     </div>
     <div class="card-body">
       <p>Precio: ${{$producto['precio']}}</p>
-      <p>Cantidad: {{$producto['cantidad']}}</p>
+      <p>Cantidad: {{$producto['cantidad']}</p>
     </div>
   </div>
   <br>
+  @empty
+  <p>Sin productos</p>
+  @endforelse
+  <!--
+  @forelse({{$carrito}}) as $producto)
 
-  @endforeach
-
-
-
+  @empty
+  <p>Sin productos</p>
+  @endforelse
+  -->
 
 
 
