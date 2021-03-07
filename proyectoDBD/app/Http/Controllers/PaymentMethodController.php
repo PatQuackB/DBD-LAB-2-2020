@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\PaymentMethod;
+use App\Models\PaymentMethodUser;
+use App\Models\User;
+use App\Models\Commune;
+use App\Models\PurchaseOrder;
 
 class PaymentMethodController extends Controller
 {
@@ -14,6 +19,39 @@ class PaymentMethodController extends Controller
         //$paymentMethod = PaymentMethod::all()->where($paymentMethod->softDelete,false);
         return response()->json($paymentMethod);
     }
+
+    //Obtener todos los datos de la tabla (get)
+    public function crearMetodoPago(Request $request, $id)
+    {
+        $ordenCompra = PurchaseOrder::find(session()->get('ultimaOrden'));
+
+
+        $user = User::find($id);
+        $commune = Commune::all()->where('softDelete',false);
+        $productos = DB::table('products')
+            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+            ->get();
+
+        $paymentMethod = new PaymentMethod();
+        $paymentMethod->estadoPago = 0;
+        $paymentMethod->tipoTarjeta = $request->tipoTarjeta;
+        $paymentMethod->nombreBanco = $request->nombreBanco;
+        $paymentMethod->ultimosNumerosTarjeta = $request->ultimosNumerosTarjeta;
+        $paymentMethod->mesVencimiento = $request->mesVencimiento;
+        $paymentMethod->anioVencimiento = $request->anioVencimiento;
+        $paymentMethod->softDelete = False;
+        $paymentMethod->save();
+
+        $metodoPagoUsuario = new PaymentMethodUser();
+        $metodoPagoUsuario->idUsuario = $id;
+        $metodoPagoUsuario->idPago = $paymentMethod->id;
+        $metodoPagoUsuario->save();
+
+        session()->forget('carrito');
+
+        return view('verOrdenCompra', compact('user', 'commune', 'productos', 'ordenCompra'));
+    }    
 
     //Crear una nueva tupla (post)
     public function store(Request $request)

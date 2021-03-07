@@ -65,7 +65,6 @@ Route::get('/commune/destroy/{id}', 'CommuneController@destroy');
 Route::get('/commune/restore/{id}', 'CommuneController@restore');
 
 //DeliveryOrder
-Route::get('/deliveryOrder', 'DeliveryOrderController@index');
 Route::get('/deliveryOrder/{id}', 'DeliveryOrderController@show');
 Route::post('/deliveryOrder/create', 'DeliveryOrderController@store');
 Route::put('/deliveryOrder/update/{id}', 'DeliveryOrderController@update');
@@ -97,6 +96,7 @@ Route::get('/numberAddress/destroy/{id}', 'NumberAddressController@destroy');
 Route::get('/numberAddress/restore/{id}', 'NumberAddressController@restore');
 
 //PaymentMethod
+Route::post('/metodoPago/{id}', 'PaymentMethodController@crearMetodoPago')->name('crearMetodoPago');
 Route::get('/paymentMethod', 'PaymentMethodController@index');
 Route::get('/paymentMethod/{id}', 'PaymentMethodController@show');
 Route::post('/paymentMethod/create', 'PaymentMethodController@store');
@@ -125,7 +125,6 @@ Route::get('/crearProducto/{id}', 'ProductController@irCrearProducto')->name('cr
 Route::post('/crearProducto/{id}', 'ProductController@store2')->name('crearNuevoProducto');
 
 Route::get('/product', 'ProductController@index');
-Route::get('/eliminarSession', 'ProductController@eliminarSession');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
 Route::post('/agregarAlCarrito/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
 Route::get('/borrarCarrito/{id}', 'ProductController@borrarCarrito');
@@ -153,6 +152,7 @@ Route::get('/productUnitOfMeasure/destroy/{id}', 'ProductUnitOfMeasureController
 Route::get('/productUnitOfMeasure/restore/{id}', 'ProductUnitOfMeasureController@restore');
 
 //PurchaseOrder
+Route::get('/ordenCompra/{id}', 'PurchaseOrderController@irCrearOrden')->name('verOrdenCompra');
 Route::get('/purchaseOrder', 'PurchaseOrderController@index');
 Route::get('/purchaseOrder/{id}', 'PurchaseOrderController@show');
 Route::post('/purchaseOrder/create', 'PurchaseOrderController@store');
@@ -163,7 +163,7 @@ Route::get('/purchaseOrder/restore/{id}', 'PurchaseOrderController@restore');
 //PurchaseOrderProduct
 Route::get('/purchaseOrderProduct', 'PurchaseOrderProductController@index');
 Route::get('/purchaseOrderProduct/{id}', 'PurchaseOrderProductController@show');
-Route::post('/purchaseOrderProduct/create', 'PurchaseOrderProductController@store');
+Route::post('/purchaseOrderProduct/create', 'PurchaseOrderProductController@store');    
 Route::put('/purchaseOrderProduct/update/{id}', 'PurchaseOrderProductController@update');
 Route::get('/purchaseOrderProduct/destroy/{id}', 'PurchaseOrderProductController@destroy');
 Route::get('/purchaseOrderProduct/restore/{id}', 'PurchaseOrderProductController@restore');

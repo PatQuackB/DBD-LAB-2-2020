@@ -35,6 +35,7 @@
 
     <div class="container">
         <form action="{{route('userStore')}}" method="POST">
+
             <div class="form-group">
                 <label for="exampleInputNombre">Nombres</label>
                 <input type="text" pattern=".{1,25}" class="form-control" name="nombreUsuario" required placeholder="Ingrese su nombre. (Max 25 caracteres)">
