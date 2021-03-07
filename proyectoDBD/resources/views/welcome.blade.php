@@ -5,16 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../css/estructuraGenericaStyle.css">
     <title>Bienvenido!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link href="../css/estructuraStyle.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!--Barra navegación-->
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-
             <a href="/welcome"><img src="../img/cuteFoodSVG/apple.svg" alt="Logo" width="60" height="40" class="d-inline-block align-top"></a>
             <a class="navbar-brand" href="/welcome">Fenlinea</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,17 +34,23 @@
             </div>
         </div>
     </nav>
-
-    <h1>Página Welcome</h1>
-
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="https://ih1.redbubble.net/image.1214836360.0014/poster,840x830,f8f8f8-pad,1000x1000,f8f8f8.jpg" alt="Card image cap">
-    </div>
-
-    <footer>
+    <section id="banner">
+        <div class="inner">
+            <div class="col-sm-5">
+                <div class="cuadro">
+                    <h1>FENLINEA</h1>
+                    <p>El mejor lugar para comprar y </p>
+                    <p>vender tus productos alimenticios</p>
+                </div>
+            </div>
+            <a href="{{route('regionIndex')}}" class="getStarted">Comienza ahora</a>
+        </div>
+    </section>
+    <!--Pie de página-->
+    <footer style="margin-top: 0%;">
         <div class="pie">
             <div class="col-sm-7" id="info" style="width: 50%;">
-                <h3>Mas información de la empresa</h3>
+                <h3 id="titulosPie">Mas información de la empresa</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -51,7 +60,7 @@
             </div>
 
             <div class="col-sm-2" style="width: 20%;">
-                <h3>Redes sociales</h3>
+                <h3 id="titulosPie">Redes sociales</h3>
                 <div class="rowFooter">
                     <a href=""><img src="../img/rrss/facebook.png"></a>
                     <label>Síguenos en Facebook</label>
@@ -68,7 +77,7 @@
             </div>
 
             <div class="col-sm-3" style="width: 30%;">
-                <h3>Contáctanos</h3>
+                <h3 id="titulosPie">Contáctanos</h3>
                 <div class="rowFooter">
                     <img src="../img/rrss/house.png">
                     <label>Calle 1234,
@@ -91,12 +100,12 @@
 
         <div class="copy-right">
             <div class="copyright">
-                © 2020 Todos los derechos reservados | <a href="">PAGINA</a>
+                © 2020 Todos los derechos reservados | <a href="" style="text-decoration: none;">PAGINA</a>
             </div>
             <div class="politicas">
-                <a href="">EMPRESA</a> |
-                <a href="">Privación y Política</a> |
-                <a href="">Términos y Condiciones</a>
+                <a href="" style="text-decoration: none;">EMPRESA</a> |
+                <a href="" style="text-decoration: none;">Privación y Política</a> |
+                <a href="" style="text-decoration: none;">Términos y Condiciones</a>
             </div>
         </div>
     </footer>

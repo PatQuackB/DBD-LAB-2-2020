@@ -22,7 +22,17 @@ class UnitOfMeasureFactory extends Factory
     public function definition()
     {
         return [
-            'nombreUnidadMedida'=>$this->faker->name,
+            //'nombreUnidadMedida'=>$this->faker->name,
+
+            'nombreUnidadMedida' => $this->faker->randomElement($array = array (
+                'Kilogramo',
+                'Gramo',
+                'Unidad',
+                'Saco',
+                'Caja',
+                'Malla',
+             )),
+
             'softDelete'=>$this->faker->randomElement($array = array (false))
         ];
     }
