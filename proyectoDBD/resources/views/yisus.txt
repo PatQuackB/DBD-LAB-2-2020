@@ -1,53 +1,43 @@
+<!-- MOSTRAR PRODUCTOS -->
+  <div class="container">
+      <div class="row row-cols-1 row-cols-md-4 g-4 px-4 py-4">
+          @forelse($productos_disponibles as $productos_disponibles)
+              @if($productos_disponibles->stock > 0) 
+                  <form action="{{route('agregarBoleta')}}" method="POST"> 
+                      <div class="col">
+                          <div class="card">
+                          
+                              <img src="{{$productos_disponibles->imagen}}" class="card-img-top" alt="...">
+                              <div class="card-body">
+                                  <input type="hidden" name="id_producto" value= "{{$productos_disponibles->id}}">
+                                  <input type="hidden" name="id_boleta" value= "{{session('boletausuario')->id}}">
+                                  <input type="hidden" name="totalProducto" value= "{{$productos_disponibles->precio}}">
+                              
+                                  <input type="hidden" name="id_puesto" value= "{{$productos_disponibles->puesto_id}}">
 
-------- SIMULAR PROCESO DE COMPRA -------
-
-
-
-------- Formulario de método de pago -------
-<div class="container">
-  <form action="{{route('userStore')}}" method="POST">
-    <div class="form-group" class="required">
-      <label for="region">Método de pago</label>
-        <select name="tipoTarjeta" class="form-select" id="validationDefault04" required>
-          <option selected disabled value="">Selecciones su medio de pago</option>
-          <option value="">Tarjeta Cencosud Scotiabank</option>
-          <option value="">Tarjeta de Crédito</option>
-          <option value="">Redcompra (Débito)</option>
-          <option value="">Tarjeta Cencosud</option>
-      </select>
-    </div>
-    <br>
-
-    <div class="form-group" class="required">
-      <label for="region">Nombre banco</label>
-        <select name="nombreBanco" class="form-select" id="validationDefault04" required>
-          <option selected disabled value="">Selecciones su banco</option>
-          <option value="">Banjo de Chile</option>
-          <option value="">Banco Estado</option>
-          <option value="">Banco Scotiabank</option>
-      </select>
-    </div>
-    <br>
-  
-    <div class="form-group">
-        <label for="exampleInputUltimosNumerosTarjeta">Últimos 4 dígitos de la tarjeta</label>
-        <input type="text" pattern=".{1,25}" class="form-control" name="ultimosNumerosTarjeta" required placeholder="Ingrese los últimos 4 dígitos de su tarjeta">
-    </div>
-    <br>
-
-    <div class="form-group">
-        <label for="exampleInputMesVencimiento">Mes vencimiento</label>
-        <input type="int" pattern=".{1,25}" class="form-control" name="mesVencimiento" required placeholder="Ingrese el año de vencimiento de su tarjeta">
-    </div>
-    <br>
-
-    <div class="form-group">
-        <label for="exampleInputAnioVencimiento">Año vencimiento</label>
-        <input type="int" pattern=".{1,25}" class="form-control" name="anioVencimiento" required placeholder="Ingrese el año de vencimiento de su tarjeta">
-    </div>
-    <br>
-
-        <button type="submit" id="submit" class="btn btn-primary">Pagar</button>
-    </form>
-</div>
-------- Fin formulario de método de pago -------
+                                  <h4 class="card-title">{{$productos_disponibles->nombre}}</h4>
+                                  <h4 class="card-title">{{session('usuario')->id_puesto}}</h4>
+                                  
+                                  <p class="card-text">El precio del producto es: {{$productos_disponibles->precio}} CLP por cada {{$productos_disponibles->nombre_medida}}</p>
+                                  <p class="card-text">Stock: {{$productos_disponibles->stock}}</p>
+                                  <p class="card-text">Puesto: {{$productos_disponibles->nombre_puesto}}</p>
+                                  <p class="card-text">Feria: {{$productos_disponibles->nombre_feria}}</p>
+                                  <div class="container row  row-cols-md-3 py-1 ">
+                                      <input class="container-fluid"type="number" name="cantidadProducto" value= "1">
+                                  </div>
+                                  <button type="submit" class="btn btn-primary  px-4 ">Agregar al Carrito</button>
+                              
+                              </div>
+                          
+                          </div>
+                      </div>   
+                  </form> 
+              @endif
+          @empty
+          <div class="alert alert-info px-4 " role="alert">
+              No hay productos
+          </div>
+          @endforelse     
+      </div>
+  </div>  
+  <!-- FIN MOSTRAR PRODUCTOS -->

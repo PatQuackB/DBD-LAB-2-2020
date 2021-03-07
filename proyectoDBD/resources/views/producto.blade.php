@@ -47,33 +47,54 @@
   </nav>
 
   <h1>Producto</h1>
+  
 
   <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
+    <img class="card-img-top" src="../img/banner4.jpg" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">{{ $product->nombreProducto }}</h5>
+      <h5 class="card-title">{{$product->nombreProducto }}</h5>
       <p class="card-text"></p>
       <p>Precio: {{ $product->precioProducto }} / {{ $product->nombreUnidadMedida }}</p>
       <p>Stock: {{ $product->stockProducto }}</p>
-      <hr color="blue" size=3>
-      @forelse($feriantes as $feriantes)
-      <p></p>
-      <h6>Nombre Puesto:</h6> {{$feriantes->nombrePuesto}}</p>
-      <p>
-      <h6>Nombre Feriante:</h6> {{ $feriantes->nombreUsuario }}</p>
-      <form action="{{route('agregarAlCarrito', $user->id)}}" method="POST">
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" pattern=".{1,2}" id="cantidad" name="cantidadProducto" min="1" max="99" placeholder="--" required>
-        <input type="hidden" id="idProducto" name="idProducto" value="{{$product->id}}">
-        <br>
-        <button type="submit" id="boton" class="btn btn-primary">Agregar al carrito</button>
-      </form>
-      <hr color="blue" size=3>
-      @empty
-      <p>Sin feriantes</p>
-      @endforelse
     </div>
   </div>
+
+  <hr color="blue" size=10>
+<div class="container">
+  <div class="row row-cols-4 row-cols-md-4 row-cols-md-4 g-4 px-4 py-4">
+    <div class="card w-50">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        @forelse($feriantes as $feriantes)
+        <p>
+        <h6>Nombre Puesto:</h6> {{$feriantes->nombrePuesto}}</p>
+        <p>
+        <h6>Nombre Feriante:</h6> {{ $feriantes->nombreUsuario }}</p>
+        <form action="{{route('agregarAlCarrito', $user->id)}}" method="POST">
+          <label for="cantidad">Cantidad:</label>
+          <input type="number" pattern=".{1,2}" id="cantidad" name="cantidadProducto" min="1" max="99" placeholder="--" required>
+          <input type="hidden" id="idProducto" name="idProducto" value="{{$product->id}}">
+          <br>
+          <br>
+          <button type="submit" id="boton" class="btn btn-primary">Agregar al carrito</button>
+          <br>
+          <br>
+          <br>
+        </form>
+
+        @empty
+        <p>Sin feriantes</p>
+        @endforelse
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 
 
 

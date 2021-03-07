@@ -128,8 +128,6 @@ class ProductController extends Controller
     {
         $user = User::find($id);
         $rol = Role::find($user->idRol);
-        //$product = Product::find($id);
-
     
         $feriantes = DB::table('product_stalls')
         ->where('product_stalls.idProducto', $id)
@@ -143,7 +141,6 @@ class ProductController extends Controller
         if ($product != null) {
             return view('producto', compact('product', 'user', 'rol', 'feriantes'));
         }
-        return view('producto', compact('product', 'user', 'rol', 'feriantes'));
     }
 
     //Modificar una tupla especifica (put)

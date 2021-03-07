@@ -46,8 +46,9 @@
   </nav>
 
 
-  <h1>Home</h1>
+  <h1>Productos Disponibles</h1>
   <br>
+
 
 
   <div class="container">
@@ -66,27 +67,30 @@
   </div>
 
 
-  <h2> Productos Disponibles </h2>
+  <br>
+  <br>
   <br>
 
-  @forelse($productos as $producto)
-  <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{$producto->nombreProducto}}</h5>
-        <p class="card-text"></p>
-        <p>Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
-        <p>Stock: {{$producto->stockProducto}}</p>
-        </p>
 
-        <a href="/producto/{{$producto->id}}" id="boton" class="btn btn-primary">Ver Detalle</a>
+
+
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4 px-4 py-4">
+      @forelse($productos as $producto)
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="../img/banner4.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{$producto->nombreProducto}}</h5>
+          <p class="card-text">Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
+          <p class="card-text">Stock: {{$producto->stockProducto}}</p>
+          <a href="/producto/{{$producto->id}}" id="boton" class="btn btn-primary">Ver Detalle</a>
+        </div>
       </div>
+      @empty
+      <h3>Sin productos</h3>
+      @endforelse
     </div>
   </div>
-  @empty
-  <h3>Sin productos</h3>
-  @endforelse
 
 
 
