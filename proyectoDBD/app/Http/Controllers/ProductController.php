@@ -237,6 +237,7 @@ class ProductController extends Controller
                 [
                     $request->idProducto =>
                     [
+                        "idProducto" => $request->idProducto,
                         "nombre" => $product->nombreProducto,
                         "cantidad" => $request->cantidadProducto,
                         "precio" => $product->precioProducto,
@@ -262,6 +263,7 @@ class ProductController extends Controller
         // si el objeto no esta en el carrito, lo agrega con cantidad 1
         $carrito[$request->idProducto] =
             [
+                "idProducto" => $request->idProducto,
                 "nombre" => $product->nombreProducto,
                 "cantidad" => $request->cantidadProducto,
                 "precio" => $product->precioProducto,
