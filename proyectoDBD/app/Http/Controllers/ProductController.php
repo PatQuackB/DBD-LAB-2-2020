@@ -15,6 +15,8 @@ use App\Models\UnitOfMeasure;
 use App\Models\ProductUnitOfMeasure;
 use App\Models\Role;
 
+use function PHPSTORM_META\type;
+
 class ProductController extends Controller
 {
     //Obtener todos los datos de la tabla (get)
@@ -222,66 +224,80 @@ class ProductController extends Controller
     }
 
     // Controlador carrito
-    public function agregarAlCarrito($id)
+    public function agregarAlCarrito(Request $request, $id)
     {
-        $product = Product::find($id);
+        $user = User::find($id);
+        $product = Product::find($request->idProducto);
 
         $carrito = session()->get('carrito');
 
         // si el carrito es nulo, este es el primer producto
-        if ($carrito == "vacio") {
-            session()->forget('carrito');
+        if ($carrito == NULL) { 
             $carrito =
                 [
-                    $id =>
+                    $request->idProducto =>
                     [
                         "nombre" => $product->nombreProducto,
-                        "cantidad" => 1,
+                        "cantidad" => $request->cantidadProducto,
                         "precio" => $product->precioProducto,
-                        "total" => $product->precioProducto
+                        "total" => ($product->precioProducto * $request->cantidadProducto)
                     ]
                 ];
 
             session()->put('carrito', $carrito);
 
-            return redirect()->back()->with('success', 'Producto agregado al carrito.');
+            return redirect()->back()->with('user', $user);
         }
-
         // si el producto no es nulo, y el producto esta, le agrega 1
-        if (isset($carrito[$id])) {
-
-            $carrito[$id]['cantidad']++;
-            $carrito[$id]['total'] = $carrito[$id]['total'] + $product->precioProducto;
+        if (isset($carrito[$request->idProducto])) 
+        {
+            $carrito[$request->idProducto]['cantidad'] = $carrito[$request->idProducto]['cantidad'] + $request->cantidadProducto;
+            $carrito[$request->idProducto]['total'] = $carrito[$request->idProducto]['total'] + ($product->precioProducto * $request->cantidadProducto);
 
             session()->put('carrito', $carrito);
 
-            return redirect()->back()->with('success', 'Producto incrementado en una unidad.');
+            return redirect()->back()->with('user', $user);
         }
 
         // si el objeto no esta en el carrito, lo agrega con cantidad 1
-        $carrito[$id] =
+        $carrito[$request->idProducto] =
             [
                 "nombre" => $product->nombreProducto,
-                "cantidad" => 1,
+                "cantidad" => $request->cantidadProducto,
                 "precio" => $product->precioProducto,
-                "total" => $product->precioProducto
+                "total" => ($product->precioProducto * $request->cantidadProducto)
             ];
 
         session()->put('carrito', $carrito);
 
-        return redirect()->back()->with('success', 'Producto agregado al carrito.');
+        return redirect()->back()->with('user', $user);
     }
 
     // Ir al carrito
     public function carrito($id)
     {
         $user = User::find($id);
-        session()->put('carrito', "Vacio");
+
         $carrito = session()->get('carrito');
-        if(NULL == $carrito){
-            return response()->json(["message" => "El carrito es nulo."]);
-        }
         $valorTotal = 0;
+        if(NULL == $carrito){
+            return view('carrito', compact('carrito', 'user', 'valorTotal'));
+        }
         return view('carrito', compact('carrito', 'user', 'valorTotal'));
+    }
+
+    // Borrar carrito
+    public function borrarCarrito($id)
+    {
+        $user = User::find($id);
+        $commune = Commune::all()->where('softDelete',false);
+        $productos = DB::table('products')
+            ->join('product_unit_of_measures', 'products.id', '=', 'product_unit_of_measures.idProducto')
+            ->join('unit_of_measures', 'unit_of_measures.id', '=', 'product_unit_of_measures.idUnidadMedida')
+            ->get();
+
+        $carrito = session()->forget('carrito');
+        
+        return view('home', compact('user', 'commune', 'productos'));
     }
 }

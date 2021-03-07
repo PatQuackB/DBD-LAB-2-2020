@@ -127,7 +127,8 @@ Route::post('/crearProducto/{id}', 'ProductController@store2')->name('crearNuevo
 Route::get('/product', 'ProductController@index');
 Route::get('/eliminarSession', 'ProductController@eliminarSession');
 Route::get('/producto/{id}', 'ProductController@show2')->name('producto');
-Route::get('/agregarAlCarrito/{id}/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::post('/agregarAlCarrito/{id}', 'ProductController@agregarAlCarrito')->name('agregarAlCarrito');
+Route::get('/borrarCarrito/{id}', 'ProductController@borrarCarrito');
 Route::get('/carrito/{id}', 'ProductController@carrito')->name('carrito');
 Route::get('/product/{id}', 'ProductController@show');
 Route::post('/product/create', 'ProductController@store');
