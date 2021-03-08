@@ -124,11 +124,11 @@ class ProductController extends Controller
     }
 
     // Show 2
-    public function show2($id)
+    public function show2(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::find($request->idUsuario);
         $rol = Role::find($user->idRol);
-    
+        
         $feriantes = DB::table('product_stalls')
         ->where('product_stalls.idProducto', $id)
         ->join('stalls', 'stalls.id', '=', 'product_stalls.idPuesto')
@@ -136,7 +136,6 @@ class ProductController extends Controller
         ->join('users', 'users.id', '=', 'user_stalls.idUsuario')
         //->join()
         ->get();
-
         $product = Product::find($id);
         if ($product != null) {
             return view('producto', compact('product', 'user', 'rol', 'feriantes'));

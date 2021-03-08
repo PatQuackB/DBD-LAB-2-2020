@@ -45,7 +45,7 @@ class PurchaseOrderController extends Controller
 
         $user = User::find($id);
         session()->put('ultimaOrden', $ordenCompra->id);
-        print_r(session()->get('ultimaOrden'));
+
 
         return view('metodoPago', compact('user', 'ordenCompra'));
     } 

@@ -23,8 +23,8 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //'nombreProducto'=>$this->faker->name,
-            'nombreProducto' => $this->faker->randomElement($array = array (
+            'nombreProducto'=>$this->faker->randomElement($array = array ('Nombre de producto')),
+            /*'nombreProducto' => $this->faker->randomElement($array = array (
                 'Tomate',
                 'Sandia',
                 'Melon',
@@ -76,7 +76,7 @@ class ProductFactory extends Factory
                 'Pollo: Filetes',
                 'Longaniza',
                 'Salchicha',
-             )),
+             )),*/
             'precioProducto'=>$this->faker->numberBetween($min=500,$max=20000),
             'stockProducto'=>$this->faker->randomNumber($nbDigits = 4, $strict = false),
             'softDelete'=>$this->faker->randomElement($array = array (false)),

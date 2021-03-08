@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $cantidadSeeders = 15;
+        $cantidadSeeders = 30;
 
         /*
         Region::insert([
@@ -533,7 +533,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 'nombreRol' => "Comprador", 'softDelete' => false, 'created_at' => now()],
             ['id' => 2, 'nombreRol' => "Vendedor", 'softDelete' => false, 'created_at' => now()]
         ]);
-
+        
         Fair::factory($cantidadSeeders)->create();
         Region::factory($cantidadSeeders)->create();
         Commune::factory($cantidadSeeders)->create();
@@ -544,7 +544,7 @@ class DatabaseSeeder extends Seeder
         Permission::factory($cantidadSeeders)->create();
         RolePermission::factory($cantidadSeeders)->create();
         SubCategory::factory($cantidadSeeders)->create();
-        Product::factory($cantidadSeeders)->create();
+        Product::factory(45)->create();
         ProductUnitOfMeasure::factory($cantidadSeeders)->create();
         Stall::factory($cantidadSeeders)->create();
         ProductStall::factory($cantidadSeeders)->create();

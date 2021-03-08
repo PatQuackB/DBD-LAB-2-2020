@@ -54,7 +54,7 @@
     <div class="card-body">
       <h5 class="card-title">{{$product->nombreProducto }}</h5>
       <p class="card-text"></p>
-      <p>Precio: {{ $product->precioProducto }} / {{ $product->nombreUnidadMedida }}</p>
+      <p>Precio: ${{ $product->precioProducto }} / {{ $product->nombreUnidadMedida }}</p>
       <p>Stock: {{ $product->stockProducto }}</p>
     </div>
   </div>

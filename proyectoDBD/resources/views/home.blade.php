@@ -83,7 +83,10 @@
           <h5 class="card-title">{{$producto->nombreProducto}}</h5>
           <p class="card-text">Precio: ${{$producto->precioProducto}} / {{$producto->nombreUnidadMedida}}</p>
           <p class="card-text">Stock: {{$producto->stockProducto}}</p>
-          <a href="/producto/{{$producto->id}}" id="boton" class="btn btn-primary">Ver Detalle</a>
+          <form action="{{route('producto', $producto->id)}}" method="GET">
+            <input type="hidden" id="idUsuario" name="idUsuario" value="{{$user->id}}">
+            <button type="submit" id="boton" class="btn btn-primary">Ver Detalle</button>
+          </form>
         </div>
       </div>
       @empty
